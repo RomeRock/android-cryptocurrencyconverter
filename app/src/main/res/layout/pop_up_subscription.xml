@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relContentPopup"
+    android:layout_width="284dp"
+    android:orientation="vertical"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <LinearLayout
+        android:id="@+id/relContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:orientation="vertical"
+        android:background="@drawable/dialog_theme1">
+
+        <ImageView
+            android:id="@+id/imgImagePremium"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="24dp"
+            android:layout_weight="1"
+            android:src="@drawable/premium" />
+
+        <TextView
+            android:layout_weight="1"
+            android:layout_marginTop="16dp"
+            android:layout_below="@+id/imgImagePremium"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="@font/dosis_regular"
+            android:gravity="center_horizontal"
+            android:text="@string/subscribeMe"
+            android:textAllCaps="true"
+            android:textColor="?attr/colorAccent"
+            android:textSize="24sp" />
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical|center|center_horizontal">
+            <ImageView
+                android:layout_gravity="center|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="?attr/colorAccent"
+                android:src="@drawable/star"/>
+
+            <TextView
+                android:id="@+id/txtfirst"
+                style="@style/textContentPremiumPopup"
+                android:text="@string/unlimited_hourly" />
+
+        </LinearLayout>
+        <RelativeLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+            <ImageView
+                android:id="@+id/imgStart"
+                android:layout_gravity="center|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="?attr/colorAccent"
+                android:src="@drawable/star"/>
+
+            <TextView
+                android:id="@+id/txtSecond"
+                style="@style/textContentPremiumPopup"
+                android:layout_alignParentEnd="true"
+                android:layout_toEndOf="@+id/imgStart"
+                android:lines="2"
+                android:text="@string/unlimited_price" />
+
+        </RelativeLayout>
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical|center|center_horizontal">
+            <ImageView
+                android:layout_gravity="center|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="?attr/colorAccent"
+                android:src="@drawable/star"/>
+
+            <TextView
+                android:id="@+id/txtThree"
+                style="@style/textContentPremiumPopup"
+                android:text="@string/remove_annoying_ads" />
+
+        </LinearLayout>
+        <LinearLayout
+            android:layout_marginTop="8dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_gravity="center_vertical|center|center_horizontal">
+            <ImageView
+                android:layout_gravity="center|center_vertical"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:tint="?attr/colorAccent"
+                android:src="@drawable/star"/>
+
+            <TextView
+                android:id="@+id/txtFour"
+                style="@style/textContentPremiumPopup"
+                android:text="@string/unlock_daylight_theme" />
+
+        </LinearLayout>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="13sp"
+            android:layout_marginTop="24dp"
+            android:textColor="#ffffff"
+            android:gravity="center_horizontal"
+            android:text="@string/pay_as_much_you_want" />
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:orientation="horizontal"
+            android:layout_height="wrap_content">
+            <Button
+                android:id="@+id/popButtonDonate1"
+                android:textColor="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:layout_weight="1"
+                android:text="@string/price_per_month"
+                android:fontFamily="@font/dosis_medium"
+                android:background="?attr/colorAccent"
+                android:layout_marginEnd="4dp"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/popButtonDonate2"
+                android:textColor="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginStart="4dp"
+                android:layout_marginEnd="4dp"
+                android:layout_weight="1"
+                android:text="@string/price_per_month"
+                android:fontFamily="@font/dosis_medium"
+                android:background="?attr/colorAccent"
+                android:textAllCaps="false" />
+            <Button
+                android:id="@+id/popButtonDonate3"
+                android:textColor="?attr/colorPrimary"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_marginStart="4dp"
+                android:layout_weight="1"
+                android:layout_marginTop="24dp"
+                android:text="@string/price_per_month"
+                android:fontFamily="@font/dosis_medium"
+                android:background="?attr/colorAccent"
+                android:textAllCaps="false" />
+
+        </LinearLayout>
+
+
+        <TextView
+            android:id="@+id/popUpNoThanks"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp"
+            android:gravity="center_horizontal"
+            android:paddingBottom="16dp"
+            android:paddingTop="11dp"
+            android:text="@string/no_thanks"
+            android:fontFamily="@font/dosis_regular"
+            android:textColor="@color/primaryTextTheme1"
+            android:textSize="14sp" />
+    </LinearLayout>
+</LinearLayout>

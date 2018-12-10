@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="2dp">
+
+    <LinearLayout
+        android:id="@+id/linAction"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimaryDark"
+        android:paddingLeft="16dp"
+        android:paddingRight="16dp">
+
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_centerVertical="true"
+            android:src="@drawable/icons_menu_copy"
+            android:visibility="visible" />
+
+        <LinearLayout
+            android:id="@+id/linClickArea"
+            android:gravity="center_vertical"
+            android:layout_gravity="center_vertical"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCountryCodeFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center|center_horizontal"
+                    android:fontFamily="@font/dosis_medium"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0"
+                    android:text="USD"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txtCurrencyFrom"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center|center_horizontal"
+                    android:fontFamily="@font/dosis_regular"
+                    android:gravity="center_horizontal"
+                    android:letterSpacing="0"
+                    android:lineSpacingExtra="0dp"
+                    android:text="United States Dollar"
+                    android:textColor="#a8a8a8"
+                    android:textSize="12sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/txtVS"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:fontFamily="@font/dosis_medium"
+                android:gravity="center_vertical|center_horizontal"
+                android:text="@string/vs"
+                android:textAlignment="center"
+                android:textColor="#a8a8a8"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:gravity="center_horizontal|center|center_vertical"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/txtCountryCodeTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center|center_horizontal"
+                    android:fontFamily="@font/dosis_medium"
+                    android:gravity="center_horizontal"
+                    android:text="USD"
+                    android:textColor="#ffffff"
+                    android:textSize="24sp" />
+
+                <TextView
+                    android:id="@+id/txtCurrencyTo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical|center|center_horizontal"
+                    android:fontFamily="@font/dosis_regular"
+                    android:gravity="center_horizontal"
+                    android:text="United States Dollar"
+                    android:textColor="#a8a8a8"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+            <ImageView
+                android:id="@+id/imgShow"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:padding="10dp"
+                android:src="@drawable/ic_navigate_next_black_24dp"
+                android:tint="?attr/colorAccent" />
+        </LinearLayout>
+    </LinearLayout>
+</LinearLayout>

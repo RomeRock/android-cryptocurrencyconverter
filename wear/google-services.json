@@ -1,0 +1,43 @@
+{
+  "project_info": {
+    "project_number": "762665074287",
+    "firebase_url": "https://cryptocurrency-converter-1e726.firebaseio.com",
+    "project_id": "cryptocurrency-converter-1e726",
+    "storage_bucket": "cryptocurrency-converter-1e726.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:762665074287:android:db8a58f6eb424aa7",
+        "android_client_info": {
+          "package_name": "com.romerock.apps.utilities.cryptocurrencyconverter"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "762665074287-s4q159460tnevfp9q5p6lgijfvduf153.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAatZZ3WlX1LzGy4UMm0yyX7rd51ECmes4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+   //   "admob_app_id": "ca-app-pub-1943700858932247~8820685884"
+    }
+  ],
+  "configuration_version": "1"
+}

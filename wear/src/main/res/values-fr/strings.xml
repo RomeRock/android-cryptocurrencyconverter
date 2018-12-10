@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">Currency Converter</string>
+    <string name="preferences_defaultCurrencies">defaultCurrencies</string>
+    <string name="preferences_name">currencyConverterWearRomeRock</string>
+    <string name="preferences_theme_tittle">themeTittle</string>
+    <string name="update_time">À jour:</string>
+    <string name="titleCurrency">Sélectionnez la\ndevise</string>
+    <string name="search">Chercher</string>
+    <string name="have_currency">Désolé, mais vous avez déjà sélectionné cette devise. Essayez avec une devise différente</string>
+</resources>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#00273D</color>
+    <color name="colorPrimaryDark">#002B43</color>
+    <color name="colorAccent">#76F8FB</color>
+    <color name="alert_snackbar">#F76C6D</color>
+    <color name="dark_color">#000000</color>
+    <color name="negative_color">#ba0000</color>
+    <color name="positive_color">#12930d</color>
+    <color name="white">#ffffff</color>
+    <color name="followDrawable">#33000000</color>
+    <color name="backgroundAccentTheme1">#013553</color>
+    <color name="backgroundAccentTheme2">#E4E3E3</color>
+    <color name="secundaryTextColorTheme1">#a8a8a8</color>
+    <color name="secundaryTextColorTheme2">#808080</color>
+    <color name="primaryTextLabelsTheme1">#efefef</color>
+    <color name="primaryTextLabelsTheme2">#323232</color>
+    <color name="primaryTextTheme1">#FFFFFF</color>
+    <color name="primaryTextTheme2">#646262</color>
+    <color name="shareFacebook">#3B5998</color>
+    <color name="shareTwitter">#55ACEE</color>
+    <color name="pop_up_feedback_bg">#efefef</color>
+    <color name="setting_text_color_list">#343434</color>
+    <color name="line_concept">#979797</color>
+    <color name="lineColorGraphTheme1">#9976F8FB</color>
+    <color name="lineColorGraphTheme2">#9900B7D4</color>
+    <color name="circle__1">#192328</color>
+
+    <color name="colorPrimaryDaylight">#FFFFFF</color>
+    <color name="colorDarkDaylight">#FAFAFA</color>
+    <color name="colorAccent_Daylight">#00B7D4</color>
+</resources>

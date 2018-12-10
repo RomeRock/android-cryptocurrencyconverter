@@ -1,0 +1,467 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    tools:context="com.romerock.apps.utilities.cryptocurrencyconverter.DetailsActivity" >
+
+    <RelativeLayout
+        android:id="@+id/relContent"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimary"
+        android:orientation="vertical"
+        tools:context="com.romerock.apps.utilities.cryptocurrencyconverter.DetailsActivity">
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarback"
+            style="@style/tittleSettingsSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <TextView
+                    android:id="@+id/txtTitle"
+                    style="@style/tittleSettings"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="@string/titleDetails" />
+
+                <ImageButton
+                    android:id="@+id/btnBack"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_alignParentStart="true"
+                    android:layout_centerVertical="true"
+                    android:background="?android:attr/selectableItemBackground"
+                    android:contentDescription="close button"
+                    android:foregroundGravity="center_vertical"
+                    android:paddingBottom="10dp"
+                    android:paddingRight="10dp"
+                    android:paddingTop="10dp"
+                    android:src="@drawable/btn_back"
+                    android:tint="@android:color/white" />
+            </RelativeLayout>
+        </android.support.v7.widget.Toolbar>
+
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@+id/toolbarback">
+            <com.google.android.gms.ads.AdView
+                xmlns:ads="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/adView"
+                android:background="@color/black"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentEnd="true"
+                android:layout_alignParentStart="true"
+                ads:adSize="BANNER"
+                ads:adUnitId="@string/banner_ad_unit_id" />
+
+            <TextView
+                android:id="@+id/txtAmount"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/adView"
+                android:layout_marginTop="8dp"
+                android:fontFamily="@font/dosis_medium"
+                android:gravity="center_horizontal"
+                android:includeFontPadding="false"
+                android:textColor="?attr/colorAccent"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/txtCurrent"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/txtAmount"
+                android:layout_centerHorizontal="true"
+                android:layout_weight="1"
+                android:fontFamily="@font/dosis_regular"
+                android:gravity="center_horizontal"
+                android:letterSpacing="-0.03"
+                android:lineSpacingExtra="-3.2sp"
+                android:text="@string/current_price"
+                android:textSize="16sp" />
+
+            <LinearLayout
+                android:id="@+id/linCurrenciesSelected"
+                android:layout_width="match_parent"
+                android:layout_height="100dp"
+                android:layout_below="@+id/txtCurrent"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+
+                    <LinearLayout
+                        android:id="@+id/linFromCurrency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center|center_vertical|center_horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imgFlagFrom"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/eur" />
+
+                        <TextView
+                            android:id="@+id/txtCurrentFrom"
+                            style="@style/CurrenciesDetailFromTo"
+                            android:layout_width="wrap_content" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imgUpCurrencyFrom"
+                        style="@style/currencyRowUpTheme1"
+                        android:layout_above="@+id/linFromCurrency" />
+
+                    <ImageView
+                        android:id="@+id/imgDownCurrencyFrom"
+                        style="@style/currencyRowDownTheme1"
+                        android:layout_below="@+id/linFromCurrency"
+                        android:background="?attr/colorPrimary" />
+
+                </RelativeLayout>
+
+                <ImageView
+                    android:id="@+id/imgChangeCurrencies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:tint="?attr/colorAccent"
+                    android:src="@drawable/ico_switch" />
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1">
+
+                    <LinearLayout
+                        android:id="@+id/linToCurrency"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_centerInParent="true"
+                        android:layout_centerVertical="true"
+                        android:gravity="center|center_vertical|center_horizontal">
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/imgFlagTo"
+                            android:layout_width="18dp"
+                            android:layout_height="18dp"
+                            android:src="@drawable/eur" />
+
+                        <TextView
+                            android:id="@+id/txtCurrentTo"
+                            style="@style/CurrenciesDetailFromTo" />
+                    </LinearLayout>
+
+                    <ImageView
+                        android:id="@+id/imgUpCurrencyTo"
+                        style="@style/currencyRowUpTheme1"
+                        android:layout_above="@+id/linToCurrency" />
+
+                    <ImageView
+                        android:id="@+id/imgDownCurrencyTo"
+                        style="@style/currencyRowDownTheme1"
+                        android:layout_below="@+id/linToCurrency" />
+
+                </RelativeLayout>
+
+            </LinearLayout>
+
+            <RadioGroup
+                android:id="@+id/radioRanges"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/linCurrenciesSelected"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:background="?attr/colorPrimaryDark"
+                android:gravity="center"
+                android:orientation="horizontal"
+                android:textAllCaps="true">
+
+                <RadioButton
+                    android:id="@+id/range1D"
+                    style="@style/rangeToApiTheme1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/range1D" />
+
+                <RadioButton
+                    android:id="@+id/range1W"
+                    style="@style/rangeToApiTheme1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/range1W" />
+
+                <RadioButton
+                    android:id="@+id/range1M"
+                    style="@style/rangeToApiTheme1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/range1M" />
+
+                <RadioButton
+                    android:id="@+id/range6M"
+                    style="@style/rangeToApiTheme1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/range6M" />
+
+                <RadioButton
+                    android:id="@+id/range1Y"
+                    style="@style/rangeToApiTheme1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/range1Y" />
+
+                <RadioButton
+                    android:id="@+id/range3Y"
+                    style="@style/rangeToApiTheme1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/range3Y" />
+            </RadioGroup>
+
+            <!-- **************  -->
+            <LinearLayout
+                android:id="@+id/linConcept"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/radioRanges"
+                android:orientation="horizontal"
+                android:paddingBottom="16dp"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout style="@style/conceptDescArrow">
+
+                        <ImageView
+                            android:id="@+id/imgDate"
+                            style="@style/arrow_details" />
+
+                        <TextView
+                            android:id="@+id/txtDate"
+                            style="@style/descriptionConcepts"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtDatePercentage"
+                        style="@style/descriptionConceptsPercentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/txtDateAmount"
+                        style="@style/descriptionConceptsAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/conceptLine" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout style="@style/conceptDescArrow">
+
+                        <ImageView
+                            android:id="@+id/imgMin"
+                            style="@style/arrow_details" />
+
+                        <TextView
+                            android:id="@+id/txtMin"
+                            style="@style/descriptionConcepts"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/min" />
+
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtMinPercentage"
+                        style="@style/descriptionConceptsPercentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/txtMinAmount"
+                        style="@style/descriptionConceptsAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/conceptLine" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout style="@style/conceptDescArrow">
+
+                        <ImageView
+                            android:id="@+id/imgMax"
+                            style="@style/arrow_details" />
+
+                        <TextView
+                            android:id="@+id/txtMax"
+                            style="@style/descriptionConcepts"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/max" />
+                    </RelativeLayout>
+
+
+                    <TextView
+                        android:id="@+id/txtMaxPercentage"
+                        style="@style/descriptionConceptsPercentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/txtMaxAmount"
+                        style="@style/descriptionConceptsAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+
+                <LinearLayout style="@style/conceptLine" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <RelativeLayout style="@style/conceptDescArrow">
+
+                        <ImageView
+                            android:id="@+id/imgAvg"
+                            style="@style/arrow_details" />
+
+                        <TextView
+                            android:id="@+id/txtAvg"
+                            style="@style/descriptionConcepts"
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:text="@string/avg" />
+                    </RelativeLayout>
+
+                    <TextView
+                        android:id="@+id/txtAvgPercentage"
+                        style="@style/descriptionConceptsPercentage"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+
+                    <TextView
+                        android:id="@+id/txtAvgAmoun"
+                        style="@style/descriptionConceptsAmount"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                </LinearLayout>
+            </LinearLayout>
+            <!-- ************** -->
+            <LinearLayout
+                android:id="@+id/linAddNotify"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:background="?attr/colorAccent"
+                android:gravity="center">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="8dp"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_marginStart="4dp"
+                    android:src="@drawable/bell"
+                    android:tint="?attr/colorPrimary" />
+
+                <TextView
+                    android:id="@+id/txtNotifyNotificationCurrencies"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="4dp"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="4dp"
+                    android:fontFamily="@font/dosis_regular"
+                    android:text="@string/notifyMeChangeCurrency"
+                    android:textColor="?attr/colorPrimary"
+                    android:textSize="22sp" />
+            </LinearLayout>
+
+            <com.github.mikephil.charting.charts.LineChart
+                android:id="@+id/chart"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@+id/linDates"
+                android:layout_below="@+id/linConcept"
+                android:background="?attr/colorPrimary"
+                android:minHeight="160dp" />
+
+            <LinearLayout
+                android:id="@+id/linDates"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_above="@+id/linAddNotify"
+                android:orientation="horizontal"
+                android:paddingLeft="16dp"
+                android:paddingRight="16dp">
+
+                <TextView
+                    android:id="@+id/txtFromDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:gravity="left"
+                    android:textColor="@color/secundaryTextColorTheme1"
+                    android:textSize="12sp" />
+
+                <TextView
+                    android:id="@+id/txtCurrentDate"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/dosis_regular"
+                    android:gravity="right"
+                    android:textColor="@color/secundaryTextColorTheme1"
+                    android:textSize="12sp" />
+            </LinearLayout>
+
+
+        </RelativeLayout>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

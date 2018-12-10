@@ -1,0 +1,226 @@
+<resources>
+
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="AppTheme.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:textColor">@color/primaryTextTheme1</item>
+    </style>
+    <style name="Night">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textColor">@color/primaryTextTheme1</item>
+    </style>
+
+    <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="AppTheme.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+
+    <style name="rangeToApiTheme1">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">35dp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:button">@null</item>
+        <item name="android:gravity">center</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="descriptionConcepts">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:textSize">13sp</item>
+        <item name="android:fontFamily">@font/dosis_medium</item>
+        <item name="android:gravity">center_horizontal|center_vertical|center</item>
+        <item name="android:textColor">@color/secundaryTextColorTheme1</item>
+    </style>
+
+    <style name="descriptionConceptsPercentage">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">20sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/dosis_medium</item>
+        <item name="android:gravity">center|center_vertical|center_horizontal</item>
+        <item name="android:textColor">@color/white</item>
+    </style>
+    <style name="descriptionConceptsAmount">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_weight">1</item>
+        <item name="android:fontFamily">@font/dosis_medium</item>
+        <item name="android:layout_marginTop">4dp</item>
+        <item name="android:gravity">center|center_vertical|center_horizontal</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+    </style>
+
+
+    <style name="arrow_details">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:gravity">center_vertical|center</item>
+        <item name="android:layout_marginLeft">8dp</item>
+    </style>
+
+    <style name="tittleSettingsSymbol">
+        <item name="android:padding">@dimen/tittle_settings_symbol</item>
+        <item name="android:gravity">center|center_vertical</item>
+        <item name="android:textSize">@dimen/tittle_settings</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="tittleSettings">
+        <item name="android:padding">@dimen/tittle_settings</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/tittle_settings</item>
+        <item name="android:textColor">@android:color/white</item>
+    </style>
+    <style name="paddingsContainer">
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+    </style>
+    <style name="ToolbarColoredBackArrowTheme1">
+        <item name="android:textColor">@color/primaryTextTheme1</item>
+        <item name="android:textColorSecondary">@color/primaryTextTheme1</item>
+    </style>
+    <style name="ToolbarColoredBackArrowTheme2">
+        <item name="android:textColor">@color/primaryTextTheme2</item>
+        <item name="android:textColorSecondary">@color/primaryTextTheme2</item>
+    </style>
+    <style name="drawableTextviewDrawableBar">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textAllCaps">true</item>
+        <item name="android:textSize">14sp</item>
+        <item name="android:layout_marginTop">14dp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:lineSpacingExtra">0dp</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/dosis_regular</item>
+    </style>
+
+    <style name="pop_up_full_boton1" parent="Night">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/primaryTextTheme1</item>
+        <item name="android:background">@color/colorAccent_Daylight</item>
+    </style>
+
+    <style name="pop_up_full_boton2" parent="Daylight">
+        <item name="android:textSize">18sp</item>
+        <item name="android:textStyle">normal</item>
+        <item name="android:textColor">@color/primaryTextTheme2</item>
+        <item name="android:background">@color/colorAccent_Daylight</item>
+    </style>
+
+    <style name="tittle_country_selection">
+        <item name="android:padding">@dimen/tittle_settings</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textSize">@dimen/tittle_settings</item>
+        <item name="android:textColor">@color/primaryTextTheme2</item>
+    </style>
+
+    <style name="conceptDescArrow">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">@dimen/heightConcept</item>
+        <item name="android:gravity">center_vertical|center</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+
+    <style name="conceptLine">
+        <item name="android:layout_width">1dp</item>
+        <item name="android:layout_marginTop">13dp</item>
+        <item name="android:layout_marginBottom">13dp</item>
+        <item name="android:background">@color/line_concept</item>
+        <item name="android:layout_height">match_parent</item>
+    </style>
+
+    <style name="CurrenciesDetailFromTo">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:fontFamily">@font/dosis_regular</item>
+        <item name="android:text">@string/min</item>
+        <item name="android:textSize">24dp</item>
+        <item name="android:textAllCaps">true</item>
+    </style>
+
+    <style name="currencyRowUpTheme1">
+        <item name="android:layout_gravity">center_horizontal|center_vertical|center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:src">@drawable/arrow_up</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="currencyRowDownTheme1">
+        <item name="android:layout_gravity">center_horizontal|center_vertical|center</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">30dp</item>
+        <item name="android:padding">8dp</item>
+        <item name="android:src">@drawable/arrow_down</item>
+        <item name="android:background">?attr/colorPrimary</item>
+    </style>
+
+    <style name="textContentPremiumPopup">
+        <item name="android:layout_marginLeft">8dp</item>
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">18sp</item>
+        <item name="android:lines">1</item>
+        <item name="android:includeFontPadding">false</item>
+        <item name="android:fontFamily">@font/dosis_regular</item>
+    </style>
+    <style name="pickerHourText">
+        <item name="android:fontFamily">@font/dosis_regular</item>
+        <item name="android:width">120dp</item>
+        <item name="android:textSize">44dp</item>
+    </style>
+
+    <style name="editTextSetupNotifications">
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:layout_weight">0.75</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:fontFamily">@font/dosis_medium</item>
+        <item name="android:minWidth">75dp</item>
+        <item name="android:inputType">numberDecimal</item>
+        <item name="android:textColorHint">@color/secundaryTextColorTheme1</item>
+        <item name="android:textColor">?attr/colorAccent</item>
+        <item name="android:textSize">24sp</item>
+        <item name="android:maxWidth">120dp</item>
+    </style>
+
+    <style name="Daylight">
+            <item name="colorPrimary">@color/colorPrimaryDaylight</item>
+            <item name="colorPrimaryDark">@color/colorDarkDaylight</item>
+            <item name="colorAccent">@color/colorAccent_Daylight</item>
+            <item name="windowActionBar">false</item>
+            <item name="windowNoTitle">true</item>
+            <item name="android:textColor">@color/primaryTextTheme2</item>
+            <item name="android:windowBackground">@android:color/black</item>
+    </style>
+
+    <style name="iconsDrawable">
+        <item name="android:layout_width">23dp</item>
+        <item name="android:layout_height">23dp</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_marginTop">12dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:paddingBottom">4dp</item>
+    </style>
+
+    <style name="linMenuDrawable">
+        <item name="android:layout_marginTop">8dp</item>
+    </style>
+</resources>

@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="?attr/colorPrimary"
+    android:orientation="horizontal">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:gravity="center_horizontal"
+        android:background="@color/colorPrimary"
+        android:id="@+id/linTopBar">
+
+
+        <android.support.v7.widget.Toolbar
+            android:id="@+id/toolbarsearch"
+            style="@style/tittleSettingsSymbol"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:gravity="center_horizontal|center"
+            app:navigationIcon="@android:drawable/ic_menu_search"
+            app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <!--searchView layout-->
+    <android.support.v7.widget.SearchView
+        android:id="@+id/search_view"
+        android:paddingLeft="60dp"
+        android:layout_marginTop="20dp"
+        android:paddingRight="60dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@color/colorPrimary"
+        android:layout_alignBottom="@+id/toolbarsearch"
+        android:iconifiedByDefault="false"
+        android:visibility="gone"
+        android:gravity="center_horizontal"
+        app:closeIcon="@drawable/btn_close"
+        app:iconifiedByDefault="false"
+        app:layout_scrollFlags="scroll|enterAlways"
+        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
+        app:queryHint="@string/search"
+        app:searchIcon="@null"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+    </LinearLayout>
+
+
+    <android.support.v7.widget.RecyclerView
+        android:id="@+id/recyclerCurrency"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/linTopBar"
+        android:background="@color/colorPrimaryDark"
+        android:textColor="@color/dark_color" />
+</RelativeLayout>

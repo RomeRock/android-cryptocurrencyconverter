@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_relative"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:background="@drawable/border_theme1"
+    android:gravity="center_vertical|center_horizontal|center">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <ImageView
+            android:id="@+id/item_icon"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_centerInParent="true"
+            android:contentDescription="icon"
+            android:visibility="gone"
+            android:paddingLeft="@dimen/font_size_settings"
+            android:paddingTop="@dimen/font_size_settings"
+            android:paddingBottom="@dimen/font_size_settings"/>
+
+        <TextView
+            android:id="@+id/item_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignBaseline="@+id/item_icon"
+            android:layout_toRightOf="@+id/item_icon"
+            android:fontFamily="@font/dosis_regular"
+            android:paddingBottom="@dimen/font_size_settings"
+            android:paddingRight="@dimen/rightRow"
+            android:paddingLeft="@dimen/font_size_settings"
+            android:paddingTop="@dimen/font_size_settings" />
+
+        <LinearLayout
+            android:orientation="horizontal"
+            android:id="@+id/linPaddingsContainer"
+            style="@style/paddingsContainer"
+            android:layout_width="match_parent"
+            android:layout_height="2px"
+            android:layout_alignBottom="@+id/item_title"
+            android:layout_alignParentBottom="true"
+            android:background="@drawable/border_theme1"
+            android:layout_marginLeft="@dimen/activity_horizontal_margin"></LinearLayout>
+
+    </RelativeLayout>
+</RelativeLayout>

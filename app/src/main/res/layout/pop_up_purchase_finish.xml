@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+android:id="@+id/relContentPopup"
+android:layout_width="284dp"
+android:layout_height="wrap_content"
+android:background="@android:color/transparent">
+<RelativeLayout
+    android:id="@+id/relContent"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginLeft="16dp"
+    android:layout_marginRight="16dp"
+    android:background="@drawable/dialog_theme1">
+
+    <RelativeLayout
+        android:id="@+id/relTittle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp">
+
+        <TextView
+            android:id="@+id/txtTittleImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/border_lineal_alert_title_theme1"
+            android:gravity="center"
+            android:paddingBottom="8dp"
+            android:fontFamily="@font/dosis_regular"
+            android:textColor="@color/primaryTextTheme1"
+            android:textSize="18sp" />
+
+        <TextView
+            android:id="@+id/txtContentPurchase"
+            android:layout_margin="@dimen/activity_horizontal_margin"
+            android:layout_below="@+id/txtTittleImg"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:textSize="17sp"
+            android:text="ok"
+            android:gravity="center_horizontal"/>
+
+    </RelativeLayout>
+
+    <LinearLayout
+        android:id="@+id/btns"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_below="@+id/relTittle"
+        android:gravity="center"
+        android:layout_margin="16dp"
+        android:orientation="vertical">
+
+
+        <Button
+            android:id="@+id/btnDone"
+            android:background="?attr/colorAccent"
+            android:textColor="?attr/colorPrimary"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Ok_labe"
+            android:fontFamily="@font/dosis_medium"
+            android:textAllCaps="false" />
+
+
+
+    </LinearLayout>
+</RelativeLayout>
+
+
+</RelativeLayout>

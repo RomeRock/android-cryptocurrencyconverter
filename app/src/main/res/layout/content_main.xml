@@ -1,0 +1,128 @@
+<android.support.design.widget.CoordinatorLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/coordinator"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_marginTop="?attr/actionBarSize"
+    android:background="?attr/colorPrimary"
+    tools:context="com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity"
+    tools:showIn="@layout/app_bar_main">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <com.google.android.gms.ads.AdView
+            xmlns:ads="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/adView"
+            android:background="@color/black"
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            ads:adSize="BANNER"
+            ads:adUnitId="@string/banner_ad_unit_id" />
+
+    <com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout xmlns:app="http://schemas.android.com/apk/res-auto"
+        android:id="@+id/swipyRefreshCurrencies"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/adView"
+        android:layout_above="@+id/linAddNotify"
+        app:srl_direction="top">
+
+
+        <ScrollView
+            android:id="@+id/row"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:id="@+id/relContainer"
+                android:layout_width="match_parent"
+                android:layout_height="@dimen/rowsCurrencyItem">
+                <!-- Elemento de recyclerview -->
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/recyclerCurrencyDashboard"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/dark_color" />
+
+                <!-- Elemento de recyclerview -->
+                <LinearLayout
+                    android:id="@+id/linAddCurrency"
+                    android:layout_width="match_parent"
+                    android:layout_height="@dimen/rowsCurrencyItem"
+                    android:layout_below="@+id/recyclerCurrencyDashboard"
+                    android:layout_marginBottom="10dp"
+                    android:layout_marginTop="4dp"
+                    android:background="@drawable/dash_border_top_button"
+                    android:gravity="center|center_vertical|center_horizontal"
+                    android:orientation="vertical">
+
+                    <ImageView
+                        android:id="@+id/imgAddCurrency"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentTop="true"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="12dp"
+                        android:layout_weight="1"
+                        android:src="@drawable/add_currency" />
+
+                    <TextView
+                        android:id="@+id/txtAddCurrencyLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_below="@+id/imgAddCurrency"
+                        android:layout_centerHorizontal="true"
+                        android:layout_marginTop="4dp"
+                        android:layout_weight="1"
+                        android:fontFamily="@font/dosis_regular"
+                        android:text="@string/add_currency"
+                        android:textColor="@color/secundaryTextColorTheme1" />
+
+                </LinearLayout>
+
+                <TextView
+                    android:id="@+id/txtUpdateTime"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/linAddCurrency"
+                    android:layout_marginBottom="54dp"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/dosis_medium"
+                    android:gravity="right|end"
+                    android:letterSpacing="-0.03"
+                    android:lineSpacingExtra="2.8sp"
+                    android:textColor="@color/secundaryTextColorTheme1"
+                    android:textSize="14sp" />
+
+            </RelativeLayout>
+
+        </ScrollView>
+    </com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout>
+
+
+    <LinearLayout
+        android:id="@+id/linAddNotify"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_alignParentBottom="true"
+        android:background="?attr/colorAccent"
+        android:gravity="center">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:src="@drawable/bell"
+            android:tint="?attr/colorPrimary" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:fontFamily="@font/dosis_regular"
+            android:text="@string/notification_center"
+            android:textColor="?attr/colorPrimary"
+            android:textSize="22sp" />
+    </LinearLayout>
+    </RelativeLayout>
+</android.support.design.widget.CoordinatorLayout>

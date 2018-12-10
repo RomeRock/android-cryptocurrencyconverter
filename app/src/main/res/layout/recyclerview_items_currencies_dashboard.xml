@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relRowItemCurrency"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:clickable="true"
+    android:focusable="true"
+    android:gravity="center_vertical|center_horizontal|center"
+    android:paddingTop="2dp">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="?attr/colorPrimaryDark">
+
+        <RelativeLayout
+            android:id="@+id/relativeLayout"
+            android:layout_width="93dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imgDelete"
+            android:gravity="center_horizontal|center_vertical">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgFlagRow"
+                android:layout_width="@dimen/flagsImages"
+                android:layout_height="@dimen/flagsImages"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_marginTop="8dp"
+                android:src="@drawable/eur" />
+
+            <TextView
+                android:id="@+id/txtFlagRow"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgFlagRow"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/dosis_medium"
+                android:gravity="center_horizontal|center_vertical|center"
+                android:text="EUR - €"
+                android:textSize="18sp" />
+        </RelativeLayout>
+        <RelativeLayout
+            android:id="@+id/relativeLayoutGraph"
+            android:layout_width="93dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentTop="true"
+            android:layout_toEndOf="@+id/imgDelete"
+            android:background="@color/backgroundAccentTheme1"
+            android:visibility="gone"
+            android:gravity="center_horizontal|center_vertical">
+
+            <com.airbnb.lottie.LottieAnimationView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/imgFlagRowGraph"
+                android:layout_width="wrap_content"
+                android:layout_height="40dp"
+                android:layout_marginTop="4dp"
+                android:gravity="center_horizontal|bottom"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/graph" />
+
+            <TextView
+                android:id="@+id/txtFlagRowGraph"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgFlagRowGraph"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/dosis_medium"
+                android:gravity="center_horizontal|center_vertical|center"
+                android:text="@string/graph"
+                android:textSize="18sp" />
+        </RelativeLayout>
+
+
+        <ImageView
+            android:id="@+id/imgDelete"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:padding="8dp"
+            android:src="@drawable/icons_menu_copy"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/txtCurrentItem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/relativeLayout"
+            android:fontFamily="@font/dosis_regular"
+            android:text="Euro"
+            android:textSize="16sp" />
+
+        <LinearLayout
+            android:id="@+id/linCurrencyLittle"
+            android:layout_marginLeft="8dp"
+            android:layout_marginRight="8dp"
+            android:layout_marginTop="2dp"
+            android:layout_toEndOf="@+id/relativeLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/txtCurrentItem"
+            android:orientation="horizontal"
+            android:visibility="gone">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/imgFlagRowLittle"
+                android:layout_width="15dp"
+                android:layout_height="15dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center_vertical"
+                android:layout_marginEnd="4dp"
+                android:layout_marginRight="4dp"
+                android:src="@drawable/eur" />
+
+            <TextView
+                android:id="@+id/txtFlagRowLittle"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/imgFlagRow"
+                android:gravity="center_horizontal|center_vertical|center"
+                android:text="EUR - €"
+                android:textSize="16sp" />
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/txtAmount"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@+id/relativeLayout"
+            android:background="@null"
+            android:fontFamily="@font/dosis_medium"
+            android:gravity="end"
+            android:includeFontPadding="false"
+            android:lineSpacingExtra="0dp"
+            android:paddingBottom="4dp"
+            android:singleLine="true"
+            android:textAlignment="textEnd"
+            android:textColor="?attr/colorAccent"
+            android:textSize="32sp" />
+
+        <com.romerock.apps.utilities.cryptocurrencyconverter.helpers.AmountEditTextWidget
+            android:id="@+id/txtAmountEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="16dp"
+            android:layout_toEndOf="@+id/relativeLayout"
+            android:background="@null"
+            android:fontFamily="@font/dosis_medium"
+            android:gravity="end"
+            android:includeFontPadding="false"
+            android:inputType="number|numberDecimal"
+            android:lineSpacingExtra="0dp"
+            android:paddingBottom="4dp"
+            android:textAlignment="textEnd"
+            android:textColor="@color/white"
+            android:singleLine="true"
+            android:textColorHint="@color/secundaryTextColorTheme1"
+            android:textSize="32sp"
+            android:visibility="gone" />
+
+        <ImageView
+            android:id="@+id/imgDragNDrop"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_margin="16dp"
+            android:padding="8dp"
+            android:src="@drawable/arrow_drag_n_drop"
+            android:visibility="gone" />
+
+    </RelativeLayout>
+</RelativeLayout>

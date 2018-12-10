@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/relContentPopup"
+    android:layout_width="284dp"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent">
+
+    <RelativeLayout
+        android:id="@+id/relContent"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="16dp"
+        android:layout_marginRight="16dp"
+        android:background="@drawable/dialog_theme1">
+
+        <RelativeLayout
+            android:id="@+id/relTittle"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp">
+
+            <TextView
+                android:id="@+id/txtTittleImg"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentLeft="true"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_lineal_alert_title_theme1"
+                android:gravity="center"
+                android:paddingBottom="8dp"
+                android:text="@string/pop_up_feedback_tittle"
+                android:textColor="@color/primaryTextTheme1"
+                android:fontFamily="@font/dosis_regular"
+                android:textSize="18sp" />
+            <TextView
+                android:id="@+id/txtVotesPurchase"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/btns"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true"
+            android:layout_below="@+id/relTittle"
+            android:layout_marginLeft="16dp"
+            android:layout_marginRight="16dp"
+            android:gravity="center"
+            android:orientation="vertical">
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:inputType="textMultiLine"
+                android:layout_gravity="top"
+                android:gravity="center_vertical"
+                android:paddingRight="8dp"
+                android:paddingLeft="8dp"
+                android:lines="1"
+                android:singleLine="true"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/border_feedback_editview"
+                android:id="@+id/txtMail"
+                android:textColor="#666666"
+                android:fontFamily="@font/dosis_regular"
+                android:hint="@string/email_optional" />
+            <EditText
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:inputType="textMultiLine"
+                android:layout_gravity="top"
+                android:gravity="top"
+                android:layout_marginBottom="@dimen/spaceElement2"
+                android:layout_marginTop="@dimen/activity_horizontal_margin"
+                android:paddingBottom="9dp"
+                android:paddingRight="9dp"
+                android:paddingLeft="9dp"
+                android:paddingTop="19dp"
+                android:background="@drawable/border_feedback_editview"
+                android:id="@+id/txtContentMail"
+                android:textColor="#6f6f6f"
+                android:fontFamily="@font/dosis_regular"
+                android:hint="@string/pop_up_get_feedback_content_mail" />
+            <Button
+                android:id="@+id/popUpFeedbackBoton"
+                android:background="?attr/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/send"
+                android:textColor="?attr/colorPrimary"
+                android:fontFamily="@font/dosis_medium"
+                android:textAllCaps="false" />
+            <TextView
+                android:id="@+id/popUpNoThanks"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="5dp"
+                android:gravity="center_horizontal"
+                android:paddingBottom="16dp"
+                android:paddingTop="11dp"
+                android:text="@string/no_thanks"
+                android:fontFamily="@font/dosis_medium"
+                android:textColor="@color/primaryTextTheme1"
+                android:textSize="14sp" />
+        </LinearLayout>
+    </RelativeLayout>
+
+
+</RelativeLayout>
