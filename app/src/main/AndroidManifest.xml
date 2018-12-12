@@ -171,7 +171,7 @@
         </receiver>
         <provider
             android:name="com.facebook.FacebookContentProvider"
-            android:authorities="com.facebook.app.FacebookContentProvider{@string/facebook_app_id}"
+            android:authorities="com.facebook.app.FacebookContentProvider2292294817451565"
             android:exported="false" />
 
         <meta-data

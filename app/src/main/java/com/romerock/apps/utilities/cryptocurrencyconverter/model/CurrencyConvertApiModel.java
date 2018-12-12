@@ -52,7 +52,7 @@ public class CurrencyConvertApiModel {
     private float fluctuationPercentage;
 
     public static int idForDrawable(Context context, String currency) {
-        int id = context.getResources().getIdentifier(currency.toLowerCase(), "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier(currency.toLowerCase().replace("*",""), "drawable", context.getPackageName());
         if (id == 0)
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
         return id;
@@ -82,7 +82,7 @@ public class CurrencyConvertApiModel {
             if (position > items.size() - 1)
                 position = 0;
         }
-        String idSearch = items.get(position).getName().toString().toLowerCase();
+        String idSearch = items.get(position).getName().toString().toLowerCase().replace("*","");
         if (idSearch.compareTo("try") == 0)
             idSearch = idSearch + idSearch;
         int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
@@ -189,7 +189,7 @@ public class CurrencyConvertApiModel {
         for (Map.Entry<String, JSONObject> entry : valueSnap.entrySet()) {
             try {
                 if (entry.getKey().toString().equals("lastest")) {
-                    if (txtUpdateTime != null) {
+                    if (txtUpdateTime != null && new JSONObject((Map) entry.getValue()).has("updated_tstamp")) {
                         String time = String.valueOf(new JSONObject((Map) entry.getValue()).getString("updated_tstamp"));
                         txtUpdateTime.setText(context.getString(R.string.update_time) + " " + Utilities.getHour(Long.parseLong(time), context));
                     }

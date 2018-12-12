@@ -64,7 +64,7 @@ public class RecyclerViewCurrenciesCatalogAdapter extends RecyclerView.Adapter<R
         });
         viewHolder.txtCurrent.setText(Items.get(position).getCurrency_name());
         if (Items.get(position).getName() != null) {
-            String idSearch = Items.get(position).getName().toLowerCase();
+            String idSearch = Items.get(position).getName().toLowerCase().replace("*","");
             if (idSearch.compareTo("try") == 0)
                 idSearch = idSearch + idSearch;
             int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());

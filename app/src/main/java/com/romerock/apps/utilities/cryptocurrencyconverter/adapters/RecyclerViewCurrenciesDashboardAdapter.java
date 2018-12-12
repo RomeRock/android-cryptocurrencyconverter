@@ -98,7 +98,7 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
         viewHolder.txtFlagRowLittle.setText(Items.get(position).getName() + " - " + Items.get(position).getCurrency_symbol());
         viewHolder.txtFlagRow.setText(Items.get(position).getName() + " - " + Items.get(position).getCurrency_symbol());
 
-        String idSearch = Items.get(position).getName().toLowerCase();
+        String idSearch = Items.get(position).getName().toLowerCase().replace("*","");
         if (idSearch.compareTo("try") == 0)
             idSearch = idSearch + idSearch;
         int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());

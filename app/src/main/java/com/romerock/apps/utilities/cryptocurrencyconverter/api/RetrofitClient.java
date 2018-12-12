@@ -16,8 +16,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitClient {
     private static String BASE_URL_ROMEROCK ="https://api.romerock.com/";
     private static String APIKEY ="LOFLDWCPLJMUPHRGBDTWLYCY";
-    private static String SOURCE_CODE="currency";
-    private static String SOURCE_LOC="currency.com";
+    private static String SOURCE_CODE="cryptocurrency";
+    private static String SOURCE_LOC="cryptocurrency.com";
     private static String OS="android";
 
     public static String getOS() {

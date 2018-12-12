@@ -5,7 +5,7 @@
     <string name="banner_ad_unit_id_big">ca-app-pub-1943700858932247/6248330570</string>
     <string name="follow_us_twitter">https://twitter.com/RomeRock_Apps</string>
     <string name="follow_us_twitter_profile">twitter://user?screen_name=RomeRock_Apps</string>
-    <string name="facebook_app_id">2186593201575723</string>
+    <string name="facebook_app_id">2292294817451565</string>
     <string name="follow_us_instagram">https://www.instagram.com/romerock_apps/</string>
     <string name="link_tipCalculator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.tipcalculator&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
     <string name="link_xpressVote">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.xpressvote&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
@@ -65,7 +65,7 @@
     <string name="share_facebook">Compartir en Facebook</string>
     <string name="share_twitter">Compartir en Twitter</string>
     <string name="pop_up_share_tittle">Comparte con el mundo\ny gana</string>
-    <string name="pop_up_share_content">¿Te gusta el calculadora de divisas?\n¡Compártela en Facebook o Twitter y gana\nel tema Daylight completamente gratis!</string>
+    <string name="pop_up_share_content">¿Te gusta el calculadora de divisas?\n¡Compártela en Facebook o Twitter!</string>
     <string name="send">Enviar</string>
     <string name="pop_up_get_feedback_content_mail">Deja tus comentarios</string>
     <string name="pop_up_feedback_tittle">¿Tienes alguna sugerencia?\nEstamos aquí para servirte :)</string>
@@ -105,8 +105,8 @@
     <string name="settings_preview_pro_version">VERSIÓN PRO</string>
     <string name="share_link">http://goo.gl/BnFmGC</string>
     <string name="shareAndRewarded">shareAndRewardedPreferences</string>
-    <string name="share_via_twitter">I\'m using #Currency  #Converter. Download for #FREE #Android</string>
-    <string name="share_success">Gracias por compartir, el tema daylight esta ahora disponible</string>
+    <string name="share_via_twitter">I\'m using #Cypto #Currency  #Converter. Download for #FREE #Android</string>
+    <string name="share_success">Gracias por compartir</string>
     <string name="quickConverter">Calculadora de unidades de medida</string>
     <string name="preferences_check_inventory">preferencesCheckInventory</string>
     <string name="tittle_purchse_finish">Gracias por tu compra!</string>

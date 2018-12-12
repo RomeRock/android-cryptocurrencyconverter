@@ -62,8 +62,6 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
     TextView txtSecond;
     @BindView(R.id.txtThree)
     TextView txtThree;
-    @BindView(R.id.txtFour)
-    TextView txtFour;
     private Inventory inventoryUser;
     private Purchase purchase;
     private IabHelper mHelper;
@@ -170,6 +168,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
     public void onViewClicked(View view) {
         switch (view.getId()) {
             case R.id.popButtonDonate1:
+                if (mHelper != null) mHelper.flagEndAsync();
                 try {
                     if (mHelper != null && mHelper.isSetupDone()) {
                         mHelper.flagEndAsync();
@@ -184,6 +183,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
 
                 break;
             case R.id.popButtonDonate2:
+                if (mHelper != null) mHelper.flagEndAsync();
                 try {
                     if (mHelper != null && mHelper.isSetupDone()) {
                         mHelper.flagEndAsync();
@@ -198,6 +198,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
 
                 break;
             case R.id.popButtonDonate3:
+                if (mHelper != null) mHelper.flagEndAsync();
                 try {
                     if (mHelper != null && mHelper.isSetupDone()) {
                         mHelper.flagEndAsync();
@@ -289,9 +290,8 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
             txtfirst.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
             txtSecond.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
             txtThree.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
-            txtFour.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
             popUpNoThanks.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
-        } else {
+        } /*else {
             if (themeSelected.contains("Daylight")) {
                 txtfirst.setTextColor(getResources().getColor(R.color.primaryTextTheme2));
                 txtSecond.setTextColor(getResources().getColor(R.color.primaryTextTheme2));
@@ -299,6 +299,6 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                 txtFour.setTextColor(getResources().getColor(R.color.primaryTextTheme2));
                 popUpNoThanks.setTextColor(getResources().getColor(R.color.primaryTextTheme2));
             }
-        }
+        }*/
     }
 }

@@ -24,7 +24,7 @@ public class CipherAES {
     private final static String DEVICE = "TYPE_ANDROID2";
     public static String id = "";
     public static Context context = null;
-    protected static String base64EncodedPublicKey="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAp+fEB38Bw1sYlf4onGhwu4ZOCkMSd0m+VIg7sXjOL7b5oKqc//z2di1mNz3XeQW6IjbOiW6F4uKcUp75Kmwb0yvTkMFH0a3t23jLwH0AzqGRxHQWKCkuN/6ZLROR5t/SUND6t1k4EIGbkj1PBHvv1A/4WRlV+UZYNal4AgP1vv7lDg44z40+vRonfiX/nPe4GItw5sP9A0y8qqAi7Fuo8YQpl8T5yOO8ANtR12Y93/fO8D0QXkTWutQyNLuQ8/d8I4Kbi5+fWgfnSaZPcdFnr9GNVqkwN7qvieI71R4SoiFWRdMPGeUCnqJQ2YHylXNmNrE8Hl8gkZwahrdYRikWowIDAQAB";
+    protected static String base64EncodedPublicKey="MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAxj8ffQrclj1IiE6wq9GouONthDapAg0DlwhGIvpV71uljvJDQ1EXdZRi84v/p/lWSOhPWnsW1VSxaVTfnoVgniVmtMwHJLN2RLBCNRezTwSoBCVLfJde80PegXdPw3uLVCmnSEqkAf/lOR85vMr9WJ/T9rPWZW37xvPJyNQd2ZmItBINEgzabfGHosDLtwgN79IFxsOl45P6X8++95EvbL2hin0lN88HIIi8i8S7qtUuOlnvEGEdqskTQJTYTWTVBw8Q7iDFccSzbvybSCTV1hWd7icOcO+lbJKLf/sZPekVOlZHiGAPp3TmpypcR/cj/VlWYfFejAOj7uRy/loO5QIDAQAB";
     public static final String base64EncodedPublicKeyTEST = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCg" +
             "KCAQEAhNe2XQ70DceAwE6uyYJGK1dIBbZcPdlER/9EEzylr6RDU6tnGj0Tk7kceN03GKvRf/ucT+ERLL3O" +
             "aHR22PXRXLZ17NZ81x6oS2vGmLyXBnjrU/I+asl8cNuLGySaoCdXxPAV+A9g6OG13dk+KY9i0O1roGpFH" +

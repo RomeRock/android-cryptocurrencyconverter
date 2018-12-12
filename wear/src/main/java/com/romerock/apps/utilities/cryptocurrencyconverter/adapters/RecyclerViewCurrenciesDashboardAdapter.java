@@ -84,7 +84,7 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
     public void onBindViewHolder(final ViewHolder viewHolder, final int position) {
         viewHolder.txtCurrent.setText(Items.get(position).getCurrency_name());
         viewHolder.nameCurrencyHolder=Items.get(position).getName();
-        int id = context.getResources().getIdentifier(Items.get(position).getName().toLowerCase(), "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier(Items.get(position).getName().toLowerCase().replace("*",""), "drawable", context.getPackageName());
         if (id == 0) {
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
         }
