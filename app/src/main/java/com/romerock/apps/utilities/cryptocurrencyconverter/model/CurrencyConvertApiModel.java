@@ -82,9 +82,10 @@ public class CurrencyConvertApiModel {
             if (position > items.size() - 1)
                 position = 0;
         }
-        String idSearch = items.get(position).getName().toString().toLowerCase().replace("*","");
+        String idSearch = Utilities.removeCharacters(items.get(position).getName().toString().toLowerCase());
         if (idSearch.compareTo("try") == 0)
             idSearch = idSearch + idSearch;
+
         int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
         if (id == 0) {
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
@@ -209,6 +210,22 @@ public class CurrencyConvertApiModel {
                             Gson gson = new GsonBuilder().create();
                             ItemLibraryCurrencyModel itemLibraryCurrencyModel = gson.fromJson(String.valueOf((JSONObject) json.get(key)), ItemLibraryCurrencyModel.class);
                             itemLibraryCurrencyModel.setName(key);
+
+                          /*  ItemLibraryCurrencyModel itemLibraryCurrencyModel= new ItemLibraryCurrencyModel();
+                            itemLibraryCurrencyModel.setName(key
+                                    .replace("*","")
+                                    .replace("-","")
+                                    .replace("_",""));
+                            if(((JSONObject) json.get(key)).has("currency_name")) {
+                                itemLibraryCurrencyModel.setCurrency_name(((JSONObject) json.get(key)).getString("currency_name"));
+                            }
+                            if(((JSONObject) json.get(key)).has("currency_symbol")) {
+                                itemLibraryCurrencyModel.setCurrency_symbol(((JSONObject) json.get(key)).getString("currency_symbol"));
+                            }
+                            if(((JSONObject) json.get(key)).has("country_name")) {
+                                itemLibraryCurrencyModel.setCountry_name(((JSONObject) json.get(key)).getString("country_name"));
+                            }*/
+
                             listAllCurrencies.add(itemLibraryCurrencyModel);
                         }
                         Collections.sort(listAllCurrencies, new Comparator<ItemLibraryCurrencyModel>() {
@@ -221,7 +238,6 @@ public class CurrencyConvertApiModel {
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
-
                 }
             } catch (JSONException e) {
                 e.printStackTrace();

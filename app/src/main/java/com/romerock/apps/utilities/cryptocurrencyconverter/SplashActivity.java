@@ -82,8 +82,8 @@ public class SplashActivity extends Activity {
             }
         }
         if (!sharedPrefs.contains(getString(R.string.globalCount))) {
-                ed.putInt(getString(R.string.globalCount),0);
-                ed.commit();
+            ed.putInt(getString(R.string.globalCount), 0);
+            ed.commit();
         }
         if (!sharedPrefs.contains(getString(R.string.preferences_count_keys))) {
             ed.putInt(getString(R.string.preferences_count_keys), 0);
@@ -100,7 +100,7 @@ public class SplashActivity extends Activity {
             ed.putInt(getString(R.string.preferences_count_some_love), countSomeLove);
         }
 
-        if(!sharedPrefs.contains(getString(R.string.dateForInterstitial))){
+        if (!sharedPrefs.contains(getString(R.string.dateForInterstitial))) {
             Calendar c = Calendar.getInstance();
             SimpleDateFormat df = new SimpleDateFormat("dd/MM/yyyy");
             c.add(Calendar.DATE, 3);
@@ -112,17 +112,20 @@ public class SplashActivity extends Activity {
         // Detect language
         if (!sharedPrefs.contains(getString(R.string.preferences_defaultCurrencies))) {
             String defaultCurrencies = "";
-            String[] defaultCryptoCurrencies = {"USD","EUR","JPY","GBP","CAD","CHF","CNY","CNH","AUD","NZD","SEK"};
+            String[] defaultCryptoCurrencies = {"USD", "EUR", "JPY", "GBP", "CAD", "CHF", "CNY", "CNH", "AUD", "NZD", "SEK"};
 
             String currency = Utilities.getCurrencyDefault(SplashActivity.this);
-            if(Arrays.asList(defaultCryptoCurrencies).contains(currency))
+            if (Arrays.asList(defaultCryptoCurrencies).contains(currency))
                 defaultCurrencies = currency.toString() + "|";
-            defaultCurrencies += "BTC|";
             if (currency.toString().compareTo("USD") != 0)
                 defaultCurrencies += "USD|";
             if (currency.toString().compareTo("EUR") != 0)
                 defaultCurrencies += "EUR|";
-
+            defaultCurrencies += "BTC|";
+            defaultCurrencies += "BTH|";
+            defaultCurrencies += "LTC|";
+            defaultCurrencies += "DOGE|";
+            defaultCurrencies += "ETH|";
             ed.putString(getString(R.string.preferences_defaultCurrencies), defaultCurrencies);
             ed.commit();
         }
@@ -132,7 +135,7 @@ public class SplashActivity extends Activity {
         }
         if (!sharedPrefs.contains(getString(R.string.language_settings))) {
             Locale current = getResources().getConfiguration().locale;
-            if(current!=null) {
+            if (current != null) {
                 if (current.getLanguage().toLowerCase().equals("es")) {
                     ed.putString(getString(R.string.language_settings), "es");
                     LocaleHelper.setLocale(this, "es");
@@ -153,16 +156,15 @@ public class SplashActivity extends Activity {
         if (extras != null) {
             String symbol = getIntent().getExtras().getString("symbol");
             if (symbol != null) {
-                String [] splitSymbol=symbol.split("-");
+                String[] splitSymbol = symbol.split("-");
                 Intent i = new Intent(this, DetailsActivity.class);
-                i.putExtra("currencySelected",splitSymbol[0]);
-                i.putExtra("currencyToSelected",splitSymbol[1]);
+                i.putExtra("currencySelected", splitSymbol[0]);
+                i.putExtra("currencyToSelected", splitSymbol[1]);
                 startActivity(i);
             } else {
                 processSplashTread();
             }
-        }
-        else {
+        } else {
             processSplashTread();
         }
     }

@@ -31,15 +31,20 @@
             android:layout_height="wrap_content">
 
             <TextView
-                android:layout_width="wrap_content"
+                android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_alignParentStart="true"
                 android:layout_alignParentTop="true"
-                android:layout_marginStart="48dp"
-                android:gravity="center_vertical|center|clip_horizontal"
-                android:text="@string/app_name"
+                android:layout_marginTop="15dp"
+                android:layout_marginEnd="2dp"
+                android:layout_marginBottom="15dp"
+                android:layout_toStartOf="@+id/txtEditText"
+                android:autoSizeTextType="uniform"
                 android:fontFamily="@font/dosis_medium"
-                android:textSize="20dp"
+                android:gravity="center_vertical|center_horizontal|start"
+                android:lines="1"
+                android:singleLine="true"
+                android:text="@string/app_name"
                 android:textStyle="bold" />
 
             <TextView

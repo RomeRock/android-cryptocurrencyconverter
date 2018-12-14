@@ -114,8 +114,6 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                             dismiss();
                             SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getFREE());
                         }
-
-
                     }
                 });
             }
@@ -171,8 +169,8 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                 if (mHelper != null) mHelper.flagEndAsync();
                 try {
                     if (mHelper != null && mHelper.isSetupDone()) {
-                        mHelper.flagEndAsync();
-                        mHelper.launchPurchaseFlow(getActivity(), SingletonInAppBilling.getSkuPackagePro1(), 10004, mPurchaseFinishedListener, "Currency Converter");
+                        mHelper.launchPurchaseFlow(getActivity(), SingletonInAppBilling.getSkuPackagePro1(), 10004, mPurchaseFinishedListener,  getString(R.string.app_name));
+
                     } else {
                         dismiss();
                         DialogsHelper.showSnackBar(((MainActivity) getActivity()).getCoordinator(), getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
@@ -186,8 +184,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                 if (mHelper != null) mHelper.flagEndAsync();
                 try {
                     if (mHelper != null && mHelper.isSetupDone()) {
-                        mHelper.flagEndAsync();
-                        mHelper.launchPurchaseFlow(getActivity(), SingletonInAppBilling.getSkuPackagePro2(), 10004, mPurchaseFinishedListener, "Currency Converter");
+                        mHelper.launchPurchaseFlow(getActivity(), SingletonInAppBilling.getSkuPackagePro2(), 10004, mPurchaseFinishedListener,  getString(R.string.app_name));
                     } else {
                         dismiss();
                         DialogsHelper.showSnackBar(((MainActivity) getActivity()).getCoordinator(), getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
@@ -201,8 +198,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                 if (mHelper != null) mHelper.flagEndAsync();
                 try {
                     if (mHelper != null && mHelper.isSetupDone()) {
-                        mHelper.flagEndAsync();
-                        mHelper.launchPurchaseFlow(getActivity(), SingletonInAppBilling.getSkuPackagePro3(), 10004, mPurchaseFinishedListener, "Currency Converter");
+                        mHelper.launchPurchaseFlow(getActivity(), SingletonInAppBilling.getSkuPackagePro3(), 10004, mPurchaseFinishedListener,  getString(R.string.app_name));
                     } else {
                         dismiss();
                         DialogsHelper.showSnackBar(((MainActivity) getActivity()).getCoordinator(), getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));

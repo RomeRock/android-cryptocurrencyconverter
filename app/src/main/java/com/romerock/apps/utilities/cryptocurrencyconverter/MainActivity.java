@@ -44,6 +44,7 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.database.DataSnapshot;
 import com.inmobi.sdk.InMobiSdk;
 import com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout;
@@ -285,6 +286,8 @@ public class MainActivity extends AppCompatActivity
         });
 
 
+
+        Log.i("FCM", String.valueOf(FirebaseApp.getInstance().getToken(true)));
     }
 
     public void setThemeByActivity() {

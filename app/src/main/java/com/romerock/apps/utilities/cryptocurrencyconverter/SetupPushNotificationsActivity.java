@@ -537,9 +537,9 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         // ------ From currency flag -----
         int id;
         if (positionFrom.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, positionFrom+positionFrom);
+            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom+positionFrom));
         }else
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, positionFrom);
+            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom));
         if (id== 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
@@ -547,9 +547,9 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         txtCurrentFrom.setText(positionFrom);
         // ------ To currency flag -----
         if (positionTo.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, positionTo+positionTo);
+            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo+positionTo));
         }else
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, positionTo);
+            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo));
         if (id== 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }

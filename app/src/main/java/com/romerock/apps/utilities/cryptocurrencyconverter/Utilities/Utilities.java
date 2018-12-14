@@ -430,7 +430,7 @@ public class Utilities {
                 mInterstitialAd = new InterstitialAd(context);
                 mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
                 AdRequest adRequest = new AdRequest.Builder()
-                                                   .addTestDevice(deviceId)  // only for test
+                        .addTestDevice(deviceId)  // only for test
                         .build();
                 mInterstitialAd.loadAd(adRequest);
                 mInterstitialAd.setAdListener(new AdListener() {
@@ -564,5 +564,10 @@ public class Utilities {
         Random r = new Random();
         int hour = r.nextInt(max - min + 1) + min;
         return hour;
+    }
+
+    public static String removeCharacters(String s) {
+        s=s.replace("*","").replace("-","").replace("_","");
+        return s;
     }
 }

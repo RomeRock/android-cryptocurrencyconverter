@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemClickLibraryInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.ItemLibraryCurrencyModel;
@@ -64,9 +65,10 @@ public class RecyclerViewCurrenciesCatalogAdapter extends RecyclerView.Adapter<R
         });
         viewHolder.txtCurrent.setText(Items.get(position).getCurrency_name());
         if (Items.get(position).getName() != null) {
-            String idSearch = Items.get(position).getName().toLowerCase().replace("*","");
+            String idSearch = Utilities.removeCharacters(Items.get(position).getName().toLowerCase());
             if (idSearch.compareTo("try") == 0)
                 idSearch = idSearch + idSearch;
+            idSearch=idSearch.replace("*","").replace("_","").replace("-","");
             int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
             viewHolder.imgFlag.setVisibility(View.VISIBLE);
             if (id== 0) {

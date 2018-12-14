@@ -169,10 +169,10 @@ public class NotificationModel implements Serializable {
         boolean processDefaulNotification = false;
         final SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), context.MODE_PRIVATE);
         SharedPreferences.Editor ed = sharedPrefs.edit();
-        String key = "USD-";
+        String key = "BTC-";
 
         for (int i = 0; i < splitCurrency.length; i++) {
-            if (splitCurrency[i].compareTo("EUR") != 0 && splitCurrency[i].compareTo("USD") != 0 && splitCurrency[i].compareTo("BTC") != 0 && !processDefaulNotification) {
+            if (splitCurrency[i].compareTo("BTC") != 0 && !processDefaulNotification) {
                 processDefaulNotification = true;
                 key += splitCurrency[i];
             }

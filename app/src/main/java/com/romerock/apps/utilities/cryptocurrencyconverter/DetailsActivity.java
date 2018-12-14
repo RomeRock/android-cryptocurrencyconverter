@@ -375,21 +375,20 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         // ------ From currency flag -----
         int id;
         if (currencyFromSelected.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyFromSelected + currencyFromSelected);
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyFromSelected + currencyFromSelected));
         } else
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyFromSelected);
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyFromSelected));
         if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
-
         imgFlagFrom.setImageResource(id);
         txtCurrentFrom.setText(currencyFromSelected);
         // ------ To currency flag -----
         id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected);
         if (currencyToSelected.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected + currencyToSelected);
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyToSelected + currencyToSelected));
         } else
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected);
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyToSelected));
         if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
