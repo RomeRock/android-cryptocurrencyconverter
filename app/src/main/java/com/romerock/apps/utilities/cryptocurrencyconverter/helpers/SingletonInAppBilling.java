@@ -40,7 +40,6 @@ public class SingletonInAppBilling {
     private boolean isInvalidated;
     private boolean showPopUp;
 
-
     public static ArrayList<String> getSKUList() {
         ArrayList<String> skuList = new ArrayList<String>();
         skuList.add(SKU_PACKAGE_PRO1);
