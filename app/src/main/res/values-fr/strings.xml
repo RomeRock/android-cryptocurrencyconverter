@@ -77,7 +77,7 @@
     <string name="unlimited_price">Notifications d\'après prix\nillimités</string>
     <string name="remove_annoying_ads">Supprimez les publicités</string>
     <string name="unlock_daylight_theme">Débloquer le thème Daylight</string>
-    <string name="go_premium">DEVENIR PREMIUM:\nNOTIFICATIONS,\nSUPPRIMEZ LA PUB ET THÈMES</string>
+    <string name="go_premium">DEVENIR PREMIUM:\nNOTIFICATIONS,\nSUPPRIMEZ LA PUB</string>
     <string name="notification_center">Centre de Notifications</string>
     <string name="setup_push_notification">Configurer les notifications</string>
     <string name="vs">VS</string>
@@ -102,7 +102,7 @@
     <string name="settings_option_select_scheme_color">Sélectionnez un thème</string>
     <string name="settings_preview">APERÇU</string>
     <string name="settings_preview_pro_version">VERSION PRO</string>
-    <string name="share_link">http://goo.gl/BnFmGC</string>
+    <string name="share_link">https://goo.gl/EBkFAh</string>
     <string name="shareAndRewarded">shareAndRewardedPreferences</string>
     <string name="share_via_twitter">I\'m using #Cypto #Currency  #Converter. Download for #FREE #Android</string>
     <string name="share_success">Merci pour partager</string>

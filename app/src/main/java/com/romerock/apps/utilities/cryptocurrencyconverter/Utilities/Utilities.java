@@ -430,7 +430,7 @@ public class Utilities {
                 mInterstitialAd = new InterstitialAd(context);
                 mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
                 AdRequest adRequest = new AdRequest.Builder()
-                        .addTestDevice(deviceId)  // only for test
+                        //.addTestDevice(deviceId)  // only for test
                         .build();
                 mInterstitialAd.loadAd(adRequest);
                 mInterstitialAd.setAdListener(new AdListener() {
@@ -509,7 +509,7 @@ public class Utilities {
                 android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                 deviceId = TestDevice(android_id).toUpperCase();
                 adRequest = new AdRequest.Builder()
-                         .addTestDevice(deviceId)  // For test
+                      //   .addTestDevice(deviceId)  // For test
                         .build();
             }
         } catch (Exception e) {
