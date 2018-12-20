@@ -402,17 +402,20 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     SpannableString content = new SpannableString(range);
-                    content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
-                    buttonView.setText(content);
-                    //Make the text BOLD
-                    buttonView.setTypeface(null, Typeface.BOLD);
+                    if(content!=null) {
+                        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
+                        buttonView.setText(content);
+                        //Make the text BOLD
+                        buttonView.setTypeface(null, Typeface.BOLD);
+                    }
                 } else {
                     //Change the color here and make the Text bold
                     SpannableString content = new SpannableString(range);
-                    content.setSpan(null, 0, content.length(), 0);
-                    buttonView.setText(content);
-                    buttonView.setTypeface(null, Typeface.NORMAL);
-
+                    if(content!=null) {
+                        content.setSpan(null, 0, content.length(), 0);
+                        buttonView.setText(content);
+                        buttonView.setTypeface(null, Typeface.NORMAL);
+                    }
                 }
             }
         };

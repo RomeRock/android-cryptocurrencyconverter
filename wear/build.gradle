@@ -8,8 +8,8 @@ android {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 23
         targetSdkVersion 27
-        versionCode 101
-        versionName "1.0.10"
+        versionCode 102
+        versionName "1.0.2"
     }
     buildTypes {
         release {
