@@ -112,7 +112,7 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
                 if (!hasFocus && viewHolder.imgFlag != null) {
                     if (viewHolder.txtCurrentAmount.getText().toString().compareTo("") == 0)
                         viewHolder.txtCurrentAmount.setText("1.00");
-                    viewHolder.txtCurrentAmount.setText(Utilities_wear.formatAmountOperation(String.valueOf(((MainActivity) context).baseValue)));
+                   // viewHolder.txtCurrentAmount.setText(Utilities_wear.formatAmountOperation(String.valueOf(((MainActivity) context).baseValue)));
 
 
                 }
@@ -294,7 +294,7 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
                 holderHide = (ViewHolder) recyclerView.findViewHolderForAdapterPosition(pos);
                 if (holderHide != null) {
                     if (((MainActivity) context).basePosition != pos) {
-                        String result = Utilities_wear.makeOperationWithFormat(((MainActivity) context).baseValue, Items.get(pos).getCurrency(), Items.get(((MainActivity) context).basePosition).getCurrency());
+                        String result="";// = Utilities_wear.makeOperationWithFormat(((MainActivity) context).baseValue, Items.get(pos).getCurrency(), Items.get(((MainActivity) context).basePosition).getCurrency());
                         holderHide.txtCurrentAmount.setText(result + "");
                     } else
                         holderHide.txtCurrentAmount.setText(((MainActivity) context).baseValue + "");
@@ -308,7 +308,7 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
         InputMethodManager imm = (InputMethodManager) context.getSystemService(Context.INPUT_METHOD_SERVICE);
         imm.hideSoftInputFromWindow(viewHolder.txtCurrentAmount.getWindowToken(), 0);
         if (correctExpression) {
-            viewHolder.txtCurrentAmount.setText(Utilities_wear.formatAmountOperation(String.valueOf(((MainActivity) context).baseValue)));
+            //viewHolder.txtCurrentAmount.setText(Utilities_wear.formatAmountOperation(String.valueOf(((MainActivity) context).baseValue)));
             hideAllControllsItems();
         }
     }

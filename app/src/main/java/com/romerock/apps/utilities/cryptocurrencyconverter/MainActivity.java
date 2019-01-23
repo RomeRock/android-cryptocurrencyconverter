@@ -167,7 +167,8 @@ public class MainActivity extends AppCompatActivity
     private int CURRENCY_SELECTED = 210;
     private int TO_CURRENCY = 211;
     private Map<String, JSONObject> valueSnap;
-    private List<ItemLibraryCurrencyModel> listItems;
+    private List<ItemLibraryCurrencyModel> listAllItems = new ArrayList<ItemLibraryCurrencyModel>();
+    private List<ItemLibraryCurrencyModel> libraryCurrencies = new ArrayList<>();
     private List<ItemLibraryCurrencyModel> listDashboardCurrencies = new ArrayList<>();
     private ItemTouchHelper mItemTouchHelper;
     private double amount;
@@ -286,7 +287,6 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-
         Log.i("FCM", String.valueOf(FirebaseApp.getInstance().getToken(true)));
     }
 
@@ -354,37 +354,39 @@ public class MainActivity extends AppCompatActivity
             splitCurrencies[0] = currenciesSaved;
         }
 
-        if(sharedPrefs.getBoolean(getString(R.string.preferences_defaultCurrencies_first_time),true)){
+        if (sharedPrefs.getBoolean(getString(R.string.preferences_defaultCurrencies_first_time), true)) {
             NotificationModel.saveNotification(MainActivity.this, firebaseHelper, splitCurrencies);
         }
-            CurrencyConvertApiModel.getListCurrencies(firebaseHelper, new CurrenciesListInterface() {
-                @Override
-                public void getCurrenciesList(DataSnapshot dataSnapshot) {
-                    if(dataSnapshot!=null) {
-                        valueSnap = (Map<String, JSONObject>) dataSnapshot.getValue();
-                        listItems = new ArrayList<ItemLibraryCurrencyModel>();
-                        listItems = CurrencyConvertApiModel.matchCurrenciesWithList(currenciesMap, listItems, valueSnap, txtUpdateTime, MainActivity.this);
-                        listDashboardCurrencies = CurrencyConvertApiModel.getListCurrenciesForDashboard(listItems, splitCurrencies);
-                        if (listDashboardCurrencies == null)
-                            listDashboardCurrencies = new ArrayList<ItemLibraryCurrencyModel>();
-                        recyclerCurrencyDashboard.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                        dashboardAdapter = new RecyclerViewCurrenciesDashboardAdapter(listDashboardCurrencies, MainActivity.this, new ItemClickLibraryInterface() {
-                            @Override
-                            public void onItemClicked(View view, ItemLibraryCurrencyModel item, String code) {
+        CurrencyConvertApiModel.getListCurrencies(firebaseHelper, new CurrenciesListInterface() {
+            @Override
+            public void getCurrenciesList(DataSnapshot dataSnapshotLastest, DataSnapshot dataSnapshotLibrary) {
+                if (dataSnapshotLastest != null) {
+                    Map<String, JSONObject> valueSnapLastest;
+                    valueSnapLastest = (Map<String, JSONObject>) dataSnapshotLastest.getValue();
+                    Map<String, JSONObject> valueSnapUpdateLibrary;
+                    valueSnapUpdateLibrary = (Map<String, JSONObject>) dataSnapshotLibrary.getValue();
+                    listAllItems = CurrencyConvertApiModel.matchCurrenciesWithList(valueSnapLastest, valueSnapUpdateLibrary, txtUpdateTime, MainActivity.this);
+                    listDashboardCurrencies = CurrencyConvertApiModel.getListCurrenciesForDashboard(listAllItems, splitCurrencies);
+                    if (listDashboardCurrencies == null)
+                        listDashboardCurrencies = new ArrayList<ItemLibraryCurrencyModel>();
+                    recyclerCurrencyDashboard.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                    dashboardAdapter = new RecyclerViewCurrenciesDashboardAdapter(listDashboardCurrencies, MainActivity.this, new ItemClickLibraryInterface() {
+                        @Override
+                        public void onItemClicked(View view, ItemLibraryCurrencyModel item, String code) {
 
-                            }
-                        }, MainActivity.this, recyclerCurrencyDashboard);
-                        recyclerCurrencyDashboard.setAdapter(dashboardAdapter);
-                        recyclerCurrencyDashboard.setItemAnimator(new DefaultItemAnimator());
-                        callback = new SimpleItemTouchHelperCallback(dashboardAdapter, MainActivity.this);
-                        mItemTouchHelper = new ItemTouchHelper(callback);
-                    }else{
-                        if (listDashboardCurrencies.size() < 1) {
-                            DialogsHelper.showSnackBar(coordinator, getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
                         }
+                    }, MainActivity.this, recyclerCurrencyDashboard);
+                    recyclerCurrencyDashboard.setAdapter(dashboardAdapter);
+                    recyclerCurrencyDashboard.setItemAnimator(new DefaultItemAnimator());
+                    callback = new SimpleItemTouchHelperCallback(dashboardAdapter, MainActivity.this);
+                    mItemTouchHelper = new ItemTouchHelper(callback);
+                } else {
+                    if (listDashboardCurrencies.size() < 1) {
+                        DialogsHelper.showSnackBar(coordinator, getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
                     }
                 }
-            }, MainActivity.this);
+            }
+        }, MainActivity.this);
         dialogsHelper.hideLoading();
     }
 
@@ -392,6 +394,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
         }
@@ -422,7 +425,7 @@ public class MainActivity extends AppCompatActivity
                         e.printStackTrace();
                     }
                     ed.commit();
-                   // linSuscribeMe.setVisibility(View.GONE);
+                    // linSuscribeMe.setVisibility(View.GONE);
                     adView.setVisibility(View.GONE);
                 } else {
 
@@ -458,12 +461,19 @@ public class MainActivity extends AppCompatActivity
 
             }
         });
+        Utilities.addIntestitialWithCount(MainActivity.this, isFree);
+        getUpdateFirebase();
+    }
+
+    public List<ItemLibraryCurrencyModel> getListAllItems() {
+        return listAllItems;
     }
 
     @Override
     protected void onPause() {
         Utilities.closeKeyboard(MainActivity.this);
         recyclerCurrencyDashboard.requestFocus();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         super.onPause();
         if ((mGoogleApiClient != null) && mGoogleApiClient.isConnected()) {
 
@@ -478,9 +488,9 @@ public class MainActivity extends AppCompatActivity
 
     @OnClick({R.id.txtEditText, R.id.linAddCurrency, R.id.iconFacebook, R.id.iconTwitter, R.id.iconInstagram, R.id.linXpressVote, R.id.linRateUs, R.id.linTipCalculator, R.id.linPrivacyPolicy,
             R.id.linSharerewarded, R.id.linFeedback, R.id.linLanguage, R.id.linSuscribeMe, R.id.linAddNotify, R.id.linQuickConverter, R.id.linTaxCalculator, R.id.linLoanCalculator,
-    R.id.lin52Challenge, R.id.linClashMate})
+            R.id.lin52Challenge, R.id.linClashMate})
     public void onViewClicked(View view) {
-        if(view!=null) {
+        if (view != null) {
             Intent i;
             switch (view.getId()) {
                 case R.id.linPrivacyPolicy:
@@ -519,7 +529,7 @@ public class MainActivity extends AppCompatActivity
                     if (dashboardAdapter != null)
                         dashboardAdapter.hideAllControllsItems();
                     i = new Intent(MainActivity.this, CurrencyActivity.class);
-                    i.putExtra("itemsData", (Serializable) listItems);
+                    i.putExtra("itemsData", (Serializable) listAllItems);
                     i.putExtra("itemsInDashboard", (Serializable) listDashboardCurrencies);
                     startActivityForResult(i, CURRENCY_SELECTED);
                     break;
@@ -595,9 +605,10 @@ public class MainActivity extends AppCompatActivity
                 case R.id.linAddNotify:
                     i = new Intent(MainActivity.this, NotificationCenterActivity.class);
                     i.putExtra("itemsInDashboard", (Serializable) listDashboardCurrencies);
-                    i.putExtra("listAllCurrencies", (Serializable) listItems);
+                    i.putExtra("listAllCurrencies", (Serializable) listAllItems);
                     startActivity(i);
-                    break;}
+                    break;
+            }
         }
     }
 
@@ -725,10 +736,10 @@ public class MainActivity extends AppCompatActivity
                 if (result.isFailure()) {
                     return;
                 } else {
-                    String purchaseOrders="";
+                    String purchaseOrders = "";
                     final SharedPreferences.Editor ed = sharedPrefs.edit();
-                    if ( inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro1())||
-                            inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro2())||
+                    if (inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro1()) ||
+                            inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro2()) ||
                             inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro3())) {
 
                         SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());
@@ -751,20 +762,20 @@ public class MainActivity extends AppCompatActivity
                             startActivity(intent);
                         }
 
-                        if( inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro1())){
+                        if (inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro1())) {
                             SingletonInAppBilling.setHavePricepackagePro1(true);
-                            purchaseOrders+=inventory.getPurchase(SingletonInAppBilling.getSkuPackagePro1()).getOrderId()+"|";
+                            purchaseOrders += inventory.getPurchase(SingletonInAppBilling.getSkuPackagePro1()).getOrderId() + "|";
                         }
-                        if( inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro2())){
+                        if (inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro2())) {
                             SingletonInAppBilling.setHavePricepackagePro2(true);
-                            purchaseOrders+=inventory.getPurchase(SingletonInAppBilling.getSkuPackagePro2()).getOrderId()+"|";
+                            purchaseOrders += inventory.getPurchase(SingletonInAppBilling.getSkuPackagePro2()).getOrderId() + "|";
                         }
-                        if( inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro3())){
+                        if (inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro3())) {
                             SingletonInAppBilling.setHavePricepackagePro3(true);
-                            purchaseOrders+=inventory.getPurchase(SingletonInAppBilling.getSkuPackagePro3()).getOrderId()+"|";
+                            purchaseOrders += inventory.getPurchase(SingletonInAppBilling.getSkuPackagePro3()).getOrderId() + "|";
                         }
 
-                        if(!purchaseOrders.isEmpty()) {
+                        if (!purchaseOrders.isEmpty()) {
                             if (!sharedPrefs.contains(getString(R.string.purchaseOrder))) {
                                 purchaseOrders = purchaseOrders.substring(0, purchaseOrders.length() - 1);
                                 try {
@@ -781,7 +792,7 @@ public class MainActivity extends AppCompatActivity
                                             @Override
                                             public void PurchaseDialogFinish(boolean isSuccess) {
                                                 if (isSuccess) {
-                                                    haveSomeOrder[0] =true;
+                                                    haveSomeOrder[0] = true;
                                                     try {
                                                         ed.putString(getString(R.string.purchaseOrder),
                                                                 CipherAES.cipher(orders[finalI].toString().replace(".", "_")));
@@ -792,8 +803,8 @@ public class MainActivity extends AppCompatActivity
                                                     }
                                                     getUpdateFirebase();
                                                 }
-                                                if(finalI==orders.length-1){
-                                                    if(!haveSomeOrder[0]){
+                                                if (finalI == orders.length - 1) {
+                                                    if (!haveSomeOrder[0]) {
                                                         try {
                                                             ed.putString(getString(R.string.purchaseOrder),
                                                                     CipherAES.cipher(orders[0].toString().replace(".", "_")));
@@ -812,7 +823,7 @@ public class MainActivity extends AppCompatActivity
                                     e.printStackTrace();
                                     Log.d("", "");
                                 }
-                            }else{
+                            } else {
                                 getUpdateFirebase();
                             }
                             if (inventory.hasPurchase(SingletonInAppBilling.getSkuPackagePro1()) &&
@@ -864,13 +875,13 @@ public class MainActivity extends AppCompatActivity
                         valsPackage = new String[2];
                         valsPackage = SingletonInAppBilling.getDetailPackageSelected(skuDetailsProducts, SingletonInAppBilling.getSkuPackagePro2());
                         if (valsPackage[0] != null) {
-                            SingletonInAppBilling.setFinalPricepackagePro2(valsPackage[0] );
+                            SingletonInAppBilling.setFinalPricepackagePro2(valsPackage[0]);
 
                         }
                         valsPackage = new String[2];
                         valsPackage = SingletonInAppBilling.getDetailPackageSelected(skuDetailsProducts, SingletonInAppBilling.getSkuPackagePro3());
                         if (valsPackage[0] != null) {
-                            SingletonInAppBilling.setFinalPricepackagePro3(valsPackage[0] );
+                            SingletonInAppBilling.setFinalPricepackagePro3(valsPackage[0]);
 
                         }
                     } catch (RemoteException e) {

@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.android.vending.billing.IInAppBillingService;
+import com.google.firebase.database.FirebaseDatabase;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -39,6 +40,15 @@ public class SingletonInAppBilling {
     private String IS_FREE_OR_PREMIUM;
     private boolean isInvalidated;
     private boolean showPopUp;
+    private FirebaseDatabase firebaseDatabase;
+
+    public FirebaseDatabase getFirebaseDatabase() {
+        return firebaseDatabase;
+    }
+
+    public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
+        this.firebaseDatabase = firebaseDatabase;
+    }
 
     public static ArrayList<String> getSKUList() {
         ArrayList<String> skuList = new ArrayList<String>();

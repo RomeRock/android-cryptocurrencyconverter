@@ -21,6 +21,7 @@ import com.google.android.gms.ads.AdView;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.adapters.RecyclerViewCurrenciesCatalogAdapter;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.DialogsHelper;
+import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemClickLibraryInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ThemeInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.ItemLibraryCurrencyModel;
@@ -139,11 +140,13 @@ public class CurrencyActivity extends AppCompatActivity implements ThemeInterfac
     protected void onPause() {
         super.onPause();
         Utilities.closeKeyboard(CurrencyActivity.this);
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
     }
 

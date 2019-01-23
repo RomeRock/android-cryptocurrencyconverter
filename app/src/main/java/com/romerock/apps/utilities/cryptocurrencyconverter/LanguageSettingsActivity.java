@@ -16,6 +16,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.adapters.RecyclerViewAdapter;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.FirebaseHelper;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.LocaleHelper;
+import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemClickInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ThemeInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.ItemSettings;
@@ -124,6 +125,13 @@ public class LanguageSettingsActivity extends AppCompatActivity implements Theme
     @Override
     protected void onResume() {
         super.onResume();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
     }
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
+    }
+
 }

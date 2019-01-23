@@ -23,6 +23,7 @@ public class FirebaseHelper {
     private static FirebaseHelper instance;
     private DatabaseReference dataReference;
     private FirebaseDatabase database ;
+
     private String UPDATE_TIME="lastest";
     private String CURRENCIES_LIBRARY="library";
     private String NOTIFICATION_PATH="notifications/%s/%s/notifications";
@@ -30,11 +31,8 @@ public class FirebaseHelper {
     private String UDID_PATH="notifications/%s/";
     private String TRANSACTION_PATH="notifications/premium/%s/transaction";
     private String PREMIUM_PATH="notifications/premium/";
-    private final String MAIN_PATH = "/";
+    private boolean persistenceActive =false;
 
-    public String getMAIN_PATH() {
-        return MAIN_PATH;
-    }
 
     public String getPREMIUM_PATH() {
         return PREMIUM_PATH;
@@ -64,8 +62,17 @@ public class FirebaseHelper {
     }
 
     public FirebaseHelper(){
+        if (database == null) {
             database = FirebaseDatabase.getInstance();
-            database.setPersistenceEnabled(true);
+            if(!persistenceActive){
+                persistenceActive=true;
+                try {
+                    database.setPersistenceEnabled(true);
+                }catch (Exception e){}
+            }
+            SingletonInAppBilling.Instance().setFirebaseDatabase(database);
+
+        }
     }
 
     public String getUPDATE_TIME() {

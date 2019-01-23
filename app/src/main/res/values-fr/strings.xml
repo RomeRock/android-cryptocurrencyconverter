@@ -129,4 +129,5 @@
     <string name="pay_as_much_you_want">* Payez autant que vous voulez pour la version premium.\n* Nous sommes une entreprise petite et nous ne pouvons survivre que grâce à votre soutien c:</string>
     <string name="preferences_count_keys">preferences_count_keys</string>
     <string name="preferences_defaultCurrencies_first_time">preferences_defaultCurrencies_first_time</string>
+    <string name="preferences_interstitial_count">preferences_interstitial_count</string>
 </resources>

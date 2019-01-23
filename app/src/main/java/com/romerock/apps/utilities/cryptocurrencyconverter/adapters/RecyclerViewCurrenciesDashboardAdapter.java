@@ -141,6 +141,7 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
                         Intent i = new Intent(context, DetailsActivity.class);
                         i.putExtra("currencySelected", viewHolder.nameCurrencyHolder);
                         i.putExtra("Currencies", (Serializable) Items);
+                        i.putExtra("listAllCurrencies", (Serializable)((MainActivity)context).getListAllItems());
                         context.startActivity(i);
                     }
                 });

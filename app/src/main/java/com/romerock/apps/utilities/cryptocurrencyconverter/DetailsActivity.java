@@ -11,6 +11,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.animation.AnimationUtils;
@@ -157,6 +158,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
     double minLimit = 0;
     boolean isOnlyTime;
     double baseDate;
+    private Map<String, JSONObject> valueSnapLibrary;
     Map<String, String> currenciesMap = new HashMap<String, String>();
     @BindView(R.id.toolbarback)
     Toolbar toolbarback;
@@ -231,81 +233,98 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         range6M.setOnCheckedChangeListener(listener(getString(R.string.range6M)));
         range1M.setChecked(true);
         Utilities.countTotalKeys(DetailsActivity.this);
-        CurrencyConvertApiModel.getListCurrencies(firebaseHelper, new CurrenciesListInterface() {
-            @Override
-            public void getCurrenciesList(DataSnapshot dataSnapshot) {
-                if (dataSnapshot != null) {
-                    valueSnap = (Map<String, JSONObject>) dataSnapshot.getValue();
-                    listAllCurrencies = new ArrayList<ItemLibraryCurrencyModel>();
-                    listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithList(currenciesMap, listAllCurrencies, valueSnap, null, DetailsActivity.this);
-                    if (itemsFromPreferences != null)
+        listAllCurrencies = new ArrayList<>();
+        if (extras != null) {
+            listAllCurrencies = (List<ItemLibraryCurrencyModel>) getIntent().getSerializableExtra("listAllCurrencies");
+            if(listAllCurrencies==null)
+                listAllCurrencies = new ArrayList<>();
+        }
+        if (listAllCurrencies.size() < 1) {
+            CurrencyConvertApiModel.getListCurrencies(firebaseHelper, new CurrenciesListInterface() {
+                @Override
+                public void getCurrenciesList(DataSnapshot dataSnapshot, DataSnapshot dataSnapshotUpdate) {
+                    if (dataSnapshot != null) {
+                        valueSnapLibrary = (Map<String, JSONObject>) dataSnapshotUpdate.getValue();
 
-                    {
-                        setCurrencies();
-                        setClickButton();
-
-                    } else
-
-                    {
-                        itemsFromPreferences = new ArrayList<>();
-                        for (int i = 0; i < splitCurrencies.length; i++) {
-                            for (int currencies = 0; currencies < listAllCurrencies.size(); currencies++) {
-                                if (listAllCurrencies.get(currencies).getName().toString().compareTo(splitCurrencies[i]) == 0) {
-                                    itemsFromPreferences.add(listAllCurrencies.get(currencies));
-                                    break;
-                                }
-                            }
-                        }
-
-                        boolean listHaveCurrency = false;
-                        for (int i = 0; i < itemsFromPreferences.size(); i++) {
-                            if (itemsFromPreferences.get(i).getName().toString().compareTo(currencyFromSelected) == 0) {
-                                listHaveCurrency = true;
-                                break;
-                            }
-                        }
-                        if (!listHaveCurrency) {
-                            for (int i = 0; i < listAllCurrencies.size(); i++) {
-                                if (listAllCurrencies.get(i).getName().toString().compareTo(currencyFromSelected) == 0) {
-                                    itemsFromPreferences.add(listAllCurrencies.get(i));
-                                    break;
-                                }
-                            }
-                        }
-                        listHaveCurrency = false;
-                        for (int i = 0; i < itemsFromPreferences.size(); i++) {
-                            if (itemsFromPreferences.get(i).getName().toString().compareTo(currencyToSelected) == 0) {
-                                listHaveCurrency = true;
-                                break;
-                            }
-                        }
-                        if (!listHaveCurrency) {
-                            for (int i = 0; i < listAllCurrencies.size(); i++) {
-                                if (listAllCurrencies.get(i).getName().toString().compareTo(currencyToSelected) == 0) {
-                                    itemsFromPreferences.add(listAllCurrencies.get(i));
-                                    break;
-                                }
-                            }
-                        }
-                        listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithArray(currenciesMap, listAllCurrencies);
-                        for (int i = 0; i < itemsFromPreferences.size(); i++) {
-                            if (itemsFromPreferences.get(i).getName().compareTo(currencyFromSelected) == 0)
-                                positionFrom = i;
-                            if (itemsFromPreferences.get(i).getName().compareTo(currencyToSelected) == 0)
-                                positionTo = i;
-                        }
-                        setClickButton();
-                        setValuesList();
+                        listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithList(valueSnapLibrary, valueSnapLibrary, null, DetailsActivity.this);
+                        process();
+                    } else {
+                        if (listAllCurrencies.size() < 1)
+                            DialogsHelper.showSnackBar(coordinator, getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
                     }
+                }
+            }, DetailsActivity.this);
+        } else {
+            process();
+        }
 
-                    callApi();
-                }else{
-                    if(listAllCurrencies.size()<1)
-                    DialogsHelper.showSnackBar(coordinator, getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
+    }
+
+    private void process() {
+        if (itemsFromPreferences != null) {
+            setCurrencies();
+            setClickButton();
+
+        } else {
+            itemsFromPreferences = new ArrayList<>();
+            for (int i = 0; i < splitCurrencies.length; i++) {
+                for (int currencies = 0; currencies < listAllCurrencies.size(); currencies++) {
+                    if (listAllCurrencies.get(currencies).getName().toString().compareTo(splitCurrencies[i]) == 0) {
+                        itemsFromPreferences.add(listAllCurrencies.get(currencies));
+                        break;
+                    }
                 }
             }
-        }, DetailsActivity.this);
 
+            boolean listHaveCurrency = false;
+            for (int i = 0; i < itemsFromPreferences.size(); i++) {
+                if (itemsFromPreferences.get(i).getName().toString().compareTo(currencyFromSelected) == 0) {
+                    listHaveCurrency = true;
+                    break;
+                }
+            }
+            if (!listHaveCurrency) {
+                for (int i = 0; i < listAllCurrencies.size(); i++) {
+                    if (listAllCurrencies.get(i).getName().toString().compareTo(currencyFromSelected) == 0) {
+                        itemsFromPreferences.add(listAllCurrencies.get(i));
+                        break;
+                    }
+                }
+            }
+            listHaveCurrency = false;
+            for (int i = 0; i < itemsFromPreferences.size(); i++) {
+                if (itemsFromPreferences.get(i).getName().toString().compareTo(currencyToSelected) == 0) {
+                    listHaveCurrency = true;
+                    break;
+                }
+            }
+            if (!listHaveCurrency) {
+                for (int i = 0; i < listAllCurrencies.size(); i++) {
+                    if (listAllCurrencies.get(i).getName().toString().compareTo(currencyToSelected) == 0) {
+                        itemsFromPreferences.add(listAllCurrencies.get(i));
+                        break;
+                    }
+                }
+            }
+            listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithArray(currenciesMap, listAllCurrencies);
+            for (int i = 0; i < itemsFromPreferences.size(); i++) {
+                if (itemsFromPreferences.get(i).getName().compareTo(currencyFromSelected) == 0)
+                    positionFrom = i;
+                if (itemsFromPreferences.get(i).getName().compareTo(currencyToSelected) == 0)
+                    positionTo = i;
+            }
+            setClickButton();
+            setValuesList();
+        }
+
+        callApi();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
+        Log.d("firebaseCon", "onDestroy");
     }
 
     private void setClickButton() {
@@ -345,9 +364,12 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         });
     }
 
+
     @Override
     protected void onResume() {
         super.onResume();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
+        Log.d("firebaseCon", "onResume");
         setThemeByActivity();
     }
 
@@ -375,20 +397,21 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         // ------ From currency flag -----
         int id;
         if (currencyFromSelected.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyFromSelected + currencyFromSelected));
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyFromSelected + currencyFromSelected);
         } else
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyFromSelected));
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyFromSelected);
         if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
+
         imgFlagFrom.setImageResource(id);
         txtCurrentFrom.setText(currencyFromSelected);
         // ------ To currency flag -----
         id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected);
         if (currencyToSelected.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyToSelected + currencyToSelected));
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected + currencyToSelected);
         } else
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, Utilities.removeCharacters(currencyToSelected));
+            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected);
         if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
@@ -402,20 +425,17 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
                     SpannableString content = new SpannableString(range);
-                    if(content!=null) {
-                        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
-                        buttonView.setText(content);
-                        //Make the text BOLD
-                        buttonView.setTypeface(null, Typeface.BOLD);
-                    }
+                    content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
+                    buttonView.setText(content);
+                    //Make the text BOLD
+                    buttonView.setTypeface(null, Typeface.BOLD);
                 } else {
                     //Change the color here and make the Text bold
                     SpannableString content = new SpannableString(range);
-                    if(content!=null) {
-                        content.setSpan(null, 0, content.length(), 0);
-                        buttonView.setText(content);
-                        buttonView.setTypeface(null, Typeface.NORMAL);
-                    }
+                    content.setSpan(null, 0, content.length(), 0);
+                    buttonView.setText(content);
+                    buttonView.setTypeface(null, Typeface.NORMAL);
+
                 }
             }
         };
@@ -543,6 +563,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                         chartWidget = new LineChartWidget(DetailsActivity.this, chart, listGraphModel, maxLimit, minLimit, isOnlyTime, dialogsHelper, sharedPrefs);
                         if (currencyConvertApiModel != null)
                             insertModelIntoView();
+
                     }
                 } else {
                     dialogsHelper.hideLoading();

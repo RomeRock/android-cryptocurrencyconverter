@@ -131,4 +131,5 @@
     <string name="preferences_count_keys">preferences_count_keys</string>
     <string name="globalCount">globalCount</string>
     <string name="preferences_defaultCurrencies_first_time">preferences_defaultCurrencies_first_time</string>
+    <string name="preferences_interstitial_count">preferences_interstitial_count</string>
 </resources>

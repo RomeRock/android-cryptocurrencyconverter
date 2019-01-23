@@ -71,6 +71,10 @@ public class SplashActivity extends Activity {
             ed.remove(getString(R.string.preferences_check_inventory));
             ed.commit();
         }
+        if (!sharedPrefs.contains(getString(R.string.preferences_interstitial_count))) {
+            ed.putInt(getString(R.string.preferences_interstitial_count), 0);
+            ed.commit();
+        }
         SingletonInAppBilling.Instance().setInvalidated(false);
         if (!sharedPrefs.contains(getString(R.string.purchaseAndroid))) {
             try {

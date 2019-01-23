@@ -444,6 +444,51 @@ public class Utilities {
         }
     }
 
+    public static void addIntestitialWithCount(Context context, String isFreeOrPremium) {
+        if (todayMayorRegisterDay(context)) {
+            int COUNT_FOR_INTERSTITIAL=2;
+            SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+            if (isFreeOrPremium.isEmpty()) {
+                try {
+                    isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), isFreeOrPremium));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+            if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
+                SharedPreferences.Editor ed = sharedPrefs.edit();
+                int countInterstitital = sharedPrefs.getInt(context.getString(R.string.preferences_interstitial_count), 0);
+                if (countInterstitital < COUNT_FOR_INTERSTITIAL) {
+                    countInterstitital++;
+                    ed.putInt(context.getString(R.string.preferences_interstitial_count), countInterstitital);
+                    ed.commit();
+                } else {
+                    ed.putInt(context.getString(R.string.preferences_interstitial_count), 0);
+                    ed.commit();
+                    String deviceId, android_id;
+                    android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
+                    deviceId = TestDevice(android_id).toUpperCase();
+                    final InterstitialAd mInterstitialAd;
+                    mInterstitialAd = new InterstitialAd(context);
+                    mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
+                    AdRequest adRequest = new AdRequest.Builder()
+                            //                           .addTestDevice(deviceId)  // only for test
+                            .build();
+                    mInterstitialAd.loadAd(adRequest);
+                    mInterstitialAd.setAdListener(new AdListener() {
+                        public void onAdLoaded() {
+                            if (mInterstitialAd.isLoaded()) {
+                                mInterstitialAd.show();
+                            }
+                        }
+                    });
+
+
+                }
+            }
+        }
+    }
+
     public static boolean todayMayorRegisterDay(Context context) {
         SharedPreferences sharedPrefs;
         sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);

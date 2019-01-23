@@ -1,6 +1,7 @@
 package com.romerock.apps.utilities.cryptocurrencyconverter.model;
 
 import android.content.Context;
+import android.util.ArrayMap;
 import android.util.Log;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
@@ -12,14 +13,11 @@ import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.FirebaseHelper;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CurrenciesListInterface;
 
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.ArrayList;
@@ -52,7 +50,7 @@ public class CurrencyConvertApiModel {
     private float fluctuationPercentage;
 
     public static int idForDrawable(Context context, String currency) {
-        int id = context.getResources().getIdentifier(currency.toLowerCase().replace("*",""), "drawable", context.getPackageName());
+        int id = context.getResources().getIdentifier(currency.toLowerCase(), "drawable", context.getPackageName());
         if (id == 0)
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
         return id;
@@ -82,10 +80,9 @@ public class CurrencyConvertApiModel {
             if (position > items.size() - 1)
                 position = 0;
         }
-        String idSearch = Utilities.removeCharacters(items.get(position).getName().toString().toLowerCase());
+        String idSearch = items.get(position).getName().toString().toLowerCase();
         if (idSearch.compareTo("try") == 0)
             idSearch = idSearch + idSearch;
-
         int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
         if (id == 0) {
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
@@ -95,36 +92,29 @@ public class CurrencyConvertApiModel {
         return items.get(position).getName().toUpperCase();
     }
 
-    public static void getListCurrencies(FirebaseHelper firebaseHelper, final CurrenciesListInterface currenciesListInterface, Context context) {
+    public static void getListCurrencies(final FirebaseHelper firebaseHelper, final CurrenciesListInterface currenciesListInterface, Context context) {
         final boolean[] cantConect = {Utilities.isNetworkAvailable(context)};
-        final Thread thread = new Thread() {
-            @Override
-            public void run() {
-                try {
-                    synchronized (this) {
-                        wait(5000);
-                    }
 
-                } catch (InterruptedException e) {
-                    e.printStackTrace();
-                } finally {
-                    if (!cantConect[0]) {
-                        if (currenciesListInterface != null)
-                            currenciesListInterface.getCurrenciesList(null);
-                    }
-                }
-            }
-        };
-        thread.start();
-
-        Query myTopPostsQuery = firebaseHelper.getDataReference(firebaseHelper.getMAIN_PATH()).getRef();
+        Query myTopPostsQuery = firebaseHelper.getDataReference(firebaseHelper.getUPDATE_TIME()).getRef();
         myTopPostsQuery.keepSynced(true);
         myTopPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
             @Override
-            public void onDataChange(DataSnapshot dataSnapshot) {
+            public void onDataChange(final DataSnapshot dataSnapshotUpdate) {
                 cantConect[0] = true;
-                thread.interrupt();
-                currenciesListInterface.getCurrenciesList(dataSnapshot);
+                Query myTopPostsQuery = firebaseHelper.getDataReference(firebaseHelper.getCURRENCIES_LIBRARY()).getRef();
+                myTopPostsQuery.keepSynced(true);
+                myTopPostsQuery.addListenerForSingleValueEvent(new ValueEventListener() {
+                    @Override
+                    public void onDataChange(DataSnapshot dataSnapshot) {
+                        cantConect[0] = true;
+                        currenciesListInterface.getCurrenciesList(dataSnapshotUpdate, dataSnapshot);
+                    }
+
+                    @Override
+                    public void onCancelled(DatabaseError databaseError) {
+                        Log.d("getListCurrencies", "onCancelled");
+                    }
+                });
             }
 
             @Override
@@ -185,66 +175,72 @@ public class CurrencyConvertApiModel {
         return itemsFromPreferences;
     }
 
-    public static List<ItemLibraryCurrencyModel> matchCurrenciesWithList(Map<String, String> currenciesMap, List<ItemLibraryCurrencyModel> listAllCurrencies, Map<String,
-            JSONObject> valueSnap, TextView txtUpdateTime, Context context) {
-        for (Map.Entry<String, JSONObject> entry : valueSnap.entrySet()) {
+    public static List<ItemLibraryCurrencyModel> matchCurrenciesWithList(Map<String, JSONObject> valueSnapLastest, Map<String, JSONObject> valueSnapLibrary, TextView txtUpdateTime, Context context) {
+        // ------------- Lastest
+        Map<String, String> currenciesMap= new ArrayMap<>();
+        List<ItemLibraryCurrencyModel>  listAllCurrencies = new ArrayList<>();
+        List<ItemLibraryCurrencyModel>  listLibraryCurrencies = new ArrayList<>();
+        //-------- Library
+        for (Map.Entry<String, JSONObject> entryLibrary : valueSnapLibrary.entrySet()) {
             try {
-                if (entry.getKey().toString().equals("lastest")) {
-                    if (txtUpdateTime != null && new JSONObject((Map) entry.getValue()).has("updated_tstamp")) {
-                        String time = String.valueOf(new JSONObject((Map) entry.getValue()).getString("updated_tstamp"));
+
+                JSONObject json = new JSONObject((Map) entryLibrary.getValue());
+                ItemLibraryCurrencyModel itemLibraryCurrencyModel= new ItemLibraryCurrencyModel();
+                if(json.has("currency_name")){
+                    itemLibraryCurrencyModel.setCurrency_name(json.getString("currency_name"));
+                }
+                if(json.has("country_name")){
+                    itemLibraryCurrencyModel.setCountry_name(json.getString("country_name"));
+                }
+                if(json.has("currency_symbol")){
+                    itemLibraryCurrencyModel.setCurrency_symbol(json.getString("currency_symbol"));
+                }
+                if(json.has("country_iso2")){
+                    itemLibraryCurrencyModel.setCountry_iso2(json.getString("country_iso2"));
+                }
+                itemLibraryCurrencyModel.setName(entryLibrary.getKey());
+                listLibraryCurrencies.add(itemLibraryCurrencyModel);
+            } catch (Exception e){
+                Log.d("","");
+            }
+        }
+        for (Map.Entry<String, JSONObject> entry : valueSnapLastest.entrySet()) {
+            try {
+                if (entry.getKey().toString().equals("updated_tstamp")) {
+                    if (txtUpdateTime != null) {
+                        String time = String.valueOf(entry.getValue());
                         txtUpdateTime.setText(context.getString(R.string.update_time) + " " + Utilities.getHour(Long.parseLong(time), context));
                     }
-                    JSONObject json = new JSONObject(new JSONObject((Map) entry.getValue()).getString("currencies"));
-                    Iterator<String> temp = json.keys();
-                    while (temp.hasNext()) {
-                        String key = temp.next();
-                        currenciesMap.put(key, String.valueOf(json.get(key)));
-                    }
-                    listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithArray(currenciesMap, listAllCurrencies);
-                } else if (entry.getKey().toString().equals("library")) {
-                    try {
+                } else {
+                    if (entry.getKey().toString().equals("currencies")){
                         JSONObject json = new JSONObject((Map) entry.getValue());
                         Iterator<String> temp = json.keys();
                         while (temp.hasNext()) {
                             String key = temp.next();
-                            Gson gson = new GsonBuilder().create();
-                            ItemLibraryCurrencyModel itemLibraryCurrencyModel = gson.fromJson(String.valueOf((JSONObject) json.get(key)), ItemLibraryCurrencyModel.class);
-                            itemLibraryCurrencyModel.setName(key);
-
-                          /*  ItemLibraryCurrencyModel itemLibraryCurrencyModel= new ItemLibraryCurrencyModel();
-                            itemLibraryCurrencyModel.setName(key
-                                    .replace("*","")
-                                    .replace("-","")
-                                    .replace("_",""));
-                            if(((JSONObject) json.get(key)).has("currency_name")) {
-                                itemLibraryCurrencyModel.setCurrency_name(((JSONObject) json.get(key)).getString("currency_name"));
+                            //  currenciesMap.put(key, String.valueOf(json.get(key)));
+                            for(int i=0; i<listLibraryCurrencies.size(); i++){
+                                if(listLibraryCurrencies.get(i).getName().compareTo(key)==0) {
+                                    listLibraryCurrencies.get(i).setCurrency(Double.valueOf(String.valueOf(json.get(key))));
+                                    break;
+                                }
                             }
-                            if(((JSONObject) json.get(key)).has("currency_symbol")) {
-                                itemLibraryCurrencyModel.setCurrency_symbol(((JSONObject) json.get(key)).getString("currency_symbol"));
-                            }
-                            if(((JSONObject) json.get(key)).has("country_name")) {
-                                itemLibraryCurrencyModel.setCountry_name(((JSONObject) json.get(key)).getString("country_name"));
-                            }*/
-
-                            listAllCurrencies.add(itemLibraryCurrencyModel);
                         }
-                        Collections.sort(listAllCurrencies, new Comparator<ItemLibraryCurrencyModel>() {
-                            @Override
-                            public int compare(ItemLibraryCurrencyModel itemLibraryCurrencyModel, ItemLibraryCurrencyModel t1) {
-                                return itemLibraryCurrencyModel.getName().compareTo(t1.getName());
-                            }
-                        });
-                        listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithArray(currenciesMap, listAllCurrencies);
-                    } catch (JSONException e) {
-                        e.printStackTrace();
                     }
+
+
                 }
-            } catch (JSONException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             }
-
         }
-        return listAllCurrencies;
+
+        Collections.sort(listLibraryCurrencies, new Comparator<ItemLibraryCurrencyModel>() {
+            @Override
+            public int compare(ItemLibraryCurrencyModel itemLibraryCurrencyModel, ItemLibraryCurrencyModel t1) {
+                return itemLibraryCurrencyModel.getName().compareTo(t1.getName());
+            }
+        });
+        return listLibraryCurrencies;
     }
 
     public float getMinPercentage() {

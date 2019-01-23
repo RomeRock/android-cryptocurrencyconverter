@@ -13,6 +13,7 @@ import android.support.v7.widget.Toolbar;
 import android.text.Editable;
 import android.text.Selection;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.widget.EditText;
@@ -694,7 +695,15 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
+    }
+
+    @Override
+    protected void onPause() {
+        super.onPause();
+        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
+        Log.d("firebaseCon", "onDestroy");
     }
 
     @Override
