@@ -117,7 +117,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
                 finish();
                 break;
             case R.id.linAddNotify:
-                if (listDashboardCurrencies.size() > 2) {
+                if (listDashboardCurrencies.size() > 1) {
                     isEditable = false;
                     Intent i = new Intent(NotificationCenterActivity.this, SetupPushNotificationsActivity.class);
                     i.putExtra("Currencies", (Serializable) listDashboardCurrencies);

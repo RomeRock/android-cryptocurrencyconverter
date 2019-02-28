@@ -400,8 +400,8 @@ public class MainActivity extends AppCompatActivity
         }
         setThemeByActivity();
         PushNotificationModel.CleanBadges(this);
+        firebaseHelper.subscribeUnsubscribeTopic(MainActivity.this, true);
         if (!sharedPrefs.contains(getString(R.string.preferences_topic))) {
-            firebaseHelper.subscribeUnsubscribeTopic(MainActivity.this, true);
             ed.putString(getString(R.string.preferences_topic), "general");
             ed.commit();
         }

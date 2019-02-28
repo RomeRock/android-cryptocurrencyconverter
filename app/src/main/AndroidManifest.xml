@@ -12,6 +12,7 @@
     <!-- for Samsung -->
     <uses-permission android:name="com.sec.android.provider.badge.permission.READ" />
     <uses-permission android:name="com.sec.android.provider.badge.permission.WRITE" />
+    <uses-permission android:name="com.samsung.android.providers.context.permission.WRITE_USE_APP_FEATURE_SURVEY"/>
 
     <!-- for htc -->
     <uses-permission android:name="com.htc.launcher.permission.READ_SETTINGS" />
