@@ -140,12 +140,14 @@ public class CurrencyActivity extends AppCompatActivity implements ThemeInterfac
     protected void onPause() {
         super.onPause();
         Utilities.closeKeyboard(CurrencyActivity.this);
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
     }
 
     @Override
     protected void onResume() {
         super.onResume();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
     }

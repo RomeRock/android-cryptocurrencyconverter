@@ -32,6 +32,7 @@ public class SingletonInAppBilling {
     private static boolean havePricepackagePro1=false;
     private static boolean havePricepackagePro2=false;
     private static boolean havePricepackagePro3=false;
+    private static FirebaseHelper firebaseHelper;
     private static IabHelper mHelper;
     private Inventory inventoryUser;
     private ServiceConnection mServiceConn;
@@ -46,8 +47,16 @@ public class SingletonInAppBilling {
         return firebaseDatabase;
     }
 
-    public void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
-        this.firebaseDatabase = firebaseDatabase;
+    public static FirebaseHelper getFirebaseHelper() {
+        return firebaseHelper;
+    }
+
+    public static void setFirebaseHelper(FirebaseHelper firebaseHelper) {
+        SingletonInAppBilling.firebaseHelper = firebaseHelper;
+    }
+
+    public static void setFirebaseDatabase(FirebaseDatabase firebaseDatabase) {
+        firebaseDatabase = firebaseDatabase;
     }
 
     public static ArrayList<String> getSKUList() {

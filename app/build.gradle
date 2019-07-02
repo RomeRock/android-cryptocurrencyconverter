@@ -8,7 +8,7 @@ buildscript {
     }
 
     dependencies {
-        classpath 'io.fabric.tools:gradle:1.+'
+        classpath 'io.fabric.tools:gradle:1.29.0'
     }
 }
 apply plugin: 'com.android.application'
@@ -23,9 +23,9 @@ android {
     defaultConfig {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
-        targetSdkVersion 26
-        versionCode 100300
-        versionName "1.3"
+        targetSdkVersion 28
+        versionCode 100401
+        versionName "1.4.1"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
     }

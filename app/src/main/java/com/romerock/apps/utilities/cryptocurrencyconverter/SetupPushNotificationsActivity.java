@@ -563,11 +563,17 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         resultAmount = Double.valueOf(String.valueOf(Utilities.getNumberDecimal(Utilities.makeOperationWithFormat(1, currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionTo, currenciesFromPreferences)).getCurrency(),
                 currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionFrom, currenciesFromPreferences)).getCurrency()))));
 
-        if(overAlert==0)
-            overAlert = Double.valueOf(Double.valueOf(resultAmount) + (Double.valueOf(resultAmount) * 0.05));
-        if(belowAlert==0)
-            belowAlert = Double.valueOf(Double.valueOf(resultAmount) - (Double.valueOf(resultAmount) * 0.05));
-        cleanEditTextAndMakeHint();
+        if(resultAmount==null) {
+            resultAmount = Double.valueOf(0);
+            overAlert=0.5;
+            belowAlert=-0.5;
+        }else {
+            if (overAlert == 0)
+                overAlert = Double.valueOf(Double.valueOf(resultAmount) + (Double.valueOf(resultAmount) * 0.05));
+            if (belowAlert == 0)
+                belowAlert = Double.valueOf(Double.valueOf(resultAmount) - (Double.valueOf(resultAmount) * 0.05));
+            cleanEditTextAndMakeHint();
+        }
         txtAmount.setText(Utilities.getNumberString(resultAmount));
     }
 
@@ -695,6 +701,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     @Override
     protected void onResume() {
         super.onResume();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
     }
@@ -702,6 +709,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     @Override
     protected void onPause() {
         super.onPause();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         Log.d("firebaseCon", "onDestroy");
     }

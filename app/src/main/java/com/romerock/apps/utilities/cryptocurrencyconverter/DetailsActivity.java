@@ -323,6 +323,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
     @Override
     protected void onPause() {
         super.onPause();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         Log.d("firebaseCon", "onDestroy");
     }
@@ -368,6 +369,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
     @Override
     protected void onResume() {
         super.onResume();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         Log.d("firebaseCon", "onResume");
         setThemeByActivity();
@@ -423,19 +425,24 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                if (isChecked) {
-                    SpannableString content = new SpannableString(range);
-                    content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
-                    buttonView.setText(content);
-                    //Make the text BOLD
-                    buttonView.setTypeface(null, Typeface.BOLD);
-                } else {
-                    //Change the color here and make the Text bold
-                    SpannableString content = new SpannableString(range);
-                    content.setSpan(null, 0, content.length(), 0);
-                    buttonView.setText(content);
-                    buttonView.setTypeface(null, Typeface.NORMAL);
-
+                try {
+                    if (isChecked) {
+                        SpannableString content = new SpannableString(range);
+                        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
+                        buttonView.setText(content);
+                        //Make the text BOLD
+                        buttonView.setTypeface(null, Typeface.BOLD);
+                    } else {
+                        //Change the color here and make the Text bold
+                        SpannableString content = new SpannableString(range);
+                        if(content!=null) {
+                            content.setSpan(null, 0, content.length(), 0);
+                            buttonView.setText(content);
+                            buttonView.setTypeface(null, Typeface.NORMAL);
+                        }
+                    }
+                }catch (Exception e){
+                    Log.d("","");
                 }
             }
         };

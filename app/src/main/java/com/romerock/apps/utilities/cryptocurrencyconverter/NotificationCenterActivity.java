@@ -135,6 +135,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
     @Override
     protected void onResume() {
         super.onResume();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         if (adView != null)
             adView.resume();
@@ -182,6 +183,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
     protected void onPause() {
         if (adView != null)
             adView.pause();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         super.onPause();
     }

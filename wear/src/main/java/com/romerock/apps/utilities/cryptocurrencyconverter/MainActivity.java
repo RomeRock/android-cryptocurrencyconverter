@@ -182,6 +182,4 @@ public class MainActivity extends WearableActivity implements OnStartDragListene
     public void onStartDrag(RecyclerView.ViewHolder viewHolder) {
         mItemTouchHelper.startDrag(viewHolder);
     }
-
-
 }

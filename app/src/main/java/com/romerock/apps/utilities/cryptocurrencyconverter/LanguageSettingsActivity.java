@@ -125,12 +125,14 @@ public class LanguageSettingsActivity extends AppCompatActivity implements Theme
     @Override
     protected void onResume() {
         super.onResume();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
     }
     @Override
     protected void onPause() {
         super.onPause();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
     }
 

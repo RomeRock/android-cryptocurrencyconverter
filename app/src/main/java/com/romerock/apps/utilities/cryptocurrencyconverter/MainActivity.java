@@ -202,6 +202,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Utilities.ChangeLanguage(this);
+        FirebaseApp.initializeApp(MainActivity.this);
         setTheme(getThemePreferences(getApplication()));
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
         ed = sharedPrefs.edit();
@@ -214,6 +215,9 @@ public class MainActivity extends AppCompatActivity
         dialogsHelper = new DialogsHelper(MainActivity.this, this);
         ed = sharedPrefs.edit();
         firebaseHelper = FirebaseHelper.getInstance();
+        if (SingletonInAppBilling.getFirebaseHelper() == null) {
+            SingletonInAppBilling.setFirebaseHelper(firebaseHelper);
+        }
         if (!sharedPrefs.getBoolean(getString(R.string.preferences_rate), false)) {
             int countSomeLove = sharedPrefs.getInt(getString(R.string.preferences_count_some_love), 0);
             if (countSomeLove > 2 || SingletonInAppBilling.Instance().isShowPopUp()) {
@@ -369,17 +373,19 @@ public class MainActivity extends AppCompatActivity
                     listDashboardCurrencies = CurrencyConvertApiModel.getListCurrenciesForDashboard(listAllItems, splitCurrencies);
                     if (listDashboardCurrencies == null)
                         listDashboardCurrencies = new ArrayList<ItemLibraryCurrencyModel>();
-                    recyclerCurrencyDashboard.setLayoutManager(new LinearLayoutManager(MainActivity.this));
-                    dashboardAdapter = new RecyclerViewCurrenciesDashboardAdapter(listDashboardCurrencies, MainActivity.this, new ItemClickLibraryInterface() {
-                        @Override
-                        public void onItemClicked(View view, ItemLibraryCurrencyModel item, String code) {
+                    if(recyclerCurrencyDashboard!=null) {
+                        recyclerCurrencyDashboard.setLayoutManager(new LinearLayoutManager(MainActivity.this));
+                        dashboardAdapter = new RecyclerViewCurrenciesDashboardAdapter(listDashboardCurrencies, MainActivity.this, new ItemClickLibraryInterface() {
+                            @Override
+                            public void onItemClicked(View view, ItemLibraryCurrencyModel item, String code) {
 
-                        }
-                    }, MainActivity.this, recyclerCurrencyDashboard);
-                    recyclerCurrencyDashboard.setAdapter(dashboardAdapter);
-                    recyclerCurrencyDashboard.setItemAnimator(new DefaultItemAnimator());
-                    callback = new SimpleItemTouchHelperCallback(dashboardAdapter, MainActivity.this);
-                    mItemTouchHelper = new ItemTouchHelper(callback);
+                            }
+                        }, MainActivity.this, recyclerCurrencyDashboard);
+                        recyclerCurrencyDashboard.setAdapter(dashboardAdapter);
+                        recyclerCurrencyDashboard.setItemAnimator(new DefaultItemAnimator());
+                        callback = new SimpleItemTouchHelperCallback(dashboardAdapter, MainActivity.this);
+                        mItemTouchHelper = new ItemTouchHelper(callback);
+                    }
                 } else {
                     if (listDashboardCurrencies.size() < 1) {
                         DialogsHelper.showSnackBar(coordinator, getString(R.string.error_internet), getResources().getColor(R.color.alert_snackbar));
@@ -394,6 +400,7 @@ public class MainActivity extends AppCompatActivity
     @Override
     protected void onResume() {
         super.onResume();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         if (mGoogleApiClient != null) {
             mGoogleApiClient.connect();
@@ -473,7 +480,8 @@ public class MainActivity extends AppCompatActivity
     protected void onPause() {
         Utilities.closeKeyboard(MainActivity.this);
         recyclerCurrencyDashboard.requestFocus();
-        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
+        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
+            SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         super.onPause();
         if ((mGoogleApiClient != null) && mGoogleApiClient.isConnected()) {
 
@@ -640,7 +648,8 @@ public class MainActivity extends AppCompatActivity
                         }
                         ed.putString(getString(R.string.preferences_defaultCurrencies), defaultCurrencies);
                         ed.commit();
-                        dashboardAdapter.notifyDataSetChanged();
+                        if(dashboardAdapter!=null)
+                            dashboardAdapter.notifyDataSetChanged();
                         SingletonInAppBilling.Instance().setInvalidated(false);
                         Intent intent = new Intent(MainActivity.this, MainActivity.class);
                         intent.addFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION);

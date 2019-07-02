@@ -61,17 +61,23 @@ public class FirebaseHelper {
         return instance;
     }
 
+    public boolean isPersistenceActive() {
+        return persistenceActive;
+    }
+
     public FirebaseHelper(){
         if (database == null) {
             database = FirebaseDatabase.getInstance();
-            if(!persistenceActive){
+
+            if(!persistenceActive&& SingletonInAppBilling.getFirebaseHelper()==null){
                 persistenceActive=true;
                 try {
                     database.setPersistenceEnabled(true);
-                }catch (Exception e){}
+                }catch (Exception e){
+                    Log.d("Error firebase",e.getMessage());
+                }
+                SingletonInAppBilling.Instance().setFirebaseDatabase(database);
             }
-            SingletonInAppBilling.Instance().setFirebaseDatabase(database);
-
         }
     }
 
