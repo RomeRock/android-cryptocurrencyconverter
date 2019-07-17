@@ -153,12 +153,12 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     private FirebaseHelper firebaseHelper;
     private DatabaseReference mDatabase;
     private NotificationModel notificationModel;
-    private double overAlert=0;
-    private double belowAlert=0;
-    private boolean separatorPress=false;
+    private double overAlert = 0;
+    private double belowAlert = 0;
+    private boolean separatorPress = false;
     private char separator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
-    private boolean block=false;
-
+    private boolean block = false;
+    private boolean saveActive = true;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -188,7 +188,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                 haveToCurrency = true;
         }
         if (!haveFomCurrency || !haveToCurrency) {
-            if(allCurrencies!=null) {
+            if (allCurrencies != null) {
                 for (int i = 0; i < allCurrencies.size(); i++) {
                     if (!haveFomCurrency) {
                         if (allCurrencies.get(i).getName().compareTo(positionFrom) == 0)
@@ -255,11 +255,12 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
             e.printStackTrace();
         }
 
-            enableSwitches();
+        enableSwitches();
         setNotificationModelFromSetup();
 
         txtBelowAmount.addTextChangedListener(new TextWatcher() {
             boolean isEdiging;
+
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -273,15 +274,15 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable charSequence) {
-                if(String.valueOf(separator).compareTo(",")==0&&charSequence.toString().contains(".")&&!isEdiging){
-                    isEdiging=true;
-                    txtBelowAmount.setText(txtBelowAmount.getText().toString().replace(".",",").replace(" ", ""));
-                    isEdiging=false;
+                if (String.valueOf(separator).compareTo(",") == 0 && charSequence.toString().contains(".") && !isEdiging) {
+                    isEdiging = true;
+                    txtBelowAmount.setText(txtBelowAmount.getText().toString().replace(".", ",").replace(" ", ""));
+                    isEdiging = false;
                     Editable etext = txtBelowAmount.getText();
                     Selection.setSelection(etext, txtBelowAmount.getText().length());
                     saveNotification();
-                }else{
-                    isEdiging=false;
+                } else {
+                    isEdiging = false;
                     saveNotification();
                 }
             }
@@ -289,6 +290,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
 
         txtOverAmount.addTextChangedListener(new TextWatcher() {
             boolean isEdiging;
+
             @Override
             public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
 
@@ -302,15 +304,15 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
 
             @Override
             public void afterTextChanged(Editable charSequence) {
-                if(String.valueOf(separator).compareTo(",")==0&&charSequence.toString().contains(".")&&!isEdiging){
-                    isEdiging=true;
-                    txtOverAmount.setText(txtOverAmount.getText().toString().replace(".",",").replace(" ", ""));
-                    isEdiging=false;
+                if (String.valueOf(separator).compareTo(",") == 0 && charSequence.toString().contains(".") && !isEdiging) {
+                    isEdiging = true;
+                    txtOverAmount.setText(txtOverAmount.getText().toString().replace(".", ",").replace(" ", ""));
+                    isEdiging = false;
                     Editable etext = txtOverAmount.getText();
                     Selection.setSelection(etext, txtOverAmount.getText().length());
                     saveNotification();
-                }else{
-                    isEdiging=false;
+                } else {
+                    isEdiging = false;
                     saveNotification();
                 }
             }
@@ -325,14 +327,14 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         switchOver.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(switchOver.isChecked()){
-                    if(NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)){
+                if (switchOver.isChecked()) {
+                    if (NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)) {
                         saveNotification();
-                    }else{
+                    } else {
                         switchOver.setChecked(false);
                         Popup.SubscribeMe(SetupPushNotificationsActivity.this);
                     }
-                }else {
+                } else {
                     NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, false);
                     saveNotification();
                 }
@@ -342,14 +344,14 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         switchBelow.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(switchBelow.isChecked()){
-                    if(NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)){
+                if (switchBelow.isChecked()) {
+                    if (NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)) {
                         saveNotification();
-                    }else{
+                    } else {
                         switchBelow.setChecked(false);
                         Popup.SubscribeMe(SetupPushNotificationsActivity.this);
                     }
-                }else {
+                } else {
                     NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, false);
                     saveNotification();
                 }
@@ -383,7 +385,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                 changeCurrent();
                 break;
             case R.id.linAddHours:
-                if(NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)) {
+                if (NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)) {
                     int countHours = itemsHours.size();
                     if (notificationModelList != null) {
                         if (notificationModelList.size() > 0) {
@@ -396,17 +398,17 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                  /*   if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0 && (itemsHours.size() > 0 || countHours > 1)) {
                         Popup.SubscribeMe(SetupPushNotificationsActivity.this);
                     } else {*/
-                        TimePickerDialog timePickerDialog;
-                        timePickerDialog = TimePickerDialog.newInstance(SetupPushNotificationsActivity.this, new Date().getHours(), new Date().getMinutes(), false);
-                        timePickerDialog.enableMinutes(false);
-                        if (themeSelected.contains("Night")) {
-                            timePickerDialog.setThemeDark(true);
-                        } else if (themeSelected.contains("Daylight")) {
-                            timePickerDialog.setThemeDark(false);
-                        }
-                        timePickerDialog.show(getFragmentManager(), "tag");
-                   // }
-                }else{
+                    TimePickerDialog timePickerDialog;
+                    timePickerDialog = TimePickerDialog.newInstance(SetupPushNotificationsActivity.this, new Date().getHours(), new Date().getMinutes(), false);
+                    timePickerDialog.enableMinutes(false);
+                    if (themeSelected.contains("Night")) {
+                        timePickerDialog.setThemeDark(true);
+                    } else if (themeSelected.contains("Daylight")) {
+                        timePickerDialog.setThemeDark(false);
+                    }
+                    timePickerDialog.show(getFragmentManager(), "tag");
+                    // }
+                } else {
                     Popup.SubscribeMe(SetupPushNotificationsActivity.this);
                 }
                 break;
@@ -414,7 +416,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     }
 
     private void changeCurrent() {
-        NotificationModel.getMyNotifications(SetupPushNotificationsActivity.this,firebaseHelper, UDID, isFreeOrPremium, new NotificationsListListener() {
+        NotificationModel.getMyNotifications(SetupPushNotificationsActivity.this, firebaseHelper, UDID, isFreeOrPremium, new NotificationsListListener() {
             @Override
             public void getNotificationList(List<NotificationModel> notificationModelListSend) {
                 notificationModelList.clear();
@@ -431,104 +433,106 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     }
 
     public void saveNotification() {
-        if (switchOver.isChecked()||switchBelow.isChecked()||itemsHours.size()>0) {
-            final String key = txtCurrentFrom.getText().toString().toUpperCase() + "-" + txtCurrentTo.getText().toString().toUpperCase();
-            if (txtCurrentFrom.getText().toString().toUpperCase().compareTo(txtCurrentTo.getText().toString().toUpperCase()) != 0) {
-                try {
-                    if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
-                        UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.udidAndroid), ""));
-                    } else {
-                        UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.purchaseOrder), ""));
+        if (saveActive) {
+            if (switchOver.isChecked() || switchBelow.isChecked() || itemsHours.size() > 0) {
+                final String key = txtCurrentFrom.getText().toString().toUpperCase() + "-" + txtCurrentTo.getText().toString().toUpperCase();
+                if (txtCurrentFrom.getText().toString().toUpperCase().compareTo(txtCurrentTo.getText().toString().toUpperCase()) != 0) {
+                    try {
+                        if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
+                            UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.udidAndroid), ""));
+                        } else {
+                            UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.purchaseOrder), ""));
+                        }
+                    } catch (Exception e) {
                     }
-                } catch (Exception e) {
-                }
-                final UserUdId userUdId = new UserUdId(sharedPrefs.getString(getResources().getString(R.string.language_settings), ""),
-                        "active", "",
-                        SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(),
-                        Utilities.getCurrentTimeStamp());
-                //double createdtstamp, double expirationtstamp, String expiredate, String language, String state, String timezon
-                if (txtCurrentFrom.getText().toString().compareTo(txtCurrentTo.getText().toString()) != 0) {
-                    userUdId.CheckFreeUDIDNode(UDID, firebaseHelper, new CheckUDIDListener() {
-                        @Override
-                        public void checkUDIDFromFirebase(boolean haveChild) {
-                            try {
-                                String fcm = FirebaseInstanceId.getInstance().getToken();
-                                SharedPreferences.Editor ed = sharedPrefs.edit();
-                                if (sharedPrefs.getString(getResources().getString(R.string.fcmUser), "").compareTo("") == 0) {
-                                    if (fcm != null)
-                                        try {
-                                            userUdId.checkFreeFMCTocken(firebaseHelper, UDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                    final UserUdId userUdId = new UserUdId(sharedPrefs.getString(getResources().getString(R.string.language_settings), ""),
+                            "active", "",
+                            SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(),
+                            Utilities.getCurrentTimeStamp());
+                    //double createdtstamp, double expirationtstamp, String expiredate, String language, String state, String timezon
+                    if (txtCurrentFrom.getText().toString().compareTo(txtCurrentTo.getText().toString()) != 0) {
+                        userUdId.CheckFreeUDIDNode(UDID, firebaseHelper, new CheckUDIDListener() {
+                            @Override
+                            public void checkUDIDFromFirebase(boolean haveChild) {
+                                try {
+                                    String fcm = FirebaseInstanceId.getInstance().getToken();
+                                    SharedPreferences.Editor ed = sharedPrefs.edit();
+                                    if (sharedPrefs.getString(getResources().getString(R.string.fcmUser), "").compareTo("") == 0) {
+                                        if (fcm != null)
+                                            try {
+                                                userUdId.checkFreeFMCTocken(firebaseHelper, UDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                                                ed.putString(getString(R.string.fcmUser), CipherAES.cipher(fcm));
+                                                ed.commit();
+                                            } catch (Exception e) {
+                                                e.printStackTrace();
+                                            }
+                                    } else {
+                                        String FMCTocken = CipherAES.decipher(sharedPrefs.getString(getResources().getString(R.string.fcmUser), ""));
+                                        if (fcm.compareTo(FMCTocken) != 0) {
                                             ed.putString(getString(R.string.fcmUser), CipherAES.cipher(fcm));
                                             ed.commit();
-                                        } catch (Exception e) {
-                                            e.printStackTrace();
+                                            FMCTocken = fcm;
                                         }
-                                } else {
-                                    String FMCTocken = CipherAES.decipher(sharedPrefs.getString(getResources().getString(R.string.fcmUser), ""));
-                                    if (fcm.compareTo(FMCTocken) != 0) {
-                                        ed.putString(getString(R.string.fcmUser), CipherAES.cipher(fcm));
-                                        ed.commit();
-                                        FMCTocken = fcm;
-                                    }
-                                    userUdId.checkFreeFMCTocken(firebaseHelper, UDID, FMCTocken, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                                        userUdId.checkFreeFMCTocken(firebaseHelper, UDID, FMCTocken, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
 
-                                    String[] hoursToSave = new String[itemsHours.size()];
-                                    int hours = 0;
-                                    for (HourModel hour : itemsHours) {
-                                        hoursToSave[hours] = String.valueOf(hour.getHour());
-                                        hours++;
-                                    }
-                                    AlertsNotificationModel alertsNotificationModel = new AlertsNotificationModel();
-                                    boolean haveAlert = false;
-                                    if (switchOver.isChecked()) {
-                                        if (txtOverAmount.getText().toString().compareTo("") != 0)
-                                            overAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtOverAmount.getText().toString())));
-                                        else
+                                        String[] hoursToSave = new String[itemsHours.size()];
+                                        int hours = 0;
+                                        for (HourModel hour : itemsHours) {
+                                            hoursToSave[hours] = String.valueOf(hour.getHour());
+                                            hours++;
+                                        }
+                                        AlertsNotificationModel alertsNotificationModel = new AlertsNotificationModel();
+                                        boolean haveAlert = false;
+                                        if (switchOver.isChecked()) {
+                                            if (txtOverAmount.getText().toString().compareTo("") != 0)
+                                                overAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtOverAmount.getText().toString())));
+                                            else
+                                                overAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtOverAmount.getHint().toString())));
+                                            alertsNotificationModel.setHigh(overAlert);
+                                            alertsNotificationModel.setHigh_active(true);
+                                            haveAlert = true;
+                                        } else {
                                             overAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtOverAmount.getHint().toString())));
-                                        alertsNotificationModel.setHigh(overAlert);
-                                        alertsNotificationModel.setHigh_active(true);
-                                        haveAlert = true;
-                                    } else {
-                                        overAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtOverAmount.getHint().toString())));
-                                        alertsNotificationModel.setHigh_active(false);
-                                        haveAlert = false;
-                                    }
-                                    if (switchBelow.isChecked()) {
-                                        if (txtBelowAmount.getText().toString().compareTo("") != 0)
-                                            belowAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtBelowAmount.getText().toString())));
-                                        else
+                                            alertsNotificationModel.setHigh_active(false);
+                                            haveAlert = false;
+                                        }
+                                        if (switchBelow.isChecked()) {
+                                            if (txtBelowAmount.getText().toString().compareTo("") != 0)
+                                                belowAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtBelowAmount.getText().toString())));
+                                            else
+                                                belowAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtBelowAmount.getHint().toString())));
+                                            alertsNotificationModel.setLow(belowAlert);
+                                            alertsNotificationModel.setLow_active(true);
+                                            haveAlert = true;
+                                        } else {
                                             belowAlert = Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtBelowAmount.getHint().toString())));
-                                        alertsNotificationModel.setLow(belowAlert);
-                                        alertsNotificationModel.setLow_active(true);
-                                        haveAlert = true;
-                                    } else {
-                                        belowAlert =  Double.parseDouble(String.valueOf(Utilities.getNumberDecimal(txtBelowAmount.getHint().toString())));
-                                        alertsNotificationModel.setLow_active(false);
-                                        haveAlert = false;
+                                            alertsNotificationModel.setLow_active(false);
+                                            haveAlert = false;
+                                        }
+                                        notificationModel = new NotificationModel(key, alertsNotificationModel, hoursToSave);
+                                        NotificationModel.addCurrencyNotification(firebaseHelper, UDID, key, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), notificationModel);
+
                                     }
-                                    notificationModel = new NotificationModel(key, alertsNotificationModel, hoursToSave);
-                                    NotificationModel.addCurrencyNotification(firebaseHelper, UDID, key, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), notificationModel);
-
+                                } catch (Exception e) {
+                                    e.printStackTrace();
                                 }
-                            } catch (Exception e) {
-                                e.printStackTrace();
                             }
-                        }
 
-                        @Override
-                        public void checkPremiumState(boolean status) {
+                            @Override
+                            public void checkPremiumState(boolean status) {
 
-                        }
-                    }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), SetupPushNotificationsActivity.this);
+                            }
+                        }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), SetupPushNotificationsActivity.this);
 
+                    }
+
+                } else {
+                    switchOver.setChecked(false);
+                    switchBelow.setChecked(false);
+                    itemsHours.clear();
+                    mAdapter.notifyDataSetChanged();
+                    DialogsHelper.showSnackBar(coordinator, getString(R.string.cant_save_same_currencies), getResources().getColor(R.color.alert_snackbar));
                 }
-
-            } else {
-                switchOver.setChecked(false);
-                switchBelow.setChecked(false);
-                itemsHours.clear();
-                mAdapter.notifyDataSetChanged();
-                DialogsHelper.showSnackBar(coordinator, getString(R.string.cant_save_same_currencies), getResources().getColor(R.color.alert_snackbar));
             }
         }
     }
@@ -538,20 +542,20 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         // ------ From currency flag -----
         int id;
         if (positionFrom.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom+positionFrom));
-        }else
+            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom + positionFrom));
+        } else
             id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom));
-        if (id== 0) {
+        if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
         imgFlagFrom.setImageResource(id);
         txtCurrentFrom.setText(positionFrom);
         // ------ To currency flag -----
         if (positionTo.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo+positionTo));
-        }else
+            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo + positionTo));
+        } else
             id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo));
-        if (id== 0) {
+        if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
         imgFlagTo.setImageResource(id);
@@ -559,15 +563,15 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     }
 
     private void makeOperation() {
-        if(currenciesFromPreferences!=null)
-        resultAmount = Double.valueOf(String.valueOf(Utilities.getNumberDecimal(Utilities.makeOperationWithFormat(1, currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionTo, currenciesFromPreferences)).getCurrency(),
-                currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionFrom, currenciesFromPreferences)).getCurrency()))));
+        if (currenciesFromPreferences != null)
+            resultAmount = Double.valueOf(String.valueOf(Utilities.getNumberDecimal(Utilities.makeOperationWithFormat(1, currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionTo, currenciesFromPreferences)).getCurrency(),
+                    currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionFrom, currenciesFromPreferences)).getCurrency()))));
 
-        if(resultAmount==null) {
+        if (resultAmount == null) {
             resultAmount = Double.valueOf(0);
-            overAlert=0.5;
-            belowAlert=-0.5;
-        }else {
+            overAlert = 0.5;
+            belowAlert = -0.5;
+        } else {
             if (overAlert == 0)
                 overAlert = Double.valueOf(Double.valueOf(resultAmount) + (Double.valueOf(resultAmount) * 0.05));
             if (belowAlert == 0)
@@ -625,7 +629,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
             if (resultCode == RESULT_OK) {
                 try {
                     isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
-                        UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.purchaseOrder), ""));
+                    UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.purchaseOrder), ""));
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
@@ -639,9 +643,10 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     }
 
     private void setNotificationModelFromSetup() {
+        saveActive = false;
         itemsHours.clear();
-        overAlert=0;
-        belowAlert=0;
+        overAlert = 0;
+        belowAlert = 0;
         mAdapter.notifyDataSetChanged();
         switchOver.setChecked(false);
         switchBelow.setChecked(false);
@@ -671,8 +676,8 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                         }
                         // --------- For Alerts ----------
                         if (notificationModelList.get(i).getAlertsNotification() != null) {
-                            overAlert=notificationModelList.get(i).getAlertsNotification().getHigh();
-                            belowAlert=notificationModelList.get(i).getAlertsNotification().getLow();
+                            overAlert = notificationModelList.get(i).getAlertsNotification().getHigh();
+                            belowAlert = notificationModelList.get(i).getAlertsNotification().getLow();
                             if (notificationModelList.get(i).getAlertsNotification().isHigh_active()) {
                                 switchOver.setChecked(true);
                             } else {
@@ -696,21 +701,22 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
             }
         }
         makeOperation();
+        saveActive = true;
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
-        SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
+        if (SingletonInAppBilling.Instance().getFirebaseDatabase() != null)
+            SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
     }
 
     @Override
     protected void onPause() {
         super.onPause();
-        if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
-        SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
+        if (SingletonInAppBilling.Instance().getFirebaseDatabase() != null)
+            SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         Log.d("firebaseCon", "onDestroy");
     }
 

@@ -73,39 +73,25 @@ public class UserUdId {
     }
 
     public static void CheckFreeUDIDNode(final String UDID, final FirebaseHelper firebaseHelper, final CheckUDIDListener checkUDIDListener, final UserUdId userUdId, final String isFreeOrPremium, final Context context) {
-        firebaseHelper.getDataReference(String.format(firebaseHelper.getUDID_PATH(), isFreeOrPremium)).addListenerForSingleValueEvent(new ValueEventListener() {
-            @Override
-            public void onDataChange(DataSnapshot snapshot) {
-               // if (!snapshot.hasChild(UDID)) {
-                    // if not have it, insert
-                    if (isFreeOrPremium.compareTo(UserUdId.getPREMIUM()) == 0) {
-                        HashMap<String, Object> udidPremium = new HashMap<>();
-                        try {
-                            SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), context.MODE_PRIVATE);
-                            String idDevice = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.udidAndroid), ""));
-                            udidPremium.put(idDevice, userUdId.getCreatedtstamp());
-                            userUdId.setUdids(udidPremium);
+        if (isFreeOrPremium.compareTo(UserUdId.getPREMIUM()) == 0) {
+            HashMap<String, Object> udidPremium = new HashMap<>();
+            try {
+                SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), context.MODE_PRIVATE);
+                String idDevice = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.udidAndroid), ""));
+                udidPremium.put(idDevice, userUdId.getCreatedtstamp());
+                userUdId.setUdids(udidPremium);
 
-                        } catch (Exception e) {
-                            e.printStackTrace();
-                        }
-
-                    }
-                    if(UDID!=null)
-                        if(!UDID.isEmpty()) {
-                            firebaseHelper.getDataReference(String.format(firebaseHelper.getUDID_PATH(), isFreeOrPremium)).child(UDID).updateChildren(userUdId.toMap());
-                            checkUDIDListener.checkUDIDFromFirebase(false);
-                        }
-               /* } else {
-                    checkUDIDListener.checkUDIDFromFirebase(true);
-                }*/
+            } catch (Exception e) {
+                e.printStackTrace();
             }
 
-            @Override
-            public void onCancelled(DatabaseError databaseError) {
-
+        }
+        if (UDID != null)
+            if (!UDID.isEmpty()) {
+                firebaseHelper.getDataReference(String.format(firebaseHelper.getUDID_PATH(), isFreeOrPremium)).child(UDID).updateChildren(userUdId.toMap());
+                checkUDIDListener.checkUDIDFromFirebase(false);
             }
-        });
+
     }
 
     public static void copyNotificationsToPremium(final FirebaseHelper firebaseHelper, final String UDID, final String idOrder) {
@@ -208,13 +194,13 @@ public class UserUdId {
         result.put("expiredate", expiredate);
         result.put("language", language);
         result.put("os", os);
-        result.put("version",version);
+        result.put("version", version);
         result.put("state", state);
         result.put("timezone", timezone);
         result.put("enviroment", enviroment);
-        if(transaction!=null)
+        if (transaction != null)
             result.put("transaction", transaction);
-       // result.put("dev_cancel_recall", DEV_CANCEL_RECALL);
+        // result.put("dev_cancel_recall", DEV_CANCEL_RECALL);
         result.put("udids", udids);
         return result;
     }
@@ -298,8 +284,8 @@ public class UserUdId {
         firebaseHelper.getDataReference(String.format(firebaseHelper.getFMC_PATH(), isFreeOrPremium, UDID)).child(FMC).setValue(createdtstamp).addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
-               // if(process)
-                  //  UserUdId.setDevCancelRecall(firebaseHelper, UDID, isFreeOrPremium);
+                // if(process)
+                //  UserUdId.setDevCancelRecall(firebaseHelper, UDID, isFreeOrPremium);
             }
         });
 

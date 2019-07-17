@@ -24,8 +24,8 @@ android {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 100401
-        versionName "1.4.1"
+        versionCode 100500
+        versionName "1.5"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
     }
