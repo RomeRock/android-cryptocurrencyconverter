@@ -40,8 +40,6 @@ import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.facebook.share.widget.ShareDialog;
 import com.google.ads.mediation.inmobi.InMobiConsent;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
 import com.google.firebase.FirebaseApp;
@@ -153,7 +151,7 @@ public class MainActivity extends AppCompatActivity
     @BindView(R.id.imgSharerewarded)
     ImageView imgSharerewarded;
     @BindView(R.id.adView)
-    AdView adView;
+    RelativeLayout adView;
     private int TWEET_COMPOSER_REQUEST_CODE = 65642;
     private int FACEBOOK_REQUEST_CODE = 64207;
     private int ACTIVITY_CHANGE_LANGUAGE = 525;
@@ -254,11 +252,7 @@ public class MainActivity extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
-        AdRequest adRequest = Utilities.addBanner(MainActivity.this, isFree, getString(R.string.banner_ad_unit_id));
-        if (adRequest != null)
-            adView.loadAd(adRequest);
-        else
-            adView.setVisibility(View.GONE);
+        Utilities.checkForBigBanner(MainActivity.this, adView);
         callbackManager = CallbackManager.Factory.create();
         shareDialog = new ShareDialog(this);
         shareDialog.registerCallback(callbackManager, new FacebookCallback<Sharer.Result>() {
@@ -291,7 +285,6 @@ public class MainActivity extends AppCompatActivity
         });
 
 
-        Log.i("FCM", String.valueOf(FirebaseApp.getInstance().getToken(true)));
     }
 
     public void setThemeByActivity() {

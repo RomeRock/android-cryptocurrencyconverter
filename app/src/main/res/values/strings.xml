@@ -1,22 +1,39 @@
 <resources>
     <string name="app_name">Cryptocurrency Converter</string>
-    <string name="banner_ad_unit_id">ca-app-pub-1943700858932247/4609978137</string>
-    <string name="interstitial_ad_unit_id">ca-app-pub-1943700858932247/4683373591</string>
-    <string name="banner_ad_unit_id_big">ca-app-pub-1943700858932247/6248330570</string>
-    <string name="follow_us_twitter">https://twitter.com/RomeRock_Apps</string>
-    <string name="follow_us_twitter_profile">twitter://user?screen_name=RomeRock_Apps</string>
-    <string name="facebook_app_id">2292294817451565</string>
-    <string name="follow_us_instagram">https://www.instagram.com/romerock_apps/</string>
-    <string name="link_tipCalculator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.tipcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_xpressVote">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.xpressvote&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_quickConverter">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.quickunitconverter&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_LoanCalulator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.loancalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_TaxCalculator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.salestaxdiscountcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_ClashMate">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.clashroyale.tournamentfinder&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_52Weeks">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.fiftytwoweekchallenge&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="follow_us_facebook">https://www.facebook.com/RomeRock-App-Studio-337180269970605</string>
-    <string name="follow_us_facebook_profile">fb://page/337180269970605</string>
-    <string name="link_twittter">https://www.twitter.com/RomeRock_Apps</string>
+    <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1943700858932247/4609978137</string>
+    <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-1943700858932247/4683373591</string>
+    <string name="banner_ad_unit_id_big" translatable="false">ca-app-pub-1943700858932247/6248330570</string>
+    <string name="follow_us_twitter" translatable="false">https://twitter.com/RomeRock_Apps</string>
+    <string name="follow_us_twitter_profile" translatable="false">twitter://user?screen_name=RomeRock_Apps</string>
+    <string name="facebook_app_id" translatable="false">2292294817451565</string>
+    <string name="banner_rewarded_AD_UNIT_ID" translatable="false">ca-app-pub-1943700858932247/1949938002</string>
+    <string name="follow_us_instagram" translatable="false">https://www.instagram.com/romerock_apps/</string>
+    <string name="link_tipCalculator" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.tipcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_xpressVote" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.xpressvote&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_quickConverter" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.quickunitconverter&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_LoanCalulator" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.loancalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_TaxCalculator" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.salestaxdiscountcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_ClashMate" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.clashroyale.tournamentfinder&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_52Weeks" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.fiftytwoweekchallenge&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="follow_us_facebook" translatable="false">https://www.facebook.com/RomeRock-App-Studio-337180269970605</string>
+    <string name="follow_us_facebook_profile" translatable="false">fb://page/337180269970605</string>
+    <string name="link_twittter" translatable="false">https://www.twitter.com/RomeRock_Apps</string>
+    <string name="preferences_count_some_love" translatable="false">countSomeLove</string>
+    <string name="preferences_name" translatable="false">currencyConverterRomeRock</string>
+    <string name="udidAndroid" translatable="false">udidAndroid</string>
+    <string name="purchaseAndroid" translatable="false">purchaseAndroid</string>
+    <string name="purchaseOrder" translatable="false">purchaseOrder</string>
+    <string name="fcmUser" translatable="false">fcmUser</string>
+    <string name="preferences_isInvalidate" translatable="false">preferences_isInvalidate</string>
+    <string name="preferences_check_inventory" translatable="false">preferencesCheckInventory</string>
+    <string name="privacy_policy_url" translatable="false">https://apps.romerock.com/foreign-exchange-converter/privacy-policy/</string>
+    <string name="dateForInterstitial" translatable="false">dateForInterstitial</string>
+    <string name="preferences_topic" translatable="false">preferences_topic</string>
+    <string name="preferences_count_keys" translatable="false">preferences_count_keys</string>
+    <string name="globalCount" translatable="false">globalCount</string>
+    <string name="preferences_defaultCurrencies_first_time" translatable="false">preferences_defaultCurrencies_first_time</string>
+    <string name="preferences_interstitial_count" translatable="false">preferences_interstitial_count</string>
+
     <string name="update_time">Updated:</string>
     <string name="range1D">24H</string>
     <string name="range1W">1W</string>
@@ -48,7 +65,6 @@
     <string name="edit">Edit</string>
     <string name="add_currency">Add currency</string>
     <string name="done">Done</string>
-    <string name="preferences_name">currencyConverterRomeRock</string>
     <string name="preferences_defaultCurrencies">defaultCurrencies</string>
     <string name="have_currency">Sorry, but you already selected this currency, please try with a different one</string>
     <string name="graph">Graph</string>
@@ -57,7 +73,6 @@
     <string name="pop_up_get_some_love_tittle">Will you show us\nsome love?</string>
     <string name="pop_up_get_some_love_content">If you like Currency Converter,\nlet us know.\nThank you for your support!</string>
     <string name="preferences_theme_tittle">themeTittle</string>
-    <string name="preferences_count_some_love">countSomeLove</string>
     <string name="preferences_rate">rateApp</string>
     <string name="language_settings">LanguageSettings</string>
     <string name="pop_up_rate_subject">Currency Converter - Feedback - Android</string>
@@ -88,12 +103,8 @@
     <string name="safe_notification">Save Configuration</string>
     <string name="below">Below</string>
     <string name="add">Add</string>
-    <string name="udidAndroid">udidAndroid</string>
-    <string name="purchaseAndroid">purchaseAndroid</string>
-    <string name="purchaseOrder">purchaseOrder</string>
     <string name="titleNotificationCenter">Notification Center</string>
     <string name="time_already_scheduled">The selected time is already scheduled</string>
-    <string name="fcmUser">fcmUser</string>
     <string name="need_at_least_2_currencies">At least 2 currencies are needed to add notifications</string>
     <string name="cant_save_same_currencies">You can not schedule notifications with the same currency</string>
     <string name="need_hours">You need add at least 1 notification.</string>
@@ -106,9 +117,7 @@
     <string name="shareAndRewarded">shareAndRewardedPreferences</string>
     <string name="share_via_twitter">I\'m using #Cypto #Currency  #Converter. Download for #FREE #Android</string>
     <string name="share_success">Thank you for sharing</string>
-    <string name="preferences_isInvalidate">preferences_isInvalidate</string>
     <string name="quickConverter">Quick Unit Converter</string>
-    <string name="preferences_check_inventory">preferencesCheckInventory</string>
     <string name="tittle_purchse_finish">Thank you for your purchase!</string>
     <string name="tittle_purchse_finish_error">ERROR. Payment Failed</string>
     <string name="Ok_labe">Ok</string>
@@ -120,16 +129,9 @@
     <string name="feedback_success">Thank you for your feedback, we are working really hard to offer the best app</string>
     <string name="error_internet">Connection error. Please check your internet connection and try again</string>
     <string name="privacy_policy">Privacy Policy</string>
-    <string name="privacy_policy_url">https://apps.romerock.com/foreign-exchange-converter/privacy-policy/</string>
-    <string name="dateForInterstitial">dateForInterstitial</string>
     <string name="email_optional">Email - optional</string>
     <string name="thanks">Thanks!</string>
     <string name="label_52Challenge">Money Saving Challenge</string>
     <string name="label_clashMate">Clash Mate: Stats &amp; Tools</string>
-    <string name="preferences_topic">preferences_topic</string>
     <string name="pay_as_much_you_want">* Pay as much as you want for  the premium version.\n* We are an Indi Company and we only urvive thanks to your support  c:"</string>
-    <string name="preferences_count_keys">preferences_count_keys</string>
-    <string name="globalCount">globalCount</string>
-    <string name="preferences_defaultCurrencies_first_time">preferences_defaultCurrencies_first_time</string>
-    <string name="preferences_interstitial_count">preferences_interstitial_count</string>
 </resources>

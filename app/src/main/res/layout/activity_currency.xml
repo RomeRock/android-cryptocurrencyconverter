@@ -67,14 +67,13 @@
             app:navigationIcon="@drawable/ic_search"
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
-        <com.google.android.gms.ads.AdView xmlns:ads="http://schemas.android.com/apk/res-auto"
+        <RelativeLayout
             android:id="@+id/adView"
             android:layout_width="match_parent"
-            android:layout_height="50dp"
+            android:layout_height="wrap_content"
             android:layout_below="@+id/txtTitle"
-            android:background="@color/black"
-            ads:adSize="BANNER"
-            ads:adUnitId="@string/banner_ad_unit_id" />
+            android:layout_gravity="center_horizontal|center|center_vertical"
+            android:background="@android:color/black" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recyclerCurrency"

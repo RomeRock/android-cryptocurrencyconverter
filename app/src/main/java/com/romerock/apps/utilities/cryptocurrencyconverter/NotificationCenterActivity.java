@@ -137,8 +137,6 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
         super.onResume();
         if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
-        if (adView != null)
-            adView.resume();
         try {
             sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
             setThemeByActivity();
@@ -181,8 +179,6 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
 
     @Override
     protected void onPause() {
-        if (adView != null)
-            adView.pause();
         if(SingletonInAppBilling.Instance().getFirebaseDatabase()!=null)
         SingletonInAppBilling.Instance().getFirebaseDatabase().goOffline();
         super.onPause();

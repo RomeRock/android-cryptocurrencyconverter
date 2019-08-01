@@ -1,22 +1,6 @@
 <resources>
     <string name="app_name">Convertidor de Criptomonedas y Divisa</string>
-    <string name="banner_ad_unit_id">ca-app-pub-1943700858932247/4609978137</string>
-    <string name="interstitial_ad_unit_id">ca-app-pub-1943700858932247/4683373591</string>
-    <string name="banner_ad_unit_id_big">ca-app-pub-1943700858932247/6248330570</string>
-    <string name="follow_us_twitter">https://twitter.com/RomeRock_Apps</string>
-    <string name="follow_us_twitter_profile">twitter://user?screen_name=RomeRock_Apps</string>
-    <string name="facebook_app_id">2292294817451565</string>
-    <string name="follow_us_instagram">https://www.instagram.com/romerock_apps/</string>
-    <string name="link_tipCalculator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.tipcalculator&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_xpressVote">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.xpressvote&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_quickConverter">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.quickunitconverter&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_LoanCalulator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.loancalculator&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_TaxCalculator">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.salestaxdiscountcalculator&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_ClashMate">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.clashroyale.tournamentfinder&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_52Weeks">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.fiftytwoweekchallenge&#38;utm_source=currencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="follow_us_facebook">https://www.facebook.com/RomeRock-App-Studio-337180269970605</string>
-    <string name="follow_us_facebook_profile">fb://page/337180269970605</string>
-    <string name="link_twittter">https://www.twitter.com/RomeRock_Apps</string>
+
     <string name="update_time">Actualizado:</string>
     <string name="range1D">24H</string>
     <string name="range1W">1S</string>

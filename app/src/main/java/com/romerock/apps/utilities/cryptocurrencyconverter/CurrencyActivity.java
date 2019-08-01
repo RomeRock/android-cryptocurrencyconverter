@@ -14,10 +14,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.view.Window;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.adapters.RecyclerViewCurrenciesCatalogAdapter;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.DialogsHelper;
@@ -46,7 +45,7 @@ public class CurrencyActivity extends AppCompatActivity implements ThemeInterfac
     @BindView(R.id.toolbarsearch)
     Toolbar toolbarsearch;
     @BindView(R.id.adView)
-    AdView adView;
+    RelativeLayout adView;
     @BindView(R.id.coordinator)
     CoordinatorLayout coordinator;
     private LinearLayoutManager linearLayoutManager;
@@ -96,11 +95,7 @@ public class CurrencyActivity extends AppCompatActivity implements ThemeInterfac
         }, itemsInDashboard, sharedPrefs);
         recyclerView.setAdapter(mAdapter);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        AdRequest adRequest = Utilities.addBanner(CurrencyActivity.this, "", getString(R.string.banner_ad_unit_id));
-        if (adRequest != null)
-            adView.loadAd(adRequest);
-        else
-            adView.setVisibility(View.GONE);
+        Utilities.checkForBigBanner(CurrencyActivity.this, adView);
 
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override

@@ -23,8 +23,6 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.github.mikephil.charting.charts.LineChart;
-import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.AdView;
 import com.google.firebase.database.DataSnapshot;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -167,7 +165,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
     @BindView(R.id.txtCurrent)
     TextView txtCurrent;
     @BindView(R.id.adView)
-    AdView adView;
+    RelativeLayout adView;
     private List<ItemLibraryCurrencyModel> itemsFromPreferences;
     private List<ItemLibraryCurrencyModel> listAllCurrencies;
     private int position;
@@ -198,11 +196,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(getResources().getString(R.string.purchaseAndroid), isFreeOrPremium));
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                 Utilities.addIntestitial(DetailsActivity.this, isFreeOrPremium);
-                AdRequest adRequest = Utilities.addBanner(DetailsActivity.this, isFreeOrPremium, getString(R.string.banner_ad_unit_id));
-                if (adRequest != null)
-                    adView.loadAd(adRequest);
-                else
-                    adView.setVisibility(View.GONE);
+                Utilities.checkForBigBanner(DetailsActivity.this, adView);
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getFREE());
             } else {
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());

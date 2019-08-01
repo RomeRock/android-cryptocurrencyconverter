@@ -23,7 +23,7 @@ import java.util.ArrayList;
 public class SingletonInAppBilling {
     private static SingletonInAppBilling instance;
     private static String SKU_PACKAGE_PRO1 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_1";
-    private static String SKU_PACKAGE_PRO2 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_2";
+    private static String SKU_PACKAGE_PRO2 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_2b";
     private static String SKU_PACKAGE_PRO3 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_3";
     private static String finalPricepackage = "";
     private static String finalPricepackagePro1 = "";

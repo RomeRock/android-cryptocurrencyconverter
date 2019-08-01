@@ -12,16 +12,20 @@ import android.net.Uri;
 import android.provider.Settings;
 import android.support.design.widget.CoordinatorLayout;
 import android.util.Base64;
+import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
+import com.google.android.gms.ads.AdSize;
+import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
@@ -614,5 +618,41 @@ public class Utilities {
     public static String removeCharacters(String s) {
         s=s.replace("*","").replace("-","").replace("_","");
         return s;
+    }
+
+    public static void checkForBigBanner(final Context context, RelativeLayout content) {
+        if (context != null) {
+            final AdView adView = new AdView(context);
+            //mayor a 430
+            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+            final int densityDpi = (int) (metrics.density * 160f);
+            SharedPreferences sharedPrefs;
+            sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+
+            if (!sharedPrefs.contains(context.getString(R.string.shareAndRewarded))) {
+                content.setVisibility(View.VISIBLE);
+                RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams) content.getLayoutParams();
+                relativeParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+                content.setLayoutParams(relativeParams);
+                final AdView mAdView = new AdView(context);
+                if (densityDpi > 480)
+                    mAdView.setAdSize(AdSize.LEADERBOARD);
+                else
+                    mAdView.setAdSize(AdSize.SMART_BANNER);
+                mAdView.setAdUnitId(context.getResources().getString(R.string.banner_ad_unit_id));
+                content.addView(mAdView);
+                final AdRequest adRequest = new AdRequest.Builder().build();
+                mAdView.setAdListener(new AdListener() {
+                    @Override
+                    public void onAdFailedToLoad(int errorCode) {
+                        mAdView.loadAd(adRequest);
+                    }
+                });
+                mAdView.loadAd(adRequest);
+
+            } else {
+                content.setVisibility(View.GONE);
+            }
+        }
     }
 }
