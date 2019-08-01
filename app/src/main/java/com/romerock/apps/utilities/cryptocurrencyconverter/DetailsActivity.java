@@ -218,7 +218,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             currencyToSelected = getIntent().getStringExtra("currencyToSelected");
         }
         rangeCurrency = "1m";
-        dialogsHelper = new DialogsHelper(DetailsActivity.this, this);
+        dialogsHelper = new DialogsHelper(DetailsActivity.this);
         range1D.setOnCheckedChangeListener(listener(getString(R.string.range1D)));
         range1M.setOnCheckedChangeListener(listener(getString(R.string.range1M)));
         range1W.setOnCheckedChangeListener(listener(getString(R.string.range1W)));

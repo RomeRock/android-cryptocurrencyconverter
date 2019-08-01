@@ -33,6 +33,7 @@
     <string name="globalCount" translatable="false">globalCount</string>
     <string name="preferences_defaultCurrencies_first_time" translatable="false">preferences_defaultCurrencies_first_time</string>
     <string name="preferences_interstitial_count" translatable="false">preferences_interstitial_count</string>
+    <string name="banner_rewarded_APP_ID" translatable="false">ca-app-pub-1943700858932247/1949938002</string>
 
     <string name="update_time">Updated:</string>
     <string name="range1D">24H</string>
@@ -134,4 +135,8 @@
     <string name="label_52Challenge">Money Saving Challenge</string>
     <string name="label_clashMate">Clash Mate: Stats &amp; Tools</string>
     <string name="pay_as_much_you_want">* Pay as much as you want for  the premium version.\n* We are an Indi Company and we only urvive thanks to your support  c:"</string>
+    <string name="VIEW_AD_AND_UNLOCK">VIEW AD AND UNLOCK THIS FEATURE</string>
+    <string name="oh_oh">Oh oh!</string>
+    <string name="donate_us">Donate us</string>
+    <string name="this_feature_is_blocked">This feature is blocked :(, if you support our team with some love, we will enable this and other functions, and we will remove those annoying ads</string>
 </resources>

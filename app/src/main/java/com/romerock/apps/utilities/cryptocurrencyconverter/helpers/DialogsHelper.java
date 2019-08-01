@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import android.support.design.widget.CoordinatorLayout;
 import android.support.design.widget.Snackbar;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
@@ -18,6 +19,8 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.PurchaseDialog;
 
 import java.io.Serializable;
+import java.util.Timer;
+import java.util.TimerTask;
 
 /**
  * Created by Ebricko on 11/05/2017.
@@ -28,9 +31,12 @@ public class DialogsHelper extends Activity implements Serializable {
     private Context context;
     private Activity activity;
 
-    public DialogsHelper(Context context, Activity activity) {
-        this.context = context;
-        this.activity = activity;
+    public DialogsHelper(Context context) {
+        if(context!=null) {
+            this.context = context;
+            activity = (Activity) context;
+            settingsDialog = new Dialog(context, android.R.style.Theme_Black_NoTitleBar_Fullscreen);
+        }
     }
 
     public static void showSnackBar(CoordinatorLayout coordinatorLayout, String msn, int color) {
@@ -44,13 +50,36 @@ public class DialogsHelper extends Activity implements Serializable {
     }
 
     public void showLoading() {
-        if(!((Activity) context).isFinishing())
-        {
-            settingsDialog = new Dialog(context,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
-            settingsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            settingsDialog.setContentView(activity.getLayoutInflater().inflate(R.layout.loading, null));
-            settingsDialog.setCancelable(false);
-            settingsDialog.show();
+        if(context!=null) {
+            if (!((Activity) context).isFinishing() && !settingsDialog.isShowing()) {
+                try {
+                    runOnUiThread(new Runnable() {
+                        public void run() {
+                            settingsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+                            settingsDialog.setContentView(activity.getLayoutInflater().inflate(R.layout.loading, null));
+                            settingsDialog.setCancelable(true);
+                            settingsDialog.show();
+                                try {
+                                    Timer timer = new Timer();
+                                    TimerTask timerTask = new TimerTask() {
+                                        @Override
+                                        public void run() {
+                                            if (settingsDialog != null)
+                                                if (settingsDialog.isShowing()) {
+                                                    settingsDialog.dismiss();
+                                                }
+                                        }
+                                    };
+                                    timer.schedule(timerTask, 6000L);
+                                } catch (Exception e) {
+                                    Log.d("", "");
+                                }
+                            }
+                    });
+                } catch (Exception e) {
+                    Log.d("push", "is: " + e.getMessage());
+                }
+            }
         }
 
     }

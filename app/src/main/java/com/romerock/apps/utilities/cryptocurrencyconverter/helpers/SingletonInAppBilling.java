@@ -42,6 +42,15 @@ public class SingletonInAppBilling {
     private boolean isInvalidated;
     private boolean showPopUp;
     private FirebaseDatabase firebaseDatabase;
+    private DialogsHelper dialogsHelper;
+
+    public DialogsHelper getDialogsHelper() {
+        return dialogsHelper;
+    }
+
+    public void setDialogsHelper(DialogsHelper dialogsHelper) {
+        this.dialogsHelper = dialogsHelper;
+    }
 
     public FirebaseDatabase getFirebaseDatabase() {
         return firebaseDatabase;

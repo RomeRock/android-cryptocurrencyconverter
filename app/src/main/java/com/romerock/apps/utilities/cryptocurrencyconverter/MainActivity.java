@@ -40,6 +40,8 @@ import com.facebook.FacebookException;
 import com.facebook.share.Sharer;
 import com.facebook.share.widget.ShareDialog;
 import com.google.ads.mediation.inmobi.InMobiConsent;
+import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
 import com.google.firebase.FirebaseApp;
@@ -62,6 +64,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAp
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.Wear;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CheckUDIDListener;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CurrenciesListInterface;
+import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemClickLibraryInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.OnStartDragListenerInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.PurchaseDialog;
@@ -182,6 +185,7 @@ public class MainActivity extends AppCompatActivity
     private Wear wear;
     private GoogleApiClient mGoogleApiClient;
     private String isFree = "";
+    private RewardedVideoAd rewardedVideoAd;
 
 
     public TextView getTxtEditText() {
@@ -205,12 +209,14 @@ public class MainActivity extends AppCompatActivity
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
         ed = sharedPrefs.edit();
         setContentView(R.layout.activity_main);
+        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
         wear = new Wear(MainActivity.this);
         Window window = this.getWindow();
         Utilities.colorStatusBar(getApplication(), window);
         setSupportActionBar(toolbar);
         ButterKnife.bind(this);
-        dialogsHelper = new DialogsHelper(MainActivity.this, this);
+        dialogsHelper = new DialogsHelper(MainActivity.this);
+        SingletonInAppBilling.Instance().setDialogsHelper(dialogsHelper);
         ed = sharedPrefs.edit();
         firebaseHelper = FirebaseHelper.getInstance();
         if (SingletonInAppBilling.getFirebaseHelper() == null) {
@@ -523,18 +529,18 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case R.id.linAddCurrency:
-                    dialogsHelper.showLoading();
-                    isEditActive = false;
-                    txtEditText.setText(getString(R.string.edit));
-                    swipyRefreshCurrencies.setEnabled(true);
-                    if (dashboardAdapter != null)
-                        dashboardAdapter.hideAllControllsItems();
-                    i = new Intent(MainActivity.this, CurrencyActivity.class);
-                    i.putExtra("itemsData", (Serializable) listAllItems);
-                    i.putExtra("itemsInDashboard", (Serializable) listDashboardCurrencies);
-                    startActivityForResult(i, CURRENCY_SELECTED);
+                    if (isFree.compareTo(UserUdId.getFREE()) == 0) {
+                        Popup.ShowRewardedPopup(MainActivity.this, rewardedVideoAd, new FinishVideo() {
+                            @Override
+                            public void finish(boolean isFinishSuccess) {
+                                if(isFinishSuccess)
+                                    processSetCurrencies();
+                            }
+                        });
+                    }else {
+                       processSetCurrencies();
+                    }
                     break;
-
                 case R.id.iconFacebook:
                     try {
                         Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(getString(R.string.follow_us_facebook_profile)));
@@ -611,6 +617,19 @@ public class MainActivity extends AppCompatActivity
                     break;
             }
         }
+    }
+
+    private void processSetCurrencies() {
+        dialogsHelper.showLoading();
+        isEditActive = false;
+        txtEditText.setText(getString(R.string.edit));
+        swipyRefreshCurrencies.setEnabled(true);
+        if (dashboardAdapter != null)
+            dashboardAdapter.hideAllControllsItems();
+        Intent i = new Intent(MainActivity.this, CurrencyActivity.class);
+        i.putExtra("itemsData", (Serializable) listAllItems);
+        i.putExtra("itemsInDashboard", (Serializable) listDashboardCurrencies);
+        startActivityForResult(i, CURRENCY_SELECTED);
     }
 
     @Override
