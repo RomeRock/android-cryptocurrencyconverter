@@ -205,6 +205,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Utilities.ChangeLanguage(this);
         FirebaseApp.initializeApp(MainActivity.this);
+        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
         setTheme(getThemePreferences(getApplication()));
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
         ed = sharedPrefs.edit();
@@ -346,6 +347,10 @@ public class MainActivity extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
+    }
+
+    public RewardedVideoAd getRewardedVideoAd() {
+        return rewardedVideoAd;
     }
 
     void getUpdateFirebase() {

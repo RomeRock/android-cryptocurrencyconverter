@@ -51,7 +51,6 @@ public class Popup {
     public static void ShowRewardedPopup(Context context, RewardedVideoAd rewardedVideoAd, FinishVideo finishVideo){
         RewardedFragment rewardedFragment = RewardedFragment.newInstance();
         FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
-        rewardedFragment.setRewardedVideoAd(rewardedVideoAd);
         rewardedFragment.setFinishVideo(finishVideo);
         rewardedFragment.show(fm, "ShowRewardedPopup dialog");
     }

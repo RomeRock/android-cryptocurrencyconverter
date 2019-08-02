@@ -12,12 +12,11 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.google.android.gms.ads.AdRequest;
-import com.google.android.gms.ads.MobileAds;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
-import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Popup;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 
@@ -44,7 +43,6 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
 
     public static RewardedFragment newInstance() {
         RewardedFragment fragment = new RewardedFragment();
-
         return fragment;
     }
 
@@ -60,7 +58,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
         View view = inflater.inflate(R.layout.pop_up_rewarded, container, false);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         unbinder = ButterKnife.bind(this, view);
-        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(getActivity());
+
         return view;
     }
 
@@ -97,6 +95,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
 
     @OnClick({R.id.popUpViewVideo, R.id.popUpDonate, R.id.popUpNoThanks})
     public void onViewClicked(View view) {
+        rewardedVideoAd = ((MainActivity)getActivity()).getRewardedVideoAd();
         switch (view.getId()) {
             case R.id.popUpViewVideo:
                 SingletonInAppBilling.Instance().getDialogsHelper().showLoading();
@@ -104,8 +103,9 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
                 loadRewardedVideoAd();
                 break;
             case R.id.popUpDonate:
-                Popup.SubscribeMe(getActivity());
-                dismiss();
+                rewardedVideoAd.show();
+              /*  Popup.SubscribeMe(getActivity());
+                dismiss();*/
                 break;
             case R.id.popUpNoThanks:
                 dismiss();
@@ -117,7 +117,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     private void loadRewardedVideoAd() {
         if (!rewardedVideoAd.isLoaded()) {
             rewardedVideoAd.loadAd(getActivity().getResources().getString(R.string.banner_rewarded_AD_UNIT_ID) , new AdRequest.Builder()
-                     //  .addTestDevice("0423998143E406A5A39DE5E1FEE6C6DA")
+                       .addTestDevice("0423998143E406A5A39DE5E1FEE6C6DA")
                     .build());
         }
 

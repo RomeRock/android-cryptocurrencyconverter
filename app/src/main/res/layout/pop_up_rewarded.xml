@@ -92,10 +92,6 @@
                 android:text="@string/VIEW_AD_AND_UNLOCK"
                 android:fontFamily="@font/dosis_medium"
                 android:textAllCaps="false" />
-
-
-
-
             <TextView
                 android:id="@+id/popUpNoThanks"
                 android:layout_width="match_parent"
