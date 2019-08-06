@@ -59,11 +59,13 @@ public class LanguageSettingsActivity extends AppCompatActivity implements Theme
         ButterKnife.bind(this);
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
         Utilities.colorStatusBar(LanguageSettingsActivity.this, this.getWindow());
-        List<ItemSettings> itemsData = new ArrayList<ItemSettings>(3);
-        itemsData.add(new ItemSettings("ENGLISH", sharedPrefs.getString(getString(R.string.language_settings), "").equals("en") ? true : false));
-        itemsData.add(new ItemSettings("ESPAÑOL", sharedPrefs.getString(getString(R.string.language_settings), "").equals("es") ? true : false));
-        itemsData.add(new ItemSettings("FRANÇAIS", sharedPrefs.getString(getString(R.string.language_settings), "").equals("fr") ? true : false));
+        String[] languages = getResources().getStringArray(R.array.languages);
+        final String[] symbols = getResources().getStringArray(R.array.language_simbol);
 
+        List<ItemSettings> itemsData = new ArrayList<ItemSettings>(languages.length);
+        for (int i = 0; i < languages.length; i++) {
+            itemsData.add(new ItemSettings(languages[i].toUpperCase(), sharedPrefs.getString(getString(R.string.language_settings), "").equals(symbols[i]) ? true : false));
+        }
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         RecyclerViewAdapter mAdapter = new RecyclerViewAdapter(itemsData, new ItemClickInterface() {
             @Override
@@ -71,28 +73,12 @@ public class LanguageSettingsActivity extends AppCompatActivity implements Theme
                 SharedPreferences sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
                 SharedPreferences.Editor ed;
                 ed = sharedPrefs.edit();
-                FirebaseHelper.subscribeUnsubscribeTopic (LanguageSettingsActivity.this, false);
-                switch (position) {
-                    default:
-                    case 0:
-                        ed.putString(getString(R.string.language_settings), "en");
-                        LocaleHelper.setLocale(LanguageSettingsActivity.this, "en");
-                        //     Toast.makeText(LanguageSettingsActivity.this, getString(R.string.settings_option_language_change, "English"), Toast.LENGTH_SHORT).show();
-                        break;
-                    case 1:
-                        ed.putString(getString(R.string.language_settings), "es");
-                        LocaleHelper.setLocale(LanguageSettingsActivity.this, "es");
-                        //   Toast.makeText(LanguageSettingsActivity.this, getString(R.string.settings_option_language_change, "Español"), Toast.LENGTH_SHORT).show();
-                        break;
-                    case 2:
-                        ed.putString(getString(R.string.language_settings), "fr");
-                        LocaleHelper.setLocale(LanguageSettingsActivity.this, "fr");
-                        //  Toast.makeText(LanguageSettingsActivity.this, getString(R.string.settings_option_language_change, "Français"), Toast.LENGTH_SHORT).show();
-                        break;
-                }
+                FirebaseHelper.subscribeUnsubscribeTopic(LanguageSettingsActivity.this, false);
+                ed.putString(getString(R.string.language_settings), symbols[position]);
+                LocaleHelper.setLocale(LanguageSettingsActivity.this, symbols[position]);
                 ed.commit();
                 tittle.setText(getString(R.string.settings_option_select_lenguage));
-                finish();
+                onBackPressed();
             }
         }, LanguageSettingsActivity.this);
         recyclerView.setAdapter(mAdapter);

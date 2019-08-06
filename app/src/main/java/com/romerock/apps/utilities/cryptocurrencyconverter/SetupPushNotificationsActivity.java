@@ -164,9 +164,9 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Window window = this.getWindow();
+        Utilities.ChangeLanguage(this);
         setTheme(getThemePreferences(getApplication()));
         Utilities.colorStatusBar(getApplication(), window);
-        Utilities.ChangeLanguage(this);
         setContentView(R.layout.activity_setup_push_notifications);
         ButterKnife.bind(this);
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);

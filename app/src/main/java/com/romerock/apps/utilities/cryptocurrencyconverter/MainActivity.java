@@ -188,6 +188,8 @@ public class MainActivity extends AppCompatActivity
     private RewardedVideoAd rewardedVideoAd;
 
 
+    String UDID = "", isFreeOrPremium = "free";
+
     public TextView getTxtEditText() {
         return txtEditText;
     }
@@ -469,11 +471,16 @@ public class MainActivity extends AppCompatActivity
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
+                UserUdId.verify( isFreeOrPremium,  sharedPrefs, MainActivity.this, firebaseHelper);
             }
         });
         Utilities.addIntestitialWithCount(MainActivity.this, isFree);
         getUpdateFirebase();
+
+
+
+
+
     }
 
     public List<ItemLibraryCurrencyModel> getListAllItems() {

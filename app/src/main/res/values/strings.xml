@@ -1,4 +1,5 @@
 <resources>
+    <!--https://testfirebasedb-46caf.firebaseapp.com/translations/hCWOvBdF3eX7Ks0NHdFD-->
     <string name="app_name">Cryptocurrency Converter</string>
     <string name="banner_ad_unit_id" translatable="false">ca-app-pub-1943700858932247/4609978137</string>
     <string name="interstitial_ad_unit_id" translatable="false">ca-app-pub-1943700858932247/4683373591</string>
@@ -34,6 +35,14 @@
     <string name="preferences_defaultCurrencies_first_time" translatable="false">preferences_defaultCurrencies_first_time</string>
     <string name="preferences_interstitial_count" translatable="false">preferences_interstitial_count</string>
     <string name="banner_rewarded_APP_ID" translatable="false">ca-app-pub-1943700858932247/1949938002</string>
+    <string name="share_link" translatable="false">https://goo.gl/EBkFAh</string>
+    <string name="preferences_defaultCurrencies" translatable="false">defaultCurrencies</string>
+    <string name="preferences_theme_tittle" translatable="false">themeTittle</string>
+    <string name="preferences_rate" translatable="false">rateApp</string>
+    <string name="language_settings" translatable="false">LanguageSettings</string>
+    <string name="mail_support" translatable="false">contact@romerock.com</string>
+    <string name="badge_settings" translatable="false">BadgeSettings</string>
+    <string name="shareAndRewarded" translatable="false">shareAndRewardedPreferences</string>
 
     <string name="update_time">Updated:</string>
     <string name="range1D">24H</string>
@@ -59,23 +68,17 @@
     <string name="tipCalculator">Tip Calculator &amp; Bill Split</string>
     <string name="xpressVote">Xpress Vote - Surveys &amp; Polls</string>
     <string name="followUs">Follow us!</string>
-    <string name="mail_support">contact@romerock.com</string>
-    <string name="badge_settings">BadgeSettings</string>
     <string name="subscribeMe">Donate and Become Premium</string>
     <string name="notifyMe">Add Notifications</string>
     <string name="edit">Edit</string>
     <string name="add_currency">Add currency</string>
     <string name="done">Done</string>
-    <string name="preferences_defaultCurrencies">defaultCurrencies</string>
     <string name="have_currency">Sorry, but you already selected this currency, please try with a different one</string>
     <string name="graph">Graph</string>
     <string name="error_eval">Error. Invalid Formula</string>
     <string name="no_thanks">No thanks</string>
     <string name="pop_up_get_some_love_tittle">Will you show us\nsome love?</string>
     <string name="pop_up_get_some_love_content">If you like Currency Converter,\nlet us know.\nThank you for your support!</string>
-    <string name="preferences_theme_tittle">themeTittle</string>
-    <string name="preferences_rate">rateApp</string>
-    <string name="language_settings">LanguageSettings</string>
     <string name="pop_up_rate_subject">Currency Converter - Feedback - Android</string>
     <string name="share_facebook">Share on Facebook</string>
     <string name="share_twitter">Share on Twitter</string>
@@ -114,8 +117,6 @@
     <string name="settings_option_select_scheme_color">Select scheme color</string>
     <string name="settings_preview">PREVIEW</string>
     <string name="settings_preview_pro_version">PRO VERSION</string>
-    <string name="share_link">https://goo.gl/EBkFAh</string>
-    <string name="shareAndRewarded">shareAndRewardedPreferences</string>
     <string name="share_via_twitter">I\'m using #Cypto #Currency  #Converter. Download for #FREE #Android</string>
     <string name="share_success">Thank you for sharing</string>
     <string name="quickConverter">Quick Unit Converter</string>
@@ -139,4 +140,12 @@
     <string name="oh_oh">Oh oh!</string>
     <string name="donate_us">Donate us</string>
     <string name="this_feature_is_blocked">This feature is blocked :(, if you support our team with some love, we will enable this and other functions, and we will remove those annoying ads</string>
+    <string name="German">German</string>
+    <string name="English">English</string>
+    <string name="Spanish">Spanish</string>
+    <string name="French">French</string>
+    <string name="Italian">Italian</string>
+    <string name="Japanese">Japanese</string>
+    <string name="Portuguese">Portuguese</string>
+    <string name="Russian">Russian</string>
 </resources>

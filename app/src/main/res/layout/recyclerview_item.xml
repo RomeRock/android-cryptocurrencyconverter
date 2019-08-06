@@ -30,6 +30,7 @@
             android:layout_alignBaseline="@+id/item_icon"
             android:layout_toRightOf="@+id/item_icon"
             android:fontFamily="@font/dosis_regular"
+            android:textColor="@color/white"
             android:paddingBottom="@dimen/font_size_settings"
             android:paddingRight="@dimen/rightRow"
             android:paddingLeft="@dimen/font_size_settings"

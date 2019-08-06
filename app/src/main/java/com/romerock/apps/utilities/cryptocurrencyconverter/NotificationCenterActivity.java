@@ -69,6 +69,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
         super.onCreate(savedInstanceState);
         Window window = this.getWindow();
         Utilities.colorStatusBar(getApplication(), window);
+        Utilities.ChangeLanguage(NotificationCenterActivity.this);
         setTheme(getThemePreferences(getApplication()));
         setContentView(R.layout.activity_notification_center);
         ButterKnife.bind(this);

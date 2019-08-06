@@ -86,6 +86,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pop_up_subscription, container);
+        Utilities.ChangeLanguage(getActivity());
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         unbinder = ButterKnife.bind(this, view);
         mHelper = SingletonInAppBilling.Instance().getmHelper();

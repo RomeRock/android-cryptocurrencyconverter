@@ -17,6 +17,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
+import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 
@@ -56,6 +57,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pop_up_rewarded, container, false);
+        Utilities.ChangeLanguage(getActivity());
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         unbinder = ButterKnife.bind(this, view);
 
@@ -117,10 +119,9 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     private void loadRewardedVideoAd() {
         if (!rewardedVideoAd.isLoaded()) {
             rewardedVideoAd.loadAd(getActivity().getResources().getString(R.string.banner_rewarded_AD_UNIT_ID) , new AdRequest.Builder()
-                       .addTestDevice("0423998143E406A5A39DE5E1FEE6C6DA")
+                    //   .addTestDevice("0423998143E406A5A39DE5E1FEE6C6DA")
                     .build());
         }
-
     }
 
     @Override

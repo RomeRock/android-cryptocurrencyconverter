@@ -77,6 +77,7 @@ public class FeedbackDialogFragment extends DialogFragment {
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Utilities.ChangeLanguage(getActivity());
         Utilities.closeKeyboard(this.getActivity());
 
 

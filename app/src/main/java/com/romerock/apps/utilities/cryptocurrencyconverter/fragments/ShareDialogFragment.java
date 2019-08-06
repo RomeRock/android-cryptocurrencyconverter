@@ -63,6 +63,7 @@ public class ShareDialogFragment extends DialogFragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.pop_up_share, container);
+        Utilities.ChangeLanguage(getActivity());
         unbinder = ButterKnife.bind(this, view);
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         switch (Utilities.getThemePreferences(getActivity())) {

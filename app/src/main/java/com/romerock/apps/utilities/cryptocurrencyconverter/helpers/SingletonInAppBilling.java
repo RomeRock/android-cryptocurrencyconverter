@@ -10,6 +10,7 @@ import android.util.Log;
 
 import com.android.vending.billing.IInAppBillingService;
 import com.google.firebase.database.FirebaseDatabase;
+import com.romerock.apps.utilities.cryptocurrencyconverter.model.UserUdId;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -23,7 +24,7 @@ import java.util.ArrayList;
 public class SingletonInAppBilling {
     private static SingletonInAppBilling instance;
     private static String SKU_PACKAGE_PRO1 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_1";
-    private static String SKU_PACKAGE_PRO2 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_2b";
+    private static String SKU_PACKAGE_PRO2 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_2";
     private static String SKU_PACKAGE_PRO3 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_3";
     private static String finalPricepackage = "";
     private static String finalPricepackagePro1 = "";
@@ -43,6 +44,10 @@ public class SingletonInAppBilling {
     private boolean showPopUp;
     private FirebaseDatabase firebaseDatabase;
     private DialogsHelper dialogsHelper;
+    private UserUdId userUdId;
+
+    public SingletonInAppBilling() {
+    }
 
     public DialogsHelper getDialogsHelper() {
         return dialogsHelper;
@@ -50,6 +55,14 @@ public class SingletonInAppBilling {
 
     public void setDialogsHelper(DialogsHelper dialogsHelper) {
         this.dialogsHelper = dialogsHelper;
+    }
+
+    public UserUdId getUserUdId() {
+        return userUdId;
+    }
+
+    public void setUserUdId(UserUdId userUdId) {
+        this.userUdId = userUdId;
     }
 
     public FirebaseDatabase getFirebaseDatabase() {

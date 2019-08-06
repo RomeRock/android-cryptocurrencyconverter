@@ -8,10 +8,13 @@ import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.ValueEventListener;
+import com.google.firebase.iid.FirebaseInstanceId;
 import com.romerock.apps.utilities.cryptocurrencyconverter.BuildConfig;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
+import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.FirebaseHelper;
+import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CheckUDIDListener;
 
 import java.text.SimpleDateFormat;
@@ -164,6 +167,43 @@ public class UserUdId {
             }
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    public static void verify(String isFreeOrPremium, SharedPreferences sharedPrefs, Context context, final FirebaseHelper firebaseHelper) {
+        String UDID="";
+        try {
+            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
+            if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
+                UDID = CipherAES.decipher(sharedPrefs.getString(context.getString(R.string.udidAndroid), ""));
+            } else {
+                UDID = CipherAES.decipher(sharedPrefs.getString(context.getString(R.string.purchaseOrder), ""));
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        if(!UDID.isEmpty()) {
+            final UserUdId userUdId = new UserUdId(sharedPrefs.getString(context.getResources().getString(R.string.language_settings), ""),
+                    "active", "",
+                    SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(),
+                    Utilities.getCurrentTimeStamp());
+
+            final String finalUDID = UDID;
+            userUdId.CheckFreeUDIDNode(UDID, firebaseHelper, new CheckUDIDListener() {
+                @Override
+                public void checkUDIDFromFirebase(boolean haveChild) {
+                    Log.d("", "");
+                    String fcm = FirebaseInstanceId.getInstance().getToken();
+                    if (fcm != null) {
+                        userUdId.checkFreeFMCTocken(firebaseHelper, finalUDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                    }
+                }
+
+                @Override
+                public void checkPremiumState(boolean status) {
+                    Log.d("", "");
+                }
+            }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), context);
         }
     }
 
