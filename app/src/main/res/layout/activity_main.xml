@@ -221,7 +221,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/"
-                                android:text="@string/tipCalculator"
+                                android:text="@string/label_tipCalculator"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -241,7 +241,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/xpressVote"
+                                android:text="@string/label_xpressVote"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -260,7 +260,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/quickConverter"
+                                android:text="@string/label_quickConverter"
                                 android:textAllCaps="true" />
                         </LinearLayout>
 
@@ -280,7 +280,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/salestax"
+                                android:text="@string/label_salestax"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -299,7 +299,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/loanCalculator"
+                                android:text="@string/label_loanCalculator"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                         <LinearLayout
@@ -339,7 +339,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/label_clashMate"
+                                android:text="@string/label_clashmate"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                     </LinearLayout>

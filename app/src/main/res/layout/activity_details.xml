@@ -229,11 +229,13 @@
                     android:id="@+id/range1Y"
                     style="@style/rangeToApiTheme1"
                     android:fontFamily="@font/dosis_regular"
+                    android:drawableEnd="@drawable/ic_lock"
                     android:text="@string/range1Y" />
 
                 <RadioButton
                     android:id="@+id/range3Y"
                     style="@style/rangeToApiTheme1"
+                    android:drawableEnd="@drawable/ic_lock"
                     android:fontFamily="@font/dosis_regular"
                     android:text="@string/range3Y" />
             </RadioGroup>

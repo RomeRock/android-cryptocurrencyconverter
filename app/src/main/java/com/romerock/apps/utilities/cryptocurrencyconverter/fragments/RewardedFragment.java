@@ -15,7 +15,6 @@ import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
-import com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
@@ -97,7 +96,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
 
     @OnClick({R.id.popUpViewVideo, R.id.popUpDonate, R.id.popUpNoThanks})
     public void onViewClicked(View view) {
-        rewardedVideoAd = ((MainActivity)getActivity()).getRewardedVideoAd();
+        rewardedVideoAd = SingletonInAppBilling.Instance().getRewardedVideoAd();
         switch (view.getId()) {
             case R.id.popUpViewVideo:
                 SingletonInAppBilling.Instance().getDialogsHelper().showLoading();
@@ -176,6 +175,12 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
         finishVideo.finish(true);
 
         dismiss();
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+           finishVideo.finish(false);
     }
 
     public interface OnFragmentInteractionListener {

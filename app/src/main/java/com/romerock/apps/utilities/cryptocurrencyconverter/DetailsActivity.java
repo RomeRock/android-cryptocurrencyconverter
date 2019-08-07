@@ -29,6 +29,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
+import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Popup;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.api.ApiConfig;
 import com.romerock.apps.utilities.cryptocurrencyconverter.api.RetrofitClient;
@@ -37,6 +38,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.FirebaseHelpe
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.LineChartWidget;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CurrenciesListInterface;
+import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ThemeInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.CurrencyConvertApiModel;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.CurrencyResponseModel;
@@ -78,7 +80,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
     @BindView(R.id.range1Y)
     RadioButton range1Y;
     @BindView(R.id.range3Y)
-    RadioButton range5Y;
+    RadioButton range3Y;
     @BindView(R.id.imgUpCurrencyFrom)
     ImageView imgUpCurrencyFrom;
     @BindView(R.id.txtCurrentFrom)
@@ -198,6 +200,8 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 Utilities.addIntestitial(DetailsActivity.this, isFreeOrPremium);
                 Utilities.checkForBigBanner(DetailsActivity.this, adView);
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getFREE());
+                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y);
+                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y);
             } else {
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());
                 adView.setVisibility(View.GONE);
@@ -223,7 +227,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         range1M.setOnCheckedChangeListener(listener(getString(R.string.range1M)));
         range1W.setOnCheckedChangeListener(listener(getString(R.string.range1W)));
         range1Y.setOnCheckedChangeListener(listener(getString(R.string.range1Y)));
-        range5Y.setOnCheckedChangeListener(listener(getString(R.string.range3Y)));
+        range3Y.setOnCheckedChangeListener(listener(getString(R.string.range3Y)));
         range6M.setOnCheckedChangeListener(listener(getString(R.string.range6M)));
         range1M.setChecked(true);
         Utilities.countTotalKeys(DetailsActivity.this);
@@ -239,7 +243,6 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 public void getCurrenciesList(DataSnapshot dataSnapshot, DataSnapshot dataSnapshotUpdate) {
                     if (dataSnapshot != null) {
                         valueSnapLibrary = (Map<String, JSONObject>) dataSnapshotUpdate.getValue();
-
                         listAllCurrencies = CurrencyConvertApiModel.matchCurrenciesWithList(valueSnapLibrary, valueSnapLibrary, null, DetailsActivity.this);
                         process();
                     } else {
@@ -419,28 +422,40 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         CompoundButton.OnCheckedChangeListener listener = new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-                try {
-                    if (isChecked) {
-                        SpannableString content = new SpannableString(range);
-                        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
-                        buttonView.setText(content);
-                        //Make the text BOLD
-                        buttonView.setTypeface(null, Typeface.BOLD);
-                    } else {
-                        //Change the color here and make the Text bold
-                        SpannableString content = new SpannableString(range);
-                        if(content!=null) {
-                            content.setSpan(null, 0, content.length(), 0);
-                            buttonView.setText(content);
-                            buttonView.setTypeface(null, Typeface.NORMAL);
-                        }
+                if(buttonView.getId()==R.id.range1Y||buttonView.getId()==R.id.range3Y) {
+                    if( isFreeOrPremium.compareTo("free")==0){
+                        Log.d("","");
+                    }else{
+                        setButton( buttonView,  isChecked, range);
                     }
-                }catch (Exception e){
-                    Log.d("","");
+                }else{
+                    setButton( buttonView,  isChecked, range);
                 }
             }
         };
         return listener;
+    }
+
+    private void setButton(CompoundButton buttonView, boolean isChecked, String range) {
+        try {
+            if (isChecked) {
+                SpannableString content = new SpannableString(range);
+                content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_MARK_MARK);
+                buttonView.setText(content);
+                //Make the text BOLD
+                buttonView.setTypeface(null, Typeface.BOLD);
+            } else {
+                //Change the color here and make the Text bold
+                SpannableString content = new SpannableString(range);
+                if(content!=null) {
+                    content.setSpan(null, 0, content.length(), 0);
+                    buttonView.setText(content);
+                    buttonView.setTypeface(null, Typeface.NORMAL);
+                }
+            }
+        }catch (Exception e){
+            Log.d("","");
+        }
     }
 
 
@@ -468,14 +483,44 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 callApi();
                 break;
             case R.id.range1Y:
-                isOnlyTime = false;
-                rangeCurrency = "1y";
-                callApi();
+                if(!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y)) {
+                    isOnlyTime = false;
+                    rangeCurrency = "1y";
+                    callApi();
+                }else {
+                    Popup.ShowRewardedPopup(DetailsActivity.this,  new FinishVideo() {
+                        @Override
+                        public void finish(boolean isFinishSuccess) {
+                            if (isFinishSuccess) {
+                                isOnlyTime = false;
+                                rangeCurrency = "1y";
+                                callApi();
+                            }else{
+                                resetRadios(range1Y);
+                            }
+                        }
+                    });
+                }
                 break;
             case R.id.range3Y:
-                isOnlyTime = false;
-                rangeCurrency = "3y";
-                callApi();
+                if(!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y)) {
+                    isOnlyTime = false;
+                    rangeCurrency = "3y";
+                    callApi();
+                }else {
+                    Popup.ShowRewardedPopup(DetailsActivity.this,  new FinishVideo() {
+                        @Override
+                        public void finish(boolean isFinishSuccess) {
+                            if (isFinishSuccess) {
+                                isOnlyTime = false;
+                                rangeCurrency = "3y";
+                                callApi();
+                            }else{
+                                resetRadios(range1Y);
+                            }
+                        }
+                    });
+                }
                 break;
             case R.id.radioRanges:
                 break;
@@ -504,6 +549,33 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 i.putExtra("AllListCurrencies", (Serializable) listAllCurrencies);
                 startActivity(i);
                 break;
+        }
+    }
+
+    private void resetRadios(RadioButton range) {
+        range.setTextColor(getResources().getColorStateList(R.color.secundaryTextColorTheme1));
+        if(rangeCurrency.compareTo("1d")==0) {
+            range1D.setTextColor(getResources().getColorStateList(R.color.colorAccent));
+            range1D.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range1D.setChecked(true);
+        }
+        else
+        if(rangeCurrency.compareTo("1w")==0) {
+            range1W.setTextColor(getResources().getColorStateList(R.color.colorAccent));
+            range1W.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range1W.setChecked(true);
+        }
+        else
+        if(rangeCurrency.compareTo("1m")==0) {
+            range1M.setTextColor(getResources().getColorStateList(R.color.colorAccent));
+            range1M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range1M.setChecked(true);
+        }
+        else
+        if(rangeCurrency.compareTo("6m")==0) {
+            range6M.setTextColor(getResources().getColorStateList(R.color.colorAccent));
+            range6M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range6M.setChecked(true);
         }
     }
 
@@ -615,7 +687,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             range1M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
             range6M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
             range1Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
-            range5Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range3Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
             txtDatePercentage.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
             txtMinPercentage.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
             txtMaxPercentage.setTextColor(getResources().getColor(R.color.primaryTextTheme1));
@@ -638,7 +710,7 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 range1M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme2));
                 range6M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme2));
                 range1Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme2));
-                range5Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme2));
+                range3Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme2));
                 txtDatePercentage.setTextColor(getResources().getColor(R.color.primaryTextTheme2));
                 txtMinPercentage.setTextColor(getResources().getColor(R.color.primaryTextTheme2));
                 txtMaxPercentage.setTextColor(getResources().getColor(R.color.primaryTextTheme2));

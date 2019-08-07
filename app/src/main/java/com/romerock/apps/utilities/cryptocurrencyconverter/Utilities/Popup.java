@@ -7,7 +7,6 @@ import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
 
-import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.romerock.apps.utilities.cryptocurrencyconverter.fragments.FeedbackDialogFragment;
 import com.romerock.apps.utilities.cryptocurrencyconverter.fragments.RateusDialogFragment;
 import com.romerock.apps.utilities.cryptocurrencyconverter.fragments.RewardedFragment;
@@ -48,7 +47,7 @@ public class Popup {
         subscriptionFragment.show(fm, "SubscribeMe dialog");
     }
 
-    public static void ShowRewardedPopup(Context context, RewardedVideoAd rewardedVideoAd, FinishVideo finishVideo){
+    public static void ShowRewardedPopup(Context context,   FinishVideo finishVideo){
         RewardedFragment rewardedFragment = RewardedFragment.newInstance();
         FragmentManager fm = ((FragmentActivity) context).getSupportFragmentManager();
         rewardedFragment.setFinishVideo(finishVideo);

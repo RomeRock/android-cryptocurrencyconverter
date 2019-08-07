@@ -132,7 +132,7 @@ public class ShareDialogFragment extends DialogFragment {
                     url = new URL(getString(R.string.share_link));
                     Intent intent = null;
                     intent = new TweetComposer.Builder(getActivity())
-                            .text(getActivity().getString(R.string.share_via_twitter))
+                            .text(getActivity().getString(R.string.shareTwitter))
                             .url(url)
                             .createIntent();
                     startActivityForResult(intent, TWEET_COMPOSER_REQUEST_CODE);

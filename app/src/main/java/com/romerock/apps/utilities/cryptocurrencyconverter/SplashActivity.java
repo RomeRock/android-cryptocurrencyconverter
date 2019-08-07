@@ -11,6 +11,7 @@ import android.view.WindowManager;
 
 import com.applovin.sdk.AppLovinSdk;
 import com.crashlytics.android.Crashlytics;
+import com.facebook.stetho.Stetho;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.LocaleHelper;
@@ -46,7 +47,7 @@ public class SplashActivity extends Activity {
         AppLovinSdk.initializeSdk(SplashActivity.this);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(CipherAES.getApiKeyTwitter(), CipherAES.getApiSecretKeyTwitter());
         Fabric.with(this, new Twitter(authConfig), new Crashlytics());
-      //  Stetho.initializeWithDefaults(this);  //   TODO  ------- BORRAR ES SOLO PARA DEBUG
+        Stetho.initializeWithDefaults(this);  //   TODO  ------- BORRAR ES SOLO PARA DEBUG
         sPlashScreen = this;
         PushNotificationModel.CleanBadges(this);
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
@@ -109,6 +110,13 @@ public class SplashActivity extends Activity {
             c.add(Calendar.DATE, 3);
             String end_date = df.format(c.getTime());
             ed.putString(getString(R.string.dateForInterstitial), end_date);
+        }
+
+        if (!sharedPrefs.contains(getString(R.string.count1ARange))) {
+            ed.putInt(getString(R.string.count1ARange), 0);
+        }
+        if (!sharedPrefs.contains(getString(R.string.count3ARange))) {
+            ed.putInt(getString(R.string.count3ARange), 0);
         }
 
         ed.commit();

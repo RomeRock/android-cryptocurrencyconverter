@@ -29,4 +29,5 @@
     <color name="colorPrimaryDaylight">#FFFFFF</color>
     <color name="colorDarkDaylight">#FAFAFA</color>
     <color name="colorAccent_Daylight">#00B7D4</color>
+    <color name="lock">#8F959A</color>
 </resources>

@@ -26,7 +26,6 @@
 	<string name="go_premium">ПОЙДИТЕ ПРЕМИУМ:\nУВЕДОМЛЕНИЯ, ПРЕДУПРЕЖДЕНИЯ, \n УДАЛИТЬ ОБЪЯВЛЕНИЯ</string>
 	<string name="graph">Graph</string>
 	<string name="have_currency">Извините, но вы уже выбрали эту валюту, попробуйте другую</string>
-	<string name="language_settings">Языковые настройки</string>
 	<string name="mail_support">contact@romerock.com</string>
 	<string name="max">Max</string>
 	<string name="min">Min</string>
@@ -84,4 +83,27 @@
 	<string name="update_time">Обновлено:</string>
 	<string name="vs">VS</string>
 	<string name="you_will_receive_notification_at">Вы получите уведомление на</string>
+	<string name="share_rewarded">Поделитесь и получите вознаграждение</string>
+	<string name="Feedback">комментарии</string>
+	<string name="rateus">Оцените приложение</string>
+	<string name="Language">язык</string>
+	<string name="shareTwitter">Я использую #Brawlmate. Скачать #FREE #iOS # Android</string>
+	<string name="share_success">Спасибо, что поделился.\nОбъявления были удалены</string>
+	<string name="label_quickConverter">Конвертер</string>
+	<string name="label_loanCalculator">Кредитный калькулятор</string>
+	<string name="label_salestax">Калькулятор налогов и скидок</string>
+	<string name="label_52Challenge">Проблема экономии денег</string>
+	<string name="label_clashmate">Компаньон для "Clash Royale"</string>
+	<string name="English">английский</string>
+	<string name="French">Французский</string>
+	<string name="German">Немецкий</string>
+	<string name="Italian">итальянский</string>
+	<string name="Japanese">японский язык</string>
+	<string name="Portuguese">португальский</string>
+	<string name="Russian">русский</string>
+	<string name="Spanish">испанский</string>
+	<string name="label_tipCalculator">Калькулятор чаевых</string>
+	<string name="label_xpressVote">«Голосование Xpress» - Опросы</string>
+	<string name="share_on_facebook">Поделиться через фейсбук</string>
+	<string name="share_on_twitter">Поделиться в Twitter</string>
 </resources>

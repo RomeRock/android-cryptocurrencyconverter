@@ -26,7 +26,6 @@
 	<string name="go_premium">プレミアムへ： \n通知、アラート、<br/>広告の削除</string>
 	<string name="graph">Graph</string>
 	<string name="have_currency">申し訳ありませんが、既にこの通貨を選択しています。別の通貨でお試しください</string>
-	<string name="language_settings">言語設定</string>
 	<string name="mail_support">contact@romerock.com</string>
 	<string name="max">Max</string>
 	<string name="min">Min</string>
@@ -35,7 +34,7 @@
 	<string name="no_thanks">結構です</string>
 	<string name="notification_center">通知センター</string>
 	<string name="notifyMe">通知を追加</string>
-	<string name="notifyMeChangeCurrency">％s 対 ％s について通知する</string>
+	<string name="notifyMeChangeCurrency">%s 対 %s について通知する</string>
 	<string name="oh_oh">ああああ！</string>
 	<string name="over">上</string>
 	<string name="over_alert">価格アラート</string>
@@ -84,4 +83,27 @@
 	<string name="update_time">更新しました：</string>
 	<string name="vs">VS</string>
 	<string name="you_will_receive_notification_at">通知を受け取ります</string>
+	<string name="share_rewarded">シェアして報酬を得る</string>
+	<string name="Feedback">コメント</string>
+	<string name="rateus">アプリを評価する</string>
+	<string name="Language">言語</string>
+	<string name="shareTwitter">#Brawlmateを使用しています。ダウンロード#FREE #iOS #Android</string>
+	<string name="share_success">共有してくれてありがとう。 \n広告は削除されました</string>
+	<string name="label_quickConverter">単位換算</string>
+	<string name="label_loanCalculator">ローン計算機</string>
+	<string name="label_salestax">税金と割引の計算</string>
+	<string name="label_52Challenge">お金節約の挑戦</string>
+	<string name="label_clashmate">"Clash Royale"のコンパニオン</string>
+	<string name="English">英語</string>
+	<string name="French">フランス語</string>
+	<string name="German">ドイツ人</string>
+	<string name="Italian">イタリアの</string>
+	<string name="Japanese">日本人</string>
+	<string name="Portuguese">ポルトガル語</string>
+	<string name="Russian">ロシア</string>
+	<string name="Spanish">スペイン語</string>
+	<string name="label_tipCalculator">チップ計算機</string>
+	<string name="label_xpressVote">"Xpress Vote"  - アンケートと投票</string>
+	<string name="share_on_facebook">Facebookでシェア</string>
+	<string name="share_on_twitter">Twitterでシェアする</string>
 </resources>

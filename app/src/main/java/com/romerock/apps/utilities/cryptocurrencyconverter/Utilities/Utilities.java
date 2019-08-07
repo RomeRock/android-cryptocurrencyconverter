@@ -19,6 +19,7 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ImageView;
+import android.widget.RadioButton;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
@@ -247,7 +248,6 @@ public class Utilities {
     }*/
 
 
-
     public static void goToLinks(Context context, String link) {
         Intent intent = new Intent(Intent.ACTION_VIEW);
         intent.setData(Uri.parse(link));
@@ -288,7 +288,7 @@ public class Utilities {
 
 
     public static String getFormatedDateOnlyTime(String date) {
-        double dateToUse =Double.valueOf(date.replace(",",".")) * 1000;
+        double dateToUse = Double.valueOf(date.replace(",", ".")) * 1000;
         Date d = new Date((long) dateToUse);
         DateFormat f = new SimpleDateFormat("MMM dd''yy'T'HH:mm a");
         date = f.format(d);
@@ -450,7 +450,7 @@ public class Utilities {
 
     public static void addIntestitialWithCount(Context context, String isFreeOrPremium) {
         if (todayMayorRegisterDay(context)) {
-            int COUNT_FOR_INTERSTITIAL=2;
+            int COUNT_FOR_INTERSTITIAL = 2;
             SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
             if (isFreeOrPremium.isEmpty()) {
                 try {
@@ -524,9 +524,8 @@ public class Utilities {
 
     }
 
-    public static void countTotalKeys(Context context){
-        if(SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0)
-        {
+    public static void countTotalKeys(Context context) {
+        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
             int countKeys = sharedPrefs.getInt(context.getString(R.string.preferences_count_keys), 0);
             if (countKeys < 9) {
@@ -558,7 +557,7 @@ public class Utilities {
                 android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                 deviceId = TestDevice(android_id).toUpperCase();
                 adRequest = new AdRequest.Builder()
-                      //   .addTestDevice(deviceId)  // For test
+                        //   .addTestDevice(deviceId)  // For test
                         .build();
             }
         } catch (Exception e) {
@@ -616,20 +615,19 @@ public class Utilities {
     }
 
     public static String removeCharacters(String s) {
-        s=s.replace("*","").replace("-","").replace("_","");
+        s = s.replace("*", "").replace("-", "").replace("_", "");
         return s;
     }
 
     public static void checkForBigBanner(final Context context, RelativeLayout content) {
+        SharedPreferences sharedPrefs;
+        sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
         if (context != null) {
-            final AdView adView = new AdView(context);
-            //mayor a 430
-            DisplayMetrics metrics = context.getResources().getDisplayMetrics();
-            final int densityDpi = (int) (metrics.density * 160f);
-            SharedPreferences sharedPrefs;
-            sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
-
-            if (!sharedPrefs.contains(context.getString(R.string.shareAndRewarded))) {
+            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
+                final AdView adView = new AdView(context);
+                //mayor a 430
+                DisplayMetrics metrics = context.getResources().getDisplayMetrics();
+                final int densityDpi = (int) (metrics.density * 160f);
                 content.setVisibility(View.VISIBLE);
                 RelativeLayout.LayoutParams relativeParams = (RelativeLayout.LayoutParams) content.getLayoutParams();
                 relativeParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
@@ -654,5 +652,35 @@ public class Utilities {
                 content.setVisibility(View.GONE);
             }
         }
+    }
+
+    //if true set lock and block radio
+    public static boolean checkLockStatusForRangeRadios(Context context, RadioButton range) {
+        boolean returnSetLock = false;
+        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
+            SharedPreferences sharedPrefs;
+            int MAX_CLICKS=1;
+            int clicks=0;
+            sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+            if (range.getId() == R.id.range1Y) {
+                clicks=sharedPrefs.getInt(context.getString(R.string.count1ARange),0);
+            } else {
+                if (range.getId() == R.id.range3Y) {
+                    clicks=sharedPrefs.getInt(context.getString(R.string.count3ARange),0);
+                }
+            }
+
+            if(clicks<MAX_CLICKS) {
+                returnSetLock= true;
+                range.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock, 0);
+            }
+            else {
+                range.setCompoundDrawables(null, null, null, null);
+                returnSetLock= false;
+            }
+        } else {
+            returnSetLock = false;
+        }
+        return returnSetLock;
     }
 }

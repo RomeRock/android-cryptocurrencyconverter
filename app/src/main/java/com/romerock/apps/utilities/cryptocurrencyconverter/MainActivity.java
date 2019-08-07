@@ -208,11 +208,11 @@ public class MainActivity extends AppCompatActivity
         Utilities.ChangeLanguage(this);
         FirebaseApp.initializeApp(MainActivity.this);
         rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
+        SingletonInAppBilling.Instance().setRewardedVideoAd(rewardedVideoAd);
         setTheme(getThemePreferences(getApplication()));
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
         ed = sharedPrefs.edit();
         setContentView(R.layout.activity_main);
-        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
         wear = new Wear(MainActivity.this);
         Window window = this.getWindow();
         Utilities.colorStatusBar(getApplication(), window);
@@ -351,9 +351,6 @@ public class MainActivity extends AppCompatActivity
         return true;
     }
 
-    public RewardedVideoAd getRewardedVideoAd() {
-        return rewardedVideoAd;
-    }
 
     void getUpdateFirebase() {
         String currenciesSaved = sharedPrefs.getString(getString(R.string.preferences_defaultCurrencies), "").toString();
@@ -542,7 +539,7 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case R.id.linAddCurrency:
                     if (isFree.compareTo(UserUdId.getFREE()) == 0) {
-                        Popup.ShowRewardedPopup(MainActivity.this, rewardedVideoAd, new FinishVideo() {
+                        Popup.ShowRewardedPopup(MainActivity.this,  new FinishVideo() {
                             @Override
                             public void finish(boolean isFinishSuccess) {
                                 if(isFinishSuccess)

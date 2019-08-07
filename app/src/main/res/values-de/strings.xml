@@ -26,7 +26,6 @@
 	<string name="go_premium">GO PREMIUM:\nBENACHRICHTIGUNGEN, ALARME, \ n ADS ENTFERNEN</string>
 	<string name="graph">Graph</string>
 	<string name="have_currency">Entschuldigung, aber Sie haben diese Währung bereits ausgewählt. Bitte versuchen Sie es mit einer anderen</string>
-	<string name="language_settings">Spracheinstellungen</string>
 	<string name="mail_support">contact@romerock.com</string>
 	<string name="max">Max</string>
 	<string name="min">Min</string>
@@ -84,4 +83,27 @@
 	<string name="update_time">Aktualisierte:</string>
 	<string name="vs">VS</string>
 	<string name="you_will_receive_notification_at">Sie erhalten die Benachrichtigung um</string>
+	<string name="share_rewarded">TEILEN UND BELOHNT WERDEN</string>
+	<string name="Feedback">Feedback</string>
+	<string name="rateus">Bewerten Sie die App</string>
+	<string name="Language">Sprache</string>
+	<string name="shareTwitter">Ich benutze #Brawlmate. Laden Sie #FREE #iOS #Android herunter</string>
+	<string name="share_success">Danke für das Teilen.\nAnzeigen wurden entfernt</string>
+	<string name="label_quickConverter">Einheitenumwandler</string>
+	<string name="label_loanCalculator">Darlehensrechner</string>
+	<string name="label_salestax">Steuer- und Rabattrechner</string>
+	<string name="label_52Challenge">Geld sparen Herausforderung</string>
+	<string name="label_clashmate">Begleiter für "Clash Royale"</string>
+	<string name="English">Englisch</string>
+	<string name="French">Französisch</string>
+	<string name="German">Deutsche</string>
+	<string name="Italian">Italienisch</string>
+	<string name="Japanese">japanisch</string>
+	<string name="Spanish">Spanisch</string>
+	<string name="Portuguese">Portugiesisch</string>
+	<string name="Russian">Russisch</string>
+	<string name="label_tipCalculator">Tipp Rechner</string>
+	<string name="label_xpressVote">"Xpress Vote" - Umfragen und Abstimmungen</string>
+	<string name="share_on_facebook">Auf Facebook teilen</string>
+	<string name="share_on_twitter">Auf Twitter teilen</string>
 </resources>

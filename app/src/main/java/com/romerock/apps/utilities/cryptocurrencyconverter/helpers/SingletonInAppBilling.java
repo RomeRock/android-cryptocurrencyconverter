@@ -9,6 +9,7 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.android.vending.billing.IInAppBillingService;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.firebase.database.FirebaseDatabase;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.UserUdId;
 
@@ -24,7 +25,7 @@ import java.util.ArrayList;
 public class SingletonInAppBilling {
     private static SingletonInAppBilling instance;
     private static String SKU_PACKAGE_PRO1 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_1";
-    private static String SKU_PACKAGE_PRO2 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_2";
+    private static String SKU_PACKAGE_PRO2 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_2b";
     private static String SKU_PACKAGE_PRO3 = "com.romerock.apps.utilities.cryptocurrencyconverter_proversion_3";
     private static String finalPricepackage = "";
     private static String finalPricepackagePro1 = "";
@@ -45,6 +46,15 @@ public class SingletonInAppBilling {
     private FirebaseDatabase firebaseDatabase;
     private DialogsHelper dialogsHelper;
     private UserUdId userUdId;
+    private RewardedVideoAd rewardedVideoAd;
+
+    public RewardedVideoAd getRewardedVideoAd() {
+        return rewardedVideoAd;
+    }
+
+    public void setRewardedVideoAd(RewardedVideoAd rewardedVideoAd) {
+        this.rewardedVideoAd = rewardedVideoAd;
+    }
 
     public SingletonInAppBilling() {
     }

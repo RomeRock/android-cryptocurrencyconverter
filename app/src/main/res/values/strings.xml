@@ -43,7 +43,6 @@
     <string name="mail_support" translatable="false">contact@romerock.com</string>
     <string name="badge_settings" translatable="false">BadgeSettings</string>
     <string name="shareAndRewarded" translatable="false">shareAndRewardedPreferences</string>
-
     <string name="update_time">Updated:</string>
     <string name="range1D">24H</string>
     <string name="range1W">1W</string>
@@ -65,8 +64,8 @@
     <string name="Language">Language</string>
     <string name="Themes">CHANGE THEME/COLORS</string>
     <string name="tryOurFree">TRY OUR FREE APPS</string>
-    <string name="tipCalculator">Tip Calculator &amp; Bill Split</string>
-    <string name="xpressVote">Xpress Vote - Surveys &amp; Polls</string>
+    <string name="label_tipCalculator">Tip Calculator &amp; Bill Split</string>
+    <string name="label_xpressVote">Xpress Vote - Surveys &amp; Polls</string>
     <string name="followUs">Follow us!</string>
     <string name="subscribeMe">Donate and Become Premium</string>
     <string name="notifyMe">Add Notifications</string>
@@ -80,8 +79,8 @@
     <string name="pop_up_get_some_love_tittle">Will you show us\nsome love?</string>
     <string name="pop_up_get_some_love_content">If you like Currency Converter,\nlet us know.\nThank you for your support!</string>
     <string name="pop_up_rate_subject">Currency Converter - Feedback - Android</string>
-    <string name="share_facebook">Share on Facebook</string>
-    <string name="share_twitter">Share on Twitter</string>
+    <string name="share_on_facebook">Share on Facebook</string>
+    <string name="share_on_twitter">Share on Twitter</string>
     <string name="pop_up_share_tittle">Share with the World \n  and get rewarded</string>
     <string name="pop_up_share_content">Do you like Crypto Currency Conveter?\nShare our app on Facebook or Twitter !!</string>
     <string name="send">Send</string>
@@ -117,24 +116,24 @@
     <string name="settings_option_select_scheme_color">Select scheme color</string>
     <string name="settings_preview">PREVIEW</string>
     <string name="settings_preview_pro_version">PRO VERSION</string>
-    <string name="share_via_twitter">I\'m using #Cypto #Currency  #Converter. Download for #FREE #Android</string>
+    <string name="shareTwitter">I\'m using #Cypto #Currency  #Converter. Download for #FREE #Android</string>
     <string name="share_success">Thank you for sharing</string>
-    <string name="quickConverter">Quick Unit Converter</string>
+    <string name="label_quickConverter">Quick Unit Converter</string>
     <string name="tittle_purchse_finish">Thank you for your purchase!</string>
     <string name="tittle_purchse_finish_error">ERROR. Payment Failed</string>
     <string name="Ok_labe">Ok</string>
     <string name="receive_notification_when_price">Recive notification when price reaches</string>
-    <string name="Play_Store_Request_Wear">Play Store Request to Wear device successful.</string>
+    <string name="Play_Store_Request_Wear" translatable="false">Play Store Request to Wear device successful.</string>
     <string name="play_store_request_fail">Play Store Request Failed. Wear device(s) may not support Play Store, that is, the Wear device may be version 1.0.</string>
-    <string name="loanCalculator">Loan Calculator</string>
-    <string name="salestax">Tax &amp; Discounts</string>
+    <string name="label_loanCalculator">Loan Calculator</string>
+    <string name="label_salestax">Tax &amp; Discounts</string>
     <string name="feedback_success">Thank you for your feedback, we are working really hard to offer the best app</string>
     <string name="error_internet">Connection error. Please check your internet connection and try again</string>
     <string name="privacy_policy">Privacy Policy</string>
     <string name="email_optional">Email - optional</string>
     <string name="thanks">Thanks!</string>
     <string name="label_52Challenge">Money Saving Challenge</string>
-    <string name="label_clashMate">Clash Mate: Stats &amp; Tools</string>
+    <string name="label_clashmate">Clash Mate: Stats &amp; Tools</string>
     <string name="pay_as_much_you_want">* Pay as much as you want for  the premium version.\n* We are an Indi Company and we only urvive thanks to your support  c:"</string>
     <string name="VIEW_AD_AND_UNLOCK">VIEW AD AND UNLOCK THIS FEATURE</string>
     <string name="oh_oh">Oh oh!</string>
@@ -148,4 +147,6 @@
     <string name="Japanese">Japanese</string>
     <string name="Portuguese">Portuguese</string>
     <string name="Russian">Russian</string>
+    <string name="count1ARange">count1ARange</string>
+    <string name="count3ARange">count3ARange</string>
 </resources>
