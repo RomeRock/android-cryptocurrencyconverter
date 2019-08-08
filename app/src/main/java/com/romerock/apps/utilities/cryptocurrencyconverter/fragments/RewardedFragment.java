@@ -16,6 +16,7 @@ import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
+import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Popup;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
@@ -104,9 +105,8 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
                 loadRewardedVideoAd();
                 break;
             case R.id.popUpDonate:
-                rewardedVideoAd.show();
-              /*  Popup.SubscribeMe(getActivity());
-                dismiss();*/
+                Popup.SubscribeMe(getActivity());
+                dismiss();
                 break;
             case R.id.popUpNoThanks:
                 dismiss();
@@ -159,11 +159,10 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
 
     @Override
     public void onRewardedVideoAdFailedToLoad(int i) {
-        Log.d("fail", "fail int: " + i);
         if (rewardedVideoAd.isLoaded())
             rewardedVideoAd.destroy(getActivity());
         SingletonInAppBilling.Instance().getDialogsHelper().hideLoading();
-        finishVideo.finish(true);
+        finishVideo.finish(true, false);
         dismiss();
     }
 
@@ -172,7 +171,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
         // aqui ya se debe abrir los stickers
         if (rewardedVideoAd.isLoaded())
             rewardedVideoAd.destroy(getActivity());
-        finishVideo.finish(true);
+        finishVideo.finish(true, true);
 
         dismiss();
     }
@@ -180,7 +179,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     @Override
     public void onDestroy() {
         super.onDestroy();
-           finishVideo.finish(false);
+           finishVideo.finish(false, false);
     }
 
     public interface OnFragmentInteractionListener {

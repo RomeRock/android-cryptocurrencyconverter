@@ -194,14 +194,14 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         Bundle extras = getIntent().getExtras();
         firebaseHelper = FirebaseHelper.getInstance();
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);
+        Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y);
+        Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y);
         try {
             isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(getResources().getString(R.string.purchaseAndroid), isFreeOrPremium));
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                 Utilities.addIntestitial(DetailsActivity.this, isFreeOrPremium);
                 Utilities.checkForBigBanner(DetailsActivity.this, adView);
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getFREE());
-                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y);
-                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y);
             } else {
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());
                 adView.setVisibility(View.GONE);
@@ -486,14 +486,17 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 if(!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y)) {
                     isOnlyTime = false;
                     rangeCurrency = "1y";
+                    Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, false);
                     callApi();
                 }else {
                     Popup.ShowRewardedPopup(DetailsActivity.this,  new FinishVideo() {
                         @Override
-                        public void finish(boolean isFinishSuccess) {
+                        public void finish(boolean isFinishSuccess, boolean completeSuccess) {
                             if (isFinishSuccess) {
                                 isOnlyTime = false;
                                 rangeCurrency = "1y";
+                                Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, completeSuccess);
+                                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y);
                                 callApi();
                             }else{
                                 resetRadios(range1Y);
@@ -506,17 +509,20 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 if(!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y)) {
                     isOnlyTime = false;
                     rangeCurrency = "3y";
+                    Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, false);
                     callApi();
                 }else {
                     Popup.ShowRewardedPopup(DetailsActivity.this,  new FinishVideo() {
                         @Override
-                        public void finish(boolean isFinishSuccess) {
+                        public void finish(boolean isFinishSuccess, boolean completeSuccess) {
                             if (isFinishSuccess) {
                                 isOnlyTime = false;
                                 rangeCurrency = "3y";
+                                Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, completeSuccess);
+                                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y);
                                 callApi();
                             }else{
-                                resetRadios(range1Y);
+                                resetRadios(range3Y);
                             }
                         }
                     });
@@ -576,7 +582,18 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             range6M.setTextColor(getResources().getColorStateList(R.color.colorAccent));
             range6M.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
             range6M.setChecked(true);
+        }else
+        if(rangeCurrency.compareTo("1y")==0) {
+            range1Y.setTextColor(getResources().getColorStateList(R.color.colorAccent));
+            range1Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range1Y.setChecked(true);
+        }else
+        if(rangeCurrency.compareTo("3y")==0) {
+            range3Y.setTextColor(getResources().getColorStateList(R.color.colorAccent));
+            range3Y.setTextColor(getResources().getColorStateList(R.color.radio_botton_text_selected_theme1));
+            range3Y.setChecked(true);
         }
+
     }
 
     private void callApi() {

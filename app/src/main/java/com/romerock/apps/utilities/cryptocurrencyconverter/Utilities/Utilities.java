@@ -659,28 +659,46 @@ public class Utilities {
         boolean returnSetLock = false;
         if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
             SharedPreferences sharedPrefs;
-            int MAX_CLICKS=1;
-            int clicks=0;
+            int MAX_CLICKS = 1;
+            int clicks = 0;
             sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
             if (range.getId() == R.id.range1Y) {
-                clicks=sharedPrefs.getInt(context.getString(R.string.count1ARange),0);
+                clicks = sharedPrefs.getInt(context.getString(R.string.count1ARange), 0);
             } else {
                 if (range.getId() == R.id.range3Y) {
-                    clicks=sharedPrefs.getInt(context.getString(R.string.count3ARange),0);
+                    clicks = sharedPrefs.getInt(context.getString(R.string.count3ARange), 0);
                 }
             }
 
-            if(clicks<MAX_CLICKS) {
-                returnSetLock= true;
+            if (clicks >= MAX_CLICKS) {
+                returnSetLock = true;
                 range.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock, 0);
-            }
-            else {
+            } else {
                 range.setCompoundDrawables(null, null, null, null);
-                returnSetLock= false;
+                returnSetLock = false;
             }
         } else {
+            range.setCompoundDrawables(null, null, null, null);
             returnSetLock = false;
         }
         return returnSetLock;
+    }
+
+    public static void IncrementLock(Context context, String rangeCurrency, boolean reset) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+        int countKeys = sharedPrefs.getInt(context.getString(R.string.preferences_count_keys), 0);
+        SharedPreferences.Editor ed = sharedPrefs.edit();
+        if (rangeCurrency.compareTo("1y") == 0) {
+            if (reset)
+                ed.putInt(context.getString(R.string.count1ARange), 0);
+            else
+                ed.putInt(context.getString(R.string.count1ARange), countKeys++);
+        } else if (rangeCurrency.compareTo("3y") == 0) {
+            if (reset)
+                ed.putInt(context.getString(R.string.count3ARange), 0);
+            else
+                ed.putInt(context.getString(R.string.count3ARange), countKeys++);
+        }
+        ed.commit();
     }
 }

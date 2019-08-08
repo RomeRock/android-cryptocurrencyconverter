@@ -24,8 +24,8 @@ android {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
         targetSdkVersion 28
-        versionCode 100500
-        versionName "1.5"
+        versionCode 100602
+        versionName "1.6.2"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         multiDexEnabled false
     }
@@ -40,6 +40,12 @@ android {
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
+    }
+    //for can change diferent languages programatically
+    bundle {
+        language {
+            enableSplit = false
+        }
     }
 }
 

@@ -53,6 +53,9 @@
     <string name="current">Current</string>
     <string name="avg">Avg</string>
     <string name="max">Max</string>
+    <string name="count1ARange" translatable="false">count1ARange</string>
+    <string name="count3ARange" translatable="false">count3ARange</string>
+    <string name="countCryptoAded" translatable="false">countCryptoAded</string>
     <string name="min">Min</string>
     <string name="fluctuation">fluctuation</string>
     <string name="titleCurrency">Select Currency</string>
@@ -147,6 +150,4 @@
     <string name="Japanese">Japanese</string>
     <string name="Portuguese">Portuguese</string>
     <string name="Russian">Russian</string>
-    <string name="count1ARange">count1ARange</string>
-    <string name="count3ARange">count3ARange</string>
 </resources>

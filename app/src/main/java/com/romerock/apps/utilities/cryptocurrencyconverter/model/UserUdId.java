@@ -81,7 +81,7 @@ public class UserUdId {
             try {
                 SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), context.MODE_PRIVATE);
                 String idDevice = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.udidAndroid), ""));
-                udidPremium.put(idDevice, userUdId.getCreatedtstamp());
+                udidPremium.put(idDevice, "1");
                 userUdId.setUdids(udidPremium);
 
             } catch (Exception e) {
@@ -94,7 +94,6 @@ public class UserUdId {
                 firebaseHelper.getDataReference(String.format(firebaseHelper.getUDID_PATH(), isFreeOrPremium)).child(UDID).updateChildren(userUdId.toMap());
                 checkUDIDListener.checkUDIDFromFirebase(false);
             }
-
     }
 
     public static void copyNotificationsToPremium(final FirebaseHelper firebaseHelper, final String UDID, final String idOrder) {
@@ -320,8 +319,8 @@ public class UserUdId {
             }
         });*/
         Map<String, Object> data = new HashMap<>();
-        data.put(FMC, createdtstamp);
-        firebaseHelper.getDataReference(String.format(firebaseHelper.getFMC_PATH(), isFreeOrPremium, UDID)).child(FMC).setValue(createdtstamp).addOnSuccessListener(new OnSuccessListener<Void>() {
+        data.put(FMC, "1");
+        firebaseHelper.getDataReference(String.format(firebaseHelper.getFMC_PATH(), isFreeOrPremium, UDID)).child(FMC).setValue("1").addOnSuccessListener(new OnSuccessListener<Void>() {
             @Override
             public void onSuccess(Void aVoid) {
                 // if(process)

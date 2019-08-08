@@ -118,6 +118,9 @@ public class SplashActivity extends Activity {
         if (!sharedPrefs.contains(getString(R.string.count3ARange))) {
             ed.putInt(getString(R.string.count3ARange), 0);
         }
+        if (!sharedPrefs.contains(getString(R.string.countCryptoAded))) {
+            ed.putInt(getString(R.string.countCryptoAded), 0);
+        }
 
         ed.commit();
         // Detect language

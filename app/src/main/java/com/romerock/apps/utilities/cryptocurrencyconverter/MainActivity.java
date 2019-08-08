@@ -539,13 +539,19 @@ public class MainActivity extends AppCompatActivity
                     break;
                 case R.id.linAddCurrency:
                     if (isFree.compareTo(UserUdId.getFREE()) == 0) {
-                        Popup.ShowRewardedPopup(MainActivity.this,  new FinishVideo() {
-                            @Override
-                            public void finish(boolean isFinishSuccess) {
-                                if(isFinishSuccess)
-                                    processSetCurrencies();
-                            }
-                        });
+                        int countCryptoAded= sharedPrefs.getInt(getString(R.string.countCryptoAded), 0);
+                        if(countCryptoAded<1){
+
+                            processSetCurrencies();
+                        }else {
+                            Popup.ShowRewardedPopup(MainActivity.this, new FinishVideo() {
+                                @Override
+                                public void finish(boolean isFinishSuccess, boolean completeSuccess) {
+                                    if (isFinishSuccess)
+                                        processSetCurrencies();
+                                }
+                            });
+                        }
                     }else {
                        processSetCurrencies();
                     }
@@ -648,8 +654,11 @@ public class MainActivity extends AppCompatActivity
         if (data != null) {
             Bundle res = data.getExtras();
             if (requestCode == CURRENCY_SELECTED) {
+
                 dialogsHelper.hideLoading();
                 if (resultCode == RESULT_OK) {
+                    ed.putInt(getString(R.string.countCryptoAded), 1);
+                    ed.commit();
                     boolean haveCurrency = false;
                     Utilities.countTotalKeys(MainActivity.this);
                     txtEditText.setVisibility(View.VISIBLE);
