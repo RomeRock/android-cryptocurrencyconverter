@@ -450,7 +450,7 @@ public class Utilities {
 
     public static void addIntestitialWithCount(Context context, String isFreeOrPremium) {
         if (todayMayorRegisterDay(context)) {
-            int COUNT_FOR_INTERSTITIAL = 2;
+            int COUNT_FOR_INTERSTITIAL = 5;
             SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
             if (isFreeOrPremium.isEmpty()) {
                 try {

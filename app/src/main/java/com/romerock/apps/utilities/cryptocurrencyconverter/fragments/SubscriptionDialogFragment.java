@@ -110,10 +110,6 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                             SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());
                             processPublish(purchase, price);
                             dismiss();
-                        } else {
-                            // IS FAILIRE
-                            dismiss();
-                            SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getFREE());
                         }
                     }
                 });

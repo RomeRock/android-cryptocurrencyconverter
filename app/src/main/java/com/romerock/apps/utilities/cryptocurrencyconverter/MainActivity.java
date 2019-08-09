@@ -471,7 +471,7 @@ public class MainActivity extends AppCompatActivity
                 UserUdId.verify( isFreeOrPremium,  sharedPrefs, MainActivity.this, firebaseHelper);
             }
         });
-        Utilities.addIntestitialWithCount(MainActivity.this, isFree);
+        Utilities.addIntestitialWithCount(MainActivity.this, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM());
         getUpdateFirebase();
 
 
@@ -538,7 +538,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case R.id.linAddCurrency:
-                    if (isFree.compareTo(UserUdId.getFREE()) == 0) {
+                    if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
                         int countCryptoAded= sharedPrefs.getInt(getString(R.string.countCryptoAded), 0);
                         if(countCryptoAded<1){
 
@@ -663,7 +663,7 @@ public class MainActivity extends AppCompatActivity
                     Utilities.countTotalKeys(MainActivity.this);
                     txtEditText.setVisibility(View.VISIBLE);
                     ItemLibraryCurrencyModel itemReturn = (ItemLibraryCurrencyModel) res.get("Current");
-                    Utilities.addIntestitial(MainActivity.this, isFree);
+                    Utilities.addIntestitial(MainActivity.this, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM());
                     if (listDashboardCurrencies != null)
                         for (ItemLibraryCurrencyModel item : listDashboardCurrencies) {
                             if (item.getName().toLowerCase().compareTo(itemReturn.getName().toLowerCase()) == 0)

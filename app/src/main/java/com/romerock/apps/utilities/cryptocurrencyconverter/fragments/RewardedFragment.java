@@ -18,6 +18,7 @@ import com.google.android.gms.ads.reward.RewardedVideoAdListener;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Popup;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
+import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.DialogsHelper;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 
@@ -33,7 +34,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     private RewardedVideoAd rewardedVideoAd;
     private OnFragmentInteractionListener mListener;
     private FinishVideo finishVideo;
-
+    private DialogsHelper dialogsHelper;
     public void setFinishVideo(FinishVideo finishVideo) {
         this.finishVideo = finishVideo;
     }
@@ -60,7 +61,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
         Utilities.ChangeLanguage(getActivity());
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         unbinder = ButterKnife.bind(this, view);
-
+        dialogsHelper=new DialogsHelper(getActivity());
         return view;
     }
 
@@ -100,7 +101,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
         rewardedVideoAd = SingletonInAppBilling.Instance().getRewardedVideoAd();
         switch (view.getId()) {
             case R.id.popUpViewVideo:
-                SingletonInAppBilling.Instance().getDialogsHelper().showLoading();
+                dialogsHelper.showLoading();
                 rewardedVideoAd.setRewardedVideoAdListener(this);
                 loadRewardedVideoAd();
                 break;
@@ -126,7 +127,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     @Override
     public void onRewardedVideoAdLoaded() {
         if (rewardedVideoAd.isLoaded()) {
-            SingletonInAppBilling.Instance().getDialogsHelper().hideLoading();
+            dialogsHelper.hideLoading();
             rewardedVideoAd.show();
 
         }
@@ -161,7 +162,7 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     public void onRewardedVideoAdFailedToLoad(int i) {
         if (rewardedVideoAd.isLoaded())
             rewardedVideoAd.destroy(getActivity());
-        SingletonInAppBilling.Instance().getDialogsHelper().hideLoading();
+        dialogsHelper.hideLoading();
         finishVideo.finish(true, false);
         dismiss();
     }

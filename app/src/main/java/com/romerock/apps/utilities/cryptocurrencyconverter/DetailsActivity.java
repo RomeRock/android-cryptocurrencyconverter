@@ -739,4 +739,25 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         }
 
     }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+
+        // Pass on the activity result to the helper for handling
+        if (requestCode == 10004) {
+            if (!SingletonInAppBilling.getmHelper().handleActivityResult(requestCode,
+                    resultCode, data)) {
+                super.onActivityResult(requestCode, resultCode, data);
+            }
+            if (resultCode == RESULT_OK) {
+                SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());
+                adView.setVisibility(View.GONE);
+                range1Y.setCompoundDrawables(null, null, null, null);
+                range3Y.setCompoundDrawables(null, null, null, null);
+            }
+        }
+    }
+
+
+
 }
