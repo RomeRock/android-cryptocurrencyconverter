@@ -201,8 +201,6 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                 }
             }
         }
-
-
         try {
             isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {

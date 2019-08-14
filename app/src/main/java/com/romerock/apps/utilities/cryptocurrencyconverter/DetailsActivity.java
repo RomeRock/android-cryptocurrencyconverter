@@ -757,7 +757,4 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
             }
         }
     }
-
-
-
 }
