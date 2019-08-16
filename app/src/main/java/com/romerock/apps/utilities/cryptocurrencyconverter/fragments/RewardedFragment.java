@@ -121,6 +121,8 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
             rewardedVideoAd.loadAd(getActivity().getResources().getString(R.string.banner_rewarded_AD_UNIT_ID) , new AdRequest.Builder()
                     //   .addTestDevice("0423998143E406A5A39DE5E1FEE6C6DA")
                     .build());
+        }else{
+            rewardedVideoAd.show();
         }
     }
 

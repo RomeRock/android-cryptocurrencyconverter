@@ -657,30 +657,32 @@ public class Utilities {
     //if true set lock and block radio
     public static boolean checkLockStatusForRangeRadios(Context context, RadioButton range) {
         boolean returnSetLock = false;
-        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
-            SharedPreferences sharedPrefs;
-            int MAX_CLICKS = 1;
-            int clicks = 0;
-            sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
-            if (range.getId() == R.id.range1Y) {
-                clicks = sharedPrefs.getInt(context.getString(R.string.count1ARange), 0);
-            } else {
-                if (range.getId() == R.id.range3Y) {
-                    clicks = sharedPrefs.getInt(context.getString(R.string.count3ARange), 0);
+       if(SingletonInAppBilling.Instance()!=null) {
+            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
+                SharedPreferences sharedPrefs;
+                int MAX_CLICKS = 1;
+                int clicks = 0;
+                sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+                if (range.getId() == R.id.range1Y) {
+                    clicks = sharedPrefs.getInt(context.getString(R.string.count1ARange), 0);
+                } else {
+                    if (range.getId() == R.id.range3Y) {
+                        clicks = sharedPrefs.getInt(context.getString(R.string.count3ARange), 0);
+                    }
                 }
-            }
 
-            if (clicks >= MAX_CLICKS) {
-                returnSetLock = true;
-                range.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock, 0);
+                if (clicks >= MAX_CLICKS) {
+                    returnSetLock = true;
+                    range.setCompoundDrawablesWithIntrinsicBounds(0, 0, R.drawable.ic_lock, 0);
+                } else {
+                    range.setCompoundDrawables(null, null, null, null);
+                    returnSetLock = false;
+                }
             } else {
                 range.setCompoundDrawables(null, null, null, null);
                 returnSetLock = false;
             }
-        } else {
-            range.setCompoundDrawables(null, null, null, null);
-            returnSetLock = false;
-        }
+       }
         return returnSetLock;
     }
 

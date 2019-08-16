@@ -483,49 +483,57 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                 callApi();
                 break;
             case R.id.range1Y:
-                if(!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y)) {
-                    isOnlyTime = false;
-                    rangeCurrency = "1y";
-                    Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, false);
-                    callApi();
-                }else {
-                    Popup.ShowRewardedPopup(DetailsActivity.this,  new FinishVideo() {
-                        @Override
-                        public void finish(boolean isFinishSuccess, boolean completeSuccess) {
-                            if (isFinishSuccess) {
-                                isOnlyTime = false;
-                                rangeCurrency = "1y";
-                                Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, completeSuccess);
-                                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y);
-                                callApi();
-                            }else{
-                                resetRadios(range1Y);
+                try {
+                    if (!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y)) {
+                        isOnlyTime = false;
+                        rangeCurrency = "1y";
+                        Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, false);
+                        callApi();
+                    } else {
+                        Popup.ShowRewardedPopup(DetailsActivity.this, new FinishVideo() {
+                            @Override
+                            public void finish(boolean isFinishSuccess, boolean completeSuccess) {
+                                if (isFinishSuccess) {
+                                    isOnlyTime = false;
+                                    rangeCurrency = "1y";
+                                    Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, completeSuccess);
+                                    Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range1Y);
+                                    callApi();
+                                } else {
+                                    resetRadios(range1Y);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                }catch (Exception e){
+                    Log.d("error",e.getMessage());
                 }
                 break;
             case R.id.range3Y:
-                if(!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y)) {
-                    isOnlyTime = false;
-                    rangeCurrency = "3y";
-                    Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, false);
-                    callApi();
-                }else {
-                    Popup.ShowRewardedPopup(DetailsActivity.this,  new FinishVideo() {
-                        @Override
-                        public void finish(boolean isFinishSuccess, boolean completeSuccess) {
-                            if (isFinishSuccess) {
-                                isOnlyTime = false;
-                                rangeCurrency = "3y";
-                                Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, completeSuccess);
-                                Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y);
-                                callApi();
-                            }else{
-                                resetRadios(range3Y);
+                try {
+                    if (!Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y)) {
+                        isOnlyTime = false;
+                        rangeCurrency = "3y";
+                        Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, false);
+                        callApi();
+                    } else {
+                        Popup.ShowRewardedPopup(DetailsActivity.this, new FinishVideo() {
+                            @Override
+                            public void finish(boolean isFinishSuccess, boolean completeSuccess) {
+                                if (isFinishSuccess) {
+                                    isOnlyTime = false;
+                                    rangeCurrency = "3y";
+                                    Utilities.IncrementLock(DetailsActivity.this, rangeCurrency, completeSuccess);
+                                    Utilities.checkLockStatusForRangeRadios(DetailsActivity.this, range3Y);
+                                    callApi();
+                                } else {
+                                    resetRadios(range3Y);
+                                }
                             }
-                        }
-                    });
+                        });
+                    }
+                }catch (Exception e){
+                    Log.d("error",e.getMessage());
                 }
                 break;
             case R.id.radioRanges:
