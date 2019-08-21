@@ -29,7 +29,7 @@
 	<string name="mail_support">contact@romerock.com</string>
 	<string name="max">Max</string>
 	<string name="min">Min</string>
-	<string name="need_at_least_2_currencies">Zum Hinzufügen von Benachrichtigungen sind mindestens 2 Währungen erforderlich</string>
+	<string name="need_at_least_2_currencies">Sie benötigen mindestens zwei Währungen, um Benachrichtigungen einzurichten</string>
 	<string name="need_hours">Sie müssen mindestens 1 Benachrichtigung hinzufügen.</string>
 	<string name="no_thanks">Nein Danke</string>
 	<string name="notification_center">Nachrichtencenter</string>

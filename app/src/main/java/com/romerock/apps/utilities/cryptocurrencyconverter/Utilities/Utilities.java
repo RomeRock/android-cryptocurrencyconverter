@@ -657,12 +657,21 @@ public class Utilities {
     //if true set lock and block radio
     public static boolean checkLockStatusForRangeRadios(Context context, RadioButton range) {
         boolean returnSetLock = false;
-       if(SingletonInAppBilling.Instance()!=null) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+        if (SingletonInAppBilling.Instance() != null) {
+            String isFree = "free";
+            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM() == null) {
+                try {
+                    isFree = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), "free"));
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+                SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(isFree);
+            }
             if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
-                SharedPreferences sharedPrefs;
                 int MAX_CLICKS = 1;
                 int clicks = 0;
-                sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
+
                 if (range.getId() == R.id.range1Y) {
                     clicks = sharedPrefs.getInt(context.getString(R.string.count1ARange), 0);
                 } else {
@@ -682,7 +691,7 @@ public class Utilities {
                 range.setCompoundDrawables(null, null, null, null);
                 returnSetLock = false;
             }
-       }
+        }
         return returnSetLock;
     }
 

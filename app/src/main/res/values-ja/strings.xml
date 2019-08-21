@@ -29,7 +29,7 @@
 	<string name="mail_support">contact@romerock.com</string>
 	<string name="max">Max</string>
 	<string name="min">Min</string>
-	<string name="need_at_least_2_currencies">通知を追加するには少なくとも2つの通貨が必要です</string>
+	<string name="need_at_least_2_currencies">通知を設定するには少なくとも2つの通貨が必要です</string>
 	<string name="need_hours">少なくとも1つの通知を追加する必要があります。</string>
 	<string name="no_thanks">結構です</string>
 	<string name="notification_center">通知センター</string>

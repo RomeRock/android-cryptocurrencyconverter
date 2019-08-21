@@ -127,7 +127,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
                     i.putExtra("positionTo", listDashboardCurrencies.get(1).getName());
                     startActivity(i);
                 } else {
-                    DialogsHelper.showSnackBar(coordinator, getString(R.string.have_currency), getResources().getColor(R.color.alert_snackbar));
+                    DialogsHelper.showSnackBar(coordinator, getString(R.string.need_at_least_2_currencies), getResources().getColor(R.color.alert_snackbar));
                 }
                 break;
         }

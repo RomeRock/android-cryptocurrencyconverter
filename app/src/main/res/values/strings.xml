@@ -111,7 +111,7 @@
     <string name="add">Add</string>
     <string name="titleNotificationCenter">Notification Center</string>
     <string name="time_already_scheduled">The selected time is already scheduled</string>
-    <string name="need_at_least_2_currencies">At least 2 currencies are needed to add notifications</string>
+    <string name="need_at_least_2_currencies">You need to have at least two currencies to setup notifications</string>
     <string name="cant_save_same_currencies">You can not schedule notifications with the same currency</string>
     <string name="need_hours">You need add at least 1 notification.</string>
     <string name="empty_notification_center">You don’t have any\nnotifications</string>

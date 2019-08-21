@@ -40,7 +40,7 @@ public class SingletonInAppBilling {
     private ServiceConnection mServiceConn;
     private IInAppBillingService mService;
     private Bundle skuDetailsProducts;
-    private String IS_FREE_OR_PREMIUM;
+    private String IS_FREE_OR_PREMIUM="";
     private boolean isInvalidated;
     private boolean showPopUp;
     private FirebaseDatabase firebaseDatabase;
