@@ -428,7 +428,6 @@ public class MainActivity extends AppCompatActivity
                     isFreeOrPremiumToSharePreferences = UserUdId.getPREMIUM();
                     SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(isFreeOrPremiumToSharePreferences);
                     params.setMargins(0, 60, 0, 0);
-                    SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(UserUdId.getPREMIUM());
                     try {
                         ed.putString(getString(R.string.purchaseAndroid), cipher(UserUdId.getPREMIUM()));
                     } catch (Exception e) {
@@ -463,7 +462,7 @@ public class MainActivity extends AppCompatActivity
                 linLanguage.setLayoutParams(params);
 
                 try {
-                    ed.putString(getString(R.string.purchaseAndroid), cipher(SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM()));
+                    ed.putString(getString(R.string.purchaseAndroid), cipher(SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(MainActivity.this)));
                     ed.commit();
                 } catch (Exception e) {
                     e.printStackTrace();
@@ -471,7 +470,7 @@ public class MainActivity extends AppCompatActivity
                 UserUdId.verify( isFreeOrPremium,  sharedPrefs, MainActivity.this, firebaseHelper);
             }
         });
-        Utilities.addIntestitialWithCount(MainActivity.this, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM());
+        Utilities.addIntestitialWithCount(MainActivity.this, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(MainActivity.this));
         getUpdateFirebase();
 
 
@@ -524,7 +523,7 @@ public class MainActivity extends AppCompatActivity
                         dashboardAdapter.resetMarginRows();
                     }
                     if (isEditActive) {
-                        mItemTouchHelper.attachToRecyclerView(null);
+                       // mItemTouchHelper.attachToRecyclerView(null);
                         isEditActive = false;
                         txtEditText.setText(getString(R.string.edit));
                         swipyRefreshCurrencies.setEnabled(true);
@@ -538,7 +537,7 @@ public class MainActivity extends AppCompatActivity
                     }
                     break;
                 case R.id.linAddCurrency:
-                    if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
+                    if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(MainActivity.this).compareTo(UserUdId.getFREE()) == 0) {
                         int countCryptoAded= sharedPrefs.getInt(getString(R.string.countCryptoAded), 0);
                         if(countCryptoAded<1){
 
@@ -663,7 +662,7 @@ public class MainActivity extends AppCompatActivity
                     Utilities.countTotalKeys(MainActivity.this);
                     txtEditText.setVisibility(View.VISIBLE);
                     ItemLibraryCurrencyModel itemReturn = (ItemLibraryCurrencyModel) res.get("Current");
-                    Utilities.addIntestitial(MainActivity.this, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM());
+                    Utilities.addIntestitial(MainActivity.this, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(MainActivity.this));
                     if (listDashboardCurrencies != null)
                         for (ItemLibraryCurrencyModel item : listDashboardCurrencies) {
                             if (item.getName().toLowerCase().compareTo(itemReturn.getName().toLowerCase()) == 0)
@@ -939,8 +938,25 @@ public class MainActivity extends AppCompatActivity
         }
     }
 
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState) {
+        super.onSaveInstanceState(savedInstanceState);
+        savedInstanceState.putSerializable("listDashboardCurrencies", (Serializable) listDashboardCurrencies);
+        savedInstanceState.putSerializable("listAllItems", (Serializable) listAllItems);
+    }
+
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        // Restore UI state from the savedInstanceState.
+        // This bundle has also been passed to onCreate.
+        listDashboardCurrencies = (List<ItemLibraryCurrencyModel>) savedInstanceState.getSerializable("listDashboardCurrencies");
+        listAllItems = (List<ItemLibraryCurrencyModel>) savedInstanceState.getSerializable("listAllItems");
+    }
+
     private void shareAndGetRewarded() {
-        if (!sharedPrefs.contains(getString(R.string.shareAndRewarded)) && SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
+        if (!sharedPrefs.contains(getString(R.string.shareAndRewarded)) && SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(MainActivity.this).compareTo(UserUdId.getFREE()) == 0) {
             dialogsHelper.showSnackBar(coordinator, getString(R.string.share_success), getResources().getColor(R.color.colorAccent));
             ed.putBoolean(getString(R.string.shareAndRewarded), true);
             ed.commit();

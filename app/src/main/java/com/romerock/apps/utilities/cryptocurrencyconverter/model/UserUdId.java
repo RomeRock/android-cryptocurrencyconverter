@@ -141,7 +141,7 @@ public class UserUdId {
         String UDID;
         FirebaseHelper firebaseHelper = FirebaseHelper.getInstance();
         try {
-            isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), ""));
+            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context);
             if (isFreeOrPremium.compareTo(UserUdId.getPREMIUM()) == 0) {
                 UDID = CipherAES.decipher(sharedPrefs.getString(context.getString(R.string.purchaseOrder), ""));
                 firebaseHelper.getDataReference(String.format(firebaseHelper.getUDID_PATH(), isFreeOrPremium) + UDID).child("state").addListenerForSingleValueEvent(new ValueEventListener() {
@@ -169,10 +169,10 @@ public class UserUdId {
         }
     }
 
-    public static void verify(String isFreeOrPremium, SharedPreferences sharedPrefs, Context context, final FirebaseHelper firebaseHelper) {
+    public static void verify(String isFreeOrPremium, SharedPreferences sharedPrefs, final Context context, final FirebaseHelper firebaseHelper) {
         String UDID="";
         try {
-            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
+            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context);
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                 UDID = CipherAES.decipher(sharedPrefs.getString(context.getString(R.string.udidAndroid), ""));
             } else {
@@ -184,7 +184,7 @@ public class UserUdId {
         if(!UDID.isEmpty()) {
             final UserUdId userUdId = new UserUdId(sharedPrefs.getString(context.getResources().getString(R.string.language_settings), ""),
                     "active", "",
-                    SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(),
+                    SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context),
                     Utilities.getCurrentTimeStamp());
 
             final String finalUDID = UDID;
@@ -194,7 +194,7 @@ public class UserUdId {
                     Log.d("", "");
                     String fcm = FirebaseInstanceId.getInstance().getToken();
                     if (fcm != null) {
-                        userUdId.checkFreeFMCTocken(firebaseHelper, finalUDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                        userUdId.checkFreeFMCTocken(firebaseHelper, finalUDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context), false);
                     }
                 }
 
@@ -202,7 +202,7 @@ public class UserUdId {
                 public void checkPremiumState(boolean status) {
                     Log.d("", "");
                 }
-            }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), context);
+            }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context), context);
         }
     }
 

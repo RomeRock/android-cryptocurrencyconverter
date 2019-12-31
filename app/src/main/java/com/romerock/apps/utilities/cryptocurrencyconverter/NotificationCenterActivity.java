@@ -143,7 +143,7 @@ public class NotificationCenterActivity extends AppCompatActivity implements The
             setThemeByActivity();
             firebaseHelper = FirebaseHelper.getInstance();
             try {
-                isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
+                isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(NotificationCenterActivity.this);
                 if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                     UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.udidAndroid), ""));
                 } else {

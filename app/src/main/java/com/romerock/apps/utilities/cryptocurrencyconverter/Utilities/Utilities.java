@@ -150,7 +150,10 @@ public class Utilities {
 
     public static String makeOperationWithFormat(double baseValue, Double currency, Double currencyDiv) {
         String result = "";
-        result = getNumberString(Double.parseDouble(String.valueOf((baseValue * currency) / currencyDiv)));
+        if (baseValue == 0 || currency == 0 || currencyDiv == 0)
+            result = "0";
+        else
+            result = getNumberString(Double.parseDouble(String.valueOf((baseValue * currency) / currencyDiv)));
         return result;
     }
 
@@ -419,12 +422,7 @@ public class Utilities {
     public static void addIntestitial(Context context, String isFreeOrPremium) {
         if (todayMayorRegisterDay(context)) {
             if (isFreeOrPremium.isEmpty()) {
-                SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
-                try {
-                    isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), isFreeOrPremium));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+                isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context);
             }
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                 String deviceId, android_id;
@@ -453,11 +451,9 @@ public class Utilities {
             int COUNT_FOR_INTERSTITIAL = 5;
             SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
             if (isFreeOrPremium.isEmpty()) {
-                try {
-                    isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), isFreeOrPremium));
-                } catch (Exception e) {
-                    e.printStackTrace();
-                }
+
+                isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context);
+
             }
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                 SharedPreferences.Editor ed = sharedPrefs.edit();
@@ -525,7 +521,7 @@ public class Utilities {
     }
 
     public static void countTotalKeys(Context context) {
-        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
+        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context).compareTo(UserUdId.getFREE()) == 0) {
             SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
             int countKeys = sharedPrefs.getInt(context.getString(R.string.preferences_count_keys), 0);
             if (countKeys < 9) {
@@ -544,12 +540,7 @@ public class Utilities {
         String deviceId, android_id;
         AdRequest adRequest = null;
         if (isFreeOrPremium.isEmpty()) {
-            SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
-            try {
-                isFreeOrPremium = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), isFreeOrPremium));
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
+            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context);
         }
         try {
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
@@ -623,7 +614,7 @@ public class Utilities {
         SharedPreferences sharedPrefs;
         sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
         if (context != null) {
-            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
+            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context).compareTo("free") == 0) {
                 final AdView adView = new AdView(context);
                 //mayor a 430
                 DisplayMetrics metrics = context.getResources().getDisplayMetrics();
@@ -660,7 +651,7 @@ public class Utilities {
         SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), MODE_PRIVATE);
         if (SingletonInAppBilling.Instance() != null) {
             String isFree = "free";
-            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM() == null) {
+            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context) == null) {
                 try {
                     isFree = CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), "free"));
                 } catch (Exception e) {
@@ -668,7 +659,7 @@ public class Utilities {
                 }
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(isFree);
             }
-            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo("free") == 0) {
+            if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context).compareTo("free") == 0) {
                 int MAX_CLICKS = 1;
                 int clicks = 0;
 

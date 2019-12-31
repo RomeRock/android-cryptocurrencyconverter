@@ -141,7 +141,7 @@ public class NotificationModel implements Serializable {
 
     public static boolean checkGlobal(Context context, boolean incrementOrDecrement) {
         //globalCount
-        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
+        if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context).compareTo(UserUdId.getFREE()) == 0) {
             SharedPreferences sharedPreferences = context.getSharedPreferences(context.getString(R.string.preferences_name), context.MODE_PRIVATE);
             int globalCount = sharedPreferences.getInt(context.getString(R.string.globalCount), 0);
             SharedPreferences.Editor ed = sharedPreferences.edit();
@@ -183,7 +183,7 @@ public class NotificationModel implements Serializable {
             String UDID = "";
 
             try {
-                if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0) {
+                if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context).compareTo(UserUdId.getFREE()) == 0) {
                     UDID = CipherAES.decipher(sharedPrefs.getString(context.getString(R.string.udidAndroid), ""));
                 } else {
                     UDID = CipherAES.decipher(sharedPrefs.getString(context.getString(R.string.purchaseOrder), ""));
@@ -194,7 +194,7 @@ public class NotificationModel implements Serializable {
             if (!UDID.isEmpty()) {
                 final UserUdId userUdId = new UserUdId(sharedPrefs.getString(context.getResources().getString(R.string.language_settings), ""),
                         "active", "",
-                        SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(),
+                        SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context),
                         Utilities.getCurrentTimeStamp());
 
                 final String finalUDID = UDID;
@@ -208,7 +208,7 @@ public class NotificationModel implements Serializable {
                             SharedPreferences.Editor ed = sharedPrefs.edit();
                                 if (fcm != null)
                                     try {
-                                        userUdId.checkFreeFMCTocken(firebaseHelper, finalUDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                                        userUdId.checkFreeFMCTocken(firebaseHelper, finalUDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context), false);
                                         ed.putString(context.getString(R.string.fcmUser), CipherAES.cipher(fcm));
                                         ed.commit();
                                     } catch (Exception e) {
@@ -221,7 +221,7 @@ public class NotificationModel implements Serializable {
                             int hour = Utilities.roundHour();
                             String[] hoursToSave = {String.valueOf(hour)};
                             NotificationModel notificationModel = new NotificationModel(finalKey, null, hoursToSave);
-                            NotificationModel.addCurrencyNotification(firebaseHelper, finalUDID1, finalKey, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), notificationModel);
+                            NotificationModel.addCurrencyNotification(firebaseHelper, finalUDID1, finalKey, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context), notificationModel);
                         }
                     }
 
@@ -229,7 +229,7 @@ public class NotificationModel implements Serializable {
                     public void checkPremiumState(boolean status) {
 
                     }
-                }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), context);
+                }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context), context);
             }
 
         }

@@ -3,6 +3,7 @@ package com.romerock.apps.utilities.cryptocurrencyconverter.helpers;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.ServiceConnection;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.IBinder;
 import android.os.RemoteException;
@@ -11,7 +12,9 @@ import android.util.Log;
 import com.android.vending.billing.IInAppBillingService;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.firebase.database.FirebaseDatabase;
+import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.UserUdId;
+import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -187,8 +190,18 @@ public class SingletonInAppBilling {
         SingletonInAppBilling.finalPricepackage = finalPricepackage;
     }
 
-    public String getIS_FREE_OR_PREMIUM() {
-        return IS_FREE_OR_PREMIUM;
+    public String getIS_FREE_OR_PREMIUM(Context context) {
+        SharedPreferences sharedPrefs = context.getSharedPreferences(context.getString(R.string.preferences_name), context.MODE_PRIVATE);
+        if(sharedPrefs.contains(context.getString(R.string.purchaseAndroid))){
+            try {
+                this.IS_FREE_OR_PREMIUM= CipherAES.decipher(sharedPrefs.getString(context.getResources().getString(R.string.purchaseAndroid), ""));
+            } catch (Exception e) {
+                this.IS_FREE_OR_PREMIUM= UserUdId.getFREE();
+            }
+        }else{
+            this.IS_FREE_OR_PREMIUM= UserUdId.getFREE();
+        }
+        return this.IS_FREE_OR_PREMIUM;
     }
 
     public void setIS_FREE_OR_PREMIUM(String IS_FREE_OR_PREMIUM) {

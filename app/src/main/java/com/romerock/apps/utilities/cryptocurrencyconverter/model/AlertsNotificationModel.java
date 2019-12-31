@@ -13,6 +13,13 @@ public class AlertsNotificationModel implements Serializable {
     private double low;
     private boolean low_active;
 
+    public AlertsNotificationModel() {
+        high = 0;
+        high_active = false;
+        low = 0;
+        low_active = false;
+    }
+
     public double getHigh() {
         return high;
     }

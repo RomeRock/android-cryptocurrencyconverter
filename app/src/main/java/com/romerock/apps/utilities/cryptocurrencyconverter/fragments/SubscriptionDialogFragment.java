@@ -267,7 +267,7 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
             @Override
             public void checkPremiumState(boolean status) {
             }
-        }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), getActivity());
+        }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context), getActivity());
     }
 
     @Override

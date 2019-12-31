@@ -202,7 +202,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
             }
         }
         try {
-            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
+            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this);
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
                 UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.udidAndroid), ""));
             } else {
@@ -248,7 +248,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         recyclerViewHoursAdded.setAdapter(mAdapter);
         recyclerViewHoursAdded.setItemAnimator(new DefaultItemAnimator());
         try {
-            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
+            isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -393,7 +393,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                             }
                         }
                     }
-                 /*   if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM().compareTo(UserUdId.getFREE()) == 0 && (itemsHours.size() > 0 || countHours > 1)) {
+                 /*   if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this).compareTo(UserUdId.getFREE()) == 0 && (itemsHours.size() > 0 || countHours > 1)) {
                         Popup.SubscribeMe(SetupPushNotificationsActivity.this);
                     } else {*/
                     TimePickerDialog timePickerDialog;
@@ -445,7 +445,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                     }
                     final UserUdId userUdId = new UserUdId(sharedPrefs.getString(getResources().getString(R.string.language_settings), ""),
                             "active", "",
-                            SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(),
+                            SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this),
                             Utilities.getCurrentTimeStamp());
                     //double createdtstamp, double expirationtstamp, String expiredate, String language, String state, String timezon
                     if (txtCurrentFrom.getText().toString().compareTo(txtCurrentTo.getText().toString()) != 0) {
@@ -458,7 +458,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                                     if (sharedPrefs.getString(getResources().getString(R.string.fcmUser), "").compareTo("") == 0) {
                                         if (fcm != null)
                                             try {
-                                                userUdId.checkFreeFMCTocken(firebaseHelper, UDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                                                userUdId.checkFreeFMCTocken(firebaseHelper, UDID, fcm, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this), false);
                                                 ed.putString(getString(R.string.fcmUser), CipherAES.cipher(fcm));
                                                 ed.commit();
                                             } catch (Exception e) {
@@ -471,7 +471,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                                             ed.commit();
                                             FMCTocken = fcm;
                                         }
-                                        userUdId.checkFreeFMCTocken(firebaseHelper, UDID, FMCTocken, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), false);
+                                        userUdId.checkFreeFMCTocken(firebaseHelper, UDID, FMCTocken, userUdId.getCreatedtstamp(), SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this), false);
 
                                         String[] hoursToSave = new String[itemsHours.size()];
                                         int hours = 0;
@@ -508,7 +508,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                                             haveAlert = false;
                                         }
                                         notificationModel = new NotificationModel(key, alertsNotificationModel, hoursToSave);
-                                        NotificationModel.addCurrencyNotification(firebaseHelper, UDID, key, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), notificationModel);
+                                        NotificationModel.addCurrencyNotification(firebaseHelper, UDID, key, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this), notificationModel);
 
                                     }
                                 } catch (Exception e) {
@@ -520,7 +520,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                             public void checkPremiumState(boolean status) {
 
                             }
-                        }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(), SetupPushNotificationsActivity.this);
+                        }, userUdId, SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this), SetupPushNotificationsActivity.this);
 
                     }
 
@@ -561,10 +561,15 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     }
 
     private void makeOperation() {
-        if (currenciesFromPreferences != null)
-            resultAmount = Double.valueOf(String.valueOf(Utilities.getNumberDecimal(Utilities.makeOperationWithFormat(1, currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionTo, currenciesFromPreferences)).getCurrency(),
-                    currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionFrom, currenciesFromPreferences)).getCurrency()))));
-
+        if (currenciesFromPreferences != null) {
+            try {
+                resultAmount = Double.valueOf(String.valueOf(Utilities.getNumberDecimal(Utilities.makeOperationWithFormat(1,
+                        currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionTo, currenciesFromPreferences)).getCurrency(),
+                        currenciesFromPreferences.get(CurrencyConvertApiModel.getPositionInList(positionFrom, currenciesFromPreferences)).getCurrency()))));
+            } catch (Exception e) {
+                resultAmount = null;
+            }
+        }
         if (resultAmount == null) {
             resultAmount = Double.valueOf(0);
             overAlert = 0.5;
@@ -626,7 +631,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         if (requestCode == FINISH_PURCHASE) {
             if (resultCode == RESULT_OK) {
                 try {
-                    isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM();
+                    isFreeOrPremium = SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this);
                     UDID = CipherAES.decipher(sharedPrefs.getString(getString(R.string.purchaseOrder), ""));
                 } catch (Exception e) {
                     e.printStackTrace();

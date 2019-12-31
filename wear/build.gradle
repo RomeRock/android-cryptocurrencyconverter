@@ -7,7 +7,7 @@ android {
     defaultConfig {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 23
-        targetSdkVersion 27
+        targetSdkVersion 28
         versionCode 102
         versionName "1.0.2"
     }
