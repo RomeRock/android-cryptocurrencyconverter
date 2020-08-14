@@ -528,7 +528,8 @@ public class MainActivity extends AppCompatActivity
                         txtEditText.setText(getString(R.string.edit));
                         swipyRefreshCurrencies.setEnabled(true);
                     } else {
-                        mItemTouchHelper.attachToRecyclerView(recyclerCurrencyDashboard);
+                        if(recyclerCurrencyDashboard!=null)
+                            mItemTouchHelper.attachToRecyclerView(recyclerCurrencyDashboard);
                         isEditActive = true;
                         txtEditText.setText(getString(R.string.done));
                         swipyRefreshCurrencies.setEnabled(false);
