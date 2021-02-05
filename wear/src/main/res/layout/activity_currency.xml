@@ -14,7 +14,7 @@
         android:id="@+id/linTopBar">
 
 
-        <android.support.v7.widget.Toolbar
+        <androidx.appcompat.widget.Toolbar
             android:id="@+id/toolbarsearch"
             style="@style/tittleSettingsSymbol"
             android:layout_width="wrap_content"
@@ -26,7 +26,7 @@
             app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
 
     <!--searchView layout-->
-    <android.support.v7.widget.SearchView
+    <androidx.appcompat.widget.SearchView
         android:id="@+id/search_view"
         android:paddingLeft="60dp"
         android:layout_marginTop="20dp"
@@ -48,7 +48,7 @@
     </LinearLayout>
 
 
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerCurrency"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

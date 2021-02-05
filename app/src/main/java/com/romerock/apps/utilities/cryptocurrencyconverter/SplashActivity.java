@@ -10,7 +10,6 @@ import android.view.Window;
 import android.view.WindowManager;
 
 import com.applovin.sdk.AppLovinSdk;
-import com.crashlytics.android.Crashlytics;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.LocaleHelper;
@@ -45,7 +44,7 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         AppLovinSdk.initializeSdk(SplashActivity.this);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(CipherAES.getApiKeyTwitter(), CipherAES.getApiSecretKeyTwitter());
-        Fabric.with(this, new Twitter(authConfig), new Crashlytics());
+        Fabric.with(this, new Twitter(authConfig));
         //Stetho.initializeWithDefaults(this);  //   TODO  ------- BORRAR ES SOLO PARA DEBUG
         sPlashScreen = this;
         PushNotificationModel.CleanBadges(this);

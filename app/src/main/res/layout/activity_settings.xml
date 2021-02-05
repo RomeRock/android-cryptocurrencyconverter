@@ -18,7 +18,7 @@
         android:fontFamily="dosis_medium"
         android:text="@string/settings_option_select_lenguage" />
 
-    <android.support.v7.widget.Toolbar
+    <androidx.appcompat.widget.Toolbar
         android:id="@+id/toolbarback"
         style="@style/tittleSettingsSymbol"
         android:layout_width="wrap_content"
@@ -30,7 +30,7 @@
         app:navigationIcon="?attr/homeAsUpIndicator"
         app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
     <!--searchView layout-->
-    <android.support.v7.widget.RecyclerView
+    <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/recyclerview"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

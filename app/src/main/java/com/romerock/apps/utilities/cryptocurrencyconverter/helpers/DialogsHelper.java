@@ -7,14 +7,13 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.Snackbar;
+import androidx.coordinatorlayout.widget.CoordinatorLayout;
+import com.google.android.material.snackbar.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.crashlytics.android.Crashlytics;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.PurchaseDialog;
 
@@ -42,7 +41,7 @@ public class DialogsHelper extends Activity implements Serializable {
         snackbar.getView().setBackgroundColor(color);
         snackbar.setDuration(5000);
         View view = snackbar.getView();
-        TextView tv = (TextView) view.findViewById(android.support.design.R.id.snackbar_text);
+        TextView tv = (TextView) view.findViewById( R.id.snackbar_text);
         tv.setTextColor(Color.WHITE);
         snackbar.show();
     }
@@ -68,7 +67,7 @@ public class DialogsHelper extends Activity implements Serializable {
                         settingsDialog.dismiss();
                    // }
                 }catch (Exception e){
-                    Crashlytics.logException(e);
+
                 }
     }
 

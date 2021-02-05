@@ -13,7 +13,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.model.PushNotificatio
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-import static android.support.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
+import static androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
 
 
 public class LocalFirebaseMessagingService extends FirebaseMessagingService {

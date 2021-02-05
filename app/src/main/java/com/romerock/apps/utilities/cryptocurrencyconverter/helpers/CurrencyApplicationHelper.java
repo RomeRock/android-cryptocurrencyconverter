@@ -3,8 +3,6 @@ package com.romerock.apps.utilities.cryptocurrencyconverter.helpers;
 import android.app.Application;
 import android.content.Context;
 import android.content.SharedPreferences;
-import com.crashlytics.android.Crashlytics;
-import io.fabric.sdk.android.Fabric;
 
 /**
  * Created by Ebricko on 29/01/2018.
@@ -17,7 +15,6 @@ public class CurrencyApplicationHelper extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        Fabric.with(this, new Crashlytics());
         CurrencyApplicationHelper.context = getApplicationContext();
         preferences = getSharedPreferences(getPackageName() + "_POLL_ROMEROCK", MODE_PRIVATE);
     }

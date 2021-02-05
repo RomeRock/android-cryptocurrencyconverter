@@ -3,8 +3,8 @@ package com.romerock.apps.utilities.cryptocurrencyconverter.Utilities;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.Context;
-import android.support.v4.app.FragmentActivity;
-import android.support.v4.app.FragmentManager;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentManager;
 import android.view.View;
 
 import com.romerock.apps.utilities.cryptocurrencyconverter.fragments.FeedbackDialogFragment;

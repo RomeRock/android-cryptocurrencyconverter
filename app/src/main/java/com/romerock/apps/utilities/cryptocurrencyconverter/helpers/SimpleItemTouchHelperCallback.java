@@ -4,8 +4,8 @@ package com.romerock.apps.utilities.cryptocurrencyconverter.helpers;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.graphics.Canvas;
-import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.helper.ItemTouchHelper;
+import androidx.recyclerview.widget.RecyclerView;
+import androidx.recyclerview.widget.ItemTouchHelper;
 
 import com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemTouchHelperInterface;
