@@ -14,7 +14,7 @@ import retrofit2.http.Query;
 
 public interface ApiConfig {
 
-    @GET("/v1/currency/history/json/get")
+    @GET("/v1/cryptocurrency/history/json/get")
     Call<CurrencyResponseModel> getCurrencyCompare(
             @Query("apikey") String apikey,
             @Query("fromsymbol") String fromsymbol,

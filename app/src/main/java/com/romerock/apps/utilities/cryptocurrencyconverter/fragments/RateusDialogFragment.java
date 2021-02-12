@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Popup;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
+import com.romerock.apps.utilities.cryptocurrencyconverter.BuildConfig;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -126,9 +127,24 @@ public class RateusDialogFragment extends DialogFragment {
                     Popup.Feedback(getActivity());
                 } else {
                     try {
+                        String feedbackStore;
+                        switch (BuildConfig.FLAVOR){
+                            case "amazon":
+                                feedbackStore="https://www.amazon.com/-/es/dp/B07P9D8VKF/";
+                                break;
+                            case "samsung":
+                                feedbackStore = "http://apps.samsung.com/appquery/appDetail.as?appId=";
+                                break;
+                            case "huawei":
+                                feedbackStore="https://appgallery.huawei.com/#/app/C103843159";        // Cambiar este al ID de huawei
+                                break;
+                            default:
+                                feedbackStore="market://details?id=";
+                        }
+
                         String appId = getActivity().getPackageName();
                         Intent rateIntent = new Intent(Intent.ACTION_VIEW,
-                                Uri.parse("market://details?id=" + appId));
+                                Uri.parse(feedbackStore + appId));
                         getActivity().startActivity(rateIntent);
                     }catch (Exception e){
 

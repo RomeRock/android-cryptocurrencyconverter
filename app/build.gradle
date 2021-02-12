@@ -47,6 +47,52 @@ android {
 
         }
     }
+    sourceSets {
+        samsung {
+            res.srcDirs = ['/src/samsung/res']
+            resources {
+                exclude 'aidl/*'
+            }
+        }
+        google {
+            res.srcDirs = ['/src/google/res' ]
+
+        }
+        amazon {
+            res.srcDirs = ['/src/amazon/res' ]
+            java.srcDir('/src/samsung/java')
+            resources {
+                exclude 'aidl/*'
+            }
+        }
+        huawei {
+            res.srcDirs = ['/src/samsung/res' ]
+            java.srcDir('/src/samsung/java')
+            resources {
+                exclude 'aidl/*'
+            }
+        }
+    }
+//constantes para usar
+    flavorDimensions 'stores'
+    productFlavors {
+        samsung {
+            dimension = 'stores'
+            buildConfigField 'String', 'URL_STORE', "\"http://apps.samsung.com/appquery/appDetail.as?appId=\""
+        }
+        google {
+            dimension = 'stores'
+            buildConfigField 'String', 'URL_STORE', "\"https://play.google.com/store/apps/details?id=\""
+        }
+        amazon {
+            dimension = 'stores'
+            buildConfigField 'String', 'URL_STORE', "\"https://play.google.com/store/apps/details?id=\""
+        }
+        huawei {
+            dimension = 'stores'
+            buildConfigField 'String', 'URL_STORE', "\"https://play.google.com/store/apps/details?id=\""
+        }
+    }
     lintOptions {
         checkReleaseBuilds false
         abortOnError false
@@ -75,7 +121,7 @@ dependencies {
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.orangegangsters:swipy:1.2.3@aar'
     implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
-    implementation 'com.facebook.android:facebook-share:[4,5)'
+    implementation 'com.facebook.android:facebook-share:8.1.0'
     implementation('com.twitter.sdk.android:twitter:2.3.2@aar') {
         transitive = true;
     }
@@ -99,7 +145,7 @@ dependencies {
     implementation 'com.squareup.picasso:picasso:2.5.2'
     implementation 'androidx.recyclerview:recyclerview:1.0.0'
     implementation 'com.facebook.android:audience-network-sdk:4.28.2'
-    implementation 'com.google.ads.mediation:facebook:4.28.2.0'
+    implementation 'com.google.ads.mediation:facebook:5.2.0.1'
     implementation 'com.google.android.gms:play-services-ads:15.0.1'
     implementation 'com.google.android.ads:mediation-test-suite:0.9.0'
     implementation platform('com.google.firebase:firebase-bom:26.2.0')
