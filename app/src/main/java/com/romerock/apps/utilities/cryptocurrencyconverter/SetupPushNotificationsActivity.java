@@ -33,6 +33,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.DialogsHelper
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.FirebaseHelper;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CheckUDIDListener;
+import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemClickLibraryInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.NotificationsListListener;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ThemeInterface;
@@ -159,6 +160,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
     private char separator = DecimalFormatSymbols.getInstance().getDecimalSeparator();
     private boolean block = false;
     private boolean saveActive = true;
+    private boolean successReward=false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -330,7 +332,20 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                         saveNotification();
                     } else {
                         switchOver.setChecked(false);
-                        Popup.SubscribeMe(SetupPushNotificationsActivity.this);
+                        if(BuildConfig.FLAVOR.compareTo("google")==0){
+                            Popup.SubscribeMe(SetupPushNotificationsActivity.this);
+                        }else {
+                            Popup.ShowRewardedPopup(SetupPushNotificationsActivity.this, new FinishVideo() {
+                                @Override
+                                public void finish(boolean isFinishSuccess, boolean completeSuccess) {
+                                    if (isFinishSuccess) {
+                                        NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true);
+                                        saveNotification();
+                                        switchOver.setChecked(true);
+                                    }
+                                }
+                            });
+                        }
                     }
                 } else {
                     NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, false);
@@ -347,7 +362,20 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                         saveNotification();
                     } else {
                         switchBelow.setChecked(false);
-                        Popup.SubscribeMe(SetupPushNotificationsActivity.this);
+                        if(BuildConfig.FLAVOR.compareTo("google")==0){
+                            Popup.SubscribeMe(SetupPushNotificationsActivity.this);
+                        }else {
+                            Popup.ShowRewardedPopup(SetupPushNotificationsActivity.this, new FinishVideo() {
+                                @Override
+                                public void finish(boolean isFinishSuccess, boolean completeSuccess) {
+                                    if (isFinishSuccess) {
+                                        NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true);
+                                        saveNotification();
+                                        switchBelow.setChecked(true);
+                                    }
+                                }
+                            });
+                        }
                     }
                 } else {
                     NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, false);
@@ -383,34 +411,47 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
                 changeCurrent();
                 break;
             case R.id.linAddHours:
-                if (NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)) {
-                    int countHours = itemsHours.size();
-                    if (notificationModelList != null) {
-                        if (notificationModelList.size() > 0) {
-                            for (int i = 0; i < notificationModelList.size(); i++) {
-                                if (notificationModelList.get(i).getKey().compareTo(positionFrom + "-" + positionTo) != 0)
-                                    countHours++;
-                            }
-                        }
-                    }
-                 /*   if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(SetupPushNotificationsActivity.this).compareTo(UserUdId.getFREE()) == 0 && (itemsHours.size() > 0 || countHours > 1)) {
-                        Popup.SubscribeMe(SetupPushNotificationsActivity.this);
-                    } else {*/
-                    TimePickerDialog timePickerDialog;
-                    timePickerDialog = TimePickerDialog.newInstance(SetupPushNotificationsActivity.this, new Date().getHours(), new Date().getMinutes(), false);
-                    timePickerDialog.enableMinutes(false);
-                    if (themeSelected.contains("Night")) {
-                        timePickerDialog.setThemeDark(true);
-                    } else if (themeSelected.contains("Daylight")) {
-                        timePickerDialog.setThemeDark(false);
-                    }
-                    timePickerDialog.show(getFragmentManager(), "tag");
-                    // }
+                if (NotificationModel.checkGlobal(SetupPushNotificationsActivity.this, true)||successReward) {
+                   processAddHour();
                 } else {
-                    Popup.SubscribeMe(SetupPushNotificationsActivity.this);
+                    if(BuildConfig.FLAVOR.compareTo("google")==0)
+                        Popup.SubscribeMe(SetupPushNotificationsActivity.this);
+                    else{
+                        Popup.ShowRewardedPopup(SetupPushNotificationsActivity.this, new FinishVideo() {
+                            @Override
+                            public void finish(boolean isFinishSuccess, boolean completeSuccess) {
+                                if (isFinishSuccess) {
+                                    successReward=true;
+                                    processAddHour();
+                                }
+                            }
+                        });
+                    }
                 }
                 break;
         }
+    }
+
+    private void processAddHour() {
+        successReward=false;
+        int countHours = itemsHours.size();
+        if (notificationModelList != null) {
+            if (notificationModelList.size() > 0) {
+                for (int i = 0; i < notificationModelList.size(); i++) {
+                    if (notificationModelList.get(i).getKey().compareTo(positionFrom + "-" + positionTo) != 0)
+                        countHours++;
+                }
+            }
+        }
+        TimePickerDialog timePickerDialog;
+        timePickerDialog = TimePickerDialog.newInstance(SetupPushNotificationsActivity.this, new Date().getHours(), new Date().getMinutes(), false);
+        timePickerDialog.enableMinutes(false);
+        if (themeSelected.contains("Night")) {
+            timePickerDialog.setThemeDark(true);
+        } else if (themeSelected.contains("Daylight")) {
+            timePickerDialog.setThemeDark(false);
+        }
+        timePickerDialog.show(getFragmentManager(), "tag");
     }
 
     private void changeCurrent() {

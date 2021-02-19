@@ -261,7 +261,6 @@ public class SubscriptionDialogFragment extends DialogFragment implements ThemeI
                 } catch (Exception e) {
                     e.printStackTrace();
                 }
-
             }
 
             @Override

@@ -48,7 +48,7 @@
 	<string name="pop_up_get_some_love_tittle">アプリを評価してください</string>
 	<string name="pop_up_rate_subject">通貨換算-フィードバック-Android</string>
 	<string name="pop_up_share_content">私たちのアプリが好きですか？\nFacebookまたはTwitterでアプリを共有してください!!</string>
-	<string name="pop_up_share_tittle">世界と共有する\nそして報われる</string>
+	<string name="pop_up_share_tittle">世界と共有する</string>
 	<string name="price_per_month">％s / 月</string>
 	<string name="privacy_policy">個人情報保護方針</string>
 	<string name="range1D">24時間</string>
@@ -106,4 +106,7 @@
 	<string name="label_xpressVote">"Xpress Vote"  - アンケートと投票</string>
 	<string name="share_on_facebook">Facebookでシェア</string>
 	<string name="share_on_twitter">Twitterでシェアする</string>
+    <string name="label_Currency">通貨換算</string>
+	<string name="label_piggy_goals">貯金箱</string>
+	<string name="label_Books">最新の本</string>
 </resources>

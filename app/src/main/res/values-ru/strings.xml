@@ -48,7 +48,7 @@
 	<string name="pop_up_get_some_love_tittle">Пожалуйста, оцените наше приложение</string>
 	<string name="pop_up_rate_subject">Конвертер валют - Обратная связь - Android</string>
 	<string name="pop_up_share_content">Вам нравится наше приложение?\nПоделитесь нашим приложением на Facebook или Twitter!</string>
-	<string name="pop_up_share_tittle">Поделись с миром\nи получить вознаграждение</string>
+	<string name="pop_up_share_tittle">Поделись с миром</string>
 	<string name="price_per_month">%s / месяц</string>
 	<string name="privacy_policy">политика конфиденциальности</string>
 	<string name="range1D">24H</string>
@@ -106,4 +106,7 @@
 	<string name="label_xpressVote">«Голосование Xpress» - Опросы</string>
 	<string name="share_on_facebook">Поделиться через фейсбук</string>
 	<string name="share_on_twitter">Поделиться в Twitter</string>
+    <string name="label_Currency">Конвертер валют</string>
+	<string name="label_piggy_goals">Копилка</string>
+	<string name="label_Books">Последние книги</string>
 </resources>

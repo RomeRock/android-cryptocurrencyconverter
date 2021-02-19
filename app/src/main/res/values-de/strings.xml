@@ -48,7 +48,7 @@
 	<string name="pop_up_get_some_love_tittle">Bitte bewerten Sie unsere App</string>
 	<string name="pop_up_rate_subject">Währungsrechner - Feedback - Android</string>
 	<string name="pop_up_share_content">Gefällt dir unsere App?\nTeile unsere App auf Facebook oder Twitter !!</string>
-	<string name="pop_up_share_tittle">Teilen Sie mit der Welt\nund belohnt werden</string>
+	<string name="pop_up_share_tittle">Teilen Sie mit der Welt</string>
 	<string name="price_per_month">%s / Monat</string>
 	<string name="privacy_policy">Datenschutz-Bestimmungen</string>
 	<string name="range1D">24h</string>
@@ -106,4 +106,7 @@
 	<string name="label_xpressVote">"Xpress Vote" - Umfragen und Abstimmungen</string>
 	<string name="share_on_facebook">Auf Facebook teilen</string>
 	<string name="share_on_twitter">Auf Twitter teilen</string>
+    <string name="label_Currency">Währungsrechner</string>
+	<string name="label_piggy_goals">Sparschwein</string>
+	<string name="label_Books">Neueste Bücher</string>
 </resources>

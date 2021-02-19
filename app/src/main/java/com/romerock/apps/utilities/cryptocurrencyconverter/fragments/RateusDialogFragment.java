@@ -136,7 +136,7 @@ public class RateusDialogFragment extends DialogFragment {
                                 feedbackStore = "http://apps.samsung.com/appquery/appDetail.as?appId=";
                                 break;
                             case "huawei":
-                                feedbackStore="https://appgallery.huawei.com/#/app/C103843159";        // Cambiar este al ID de huawei
+                                feedbackStore="https://appgallery.huawei.com/#/app/C103855619";        // Cambiar este al ID de huawei
                                 break;
                             default:
                                 feedbackStore="market://details?id=";

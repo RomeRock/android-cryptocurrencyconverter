@@ -204,15 +204,73 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="16dp"
                             android:text="@string/tryOurFree" />
+                        <LinearLayout
+                            android:id="@+id/linPiggy"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
 
+                            <ImageView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:padding="4dp"
+                                android:src="@drawable/icon_piggy" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="12dp"
+                                android:fontFamily="@font/dosis_medium"
+                                android:text="@string/label_piggy_goals"
+                                android:textAllCaps="true" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/lin52Challenge"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:src="@drawable/icon_52_weeks" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="12dp"
+                                android:fontFamily="@font/dosis_medium"
+                                android:text="@string/label_52Challenge"
+                                android:textAllCaps="true" />
+                        </LinearLayout>
+                        <LinearLayout
+                            android:id="@+id/linCurrency"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:padding="4dp"
+                                android:src="@drawable/icon_currency" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="12dp"
+                                android:fontFamily="@font/dosis_medium"
+                                android:text="@string/label_Currency"
+                                android:textAllCaps="true" />
+                        </LinearLayout>
                         <LinearLayout
                             android:id="@+id/linTipCalculator"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
                                 android:src="@drawable/icon_tipcalculator" />
 
                             <TextView
@@ -225,33 +283,13 @@
                                 android:textAllCaps="true" />
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/linXpressVote"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginTop="8dp">
-
-                            <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/icon_xpressvote" />
-
-                            <TextView
-                                android:layout_width="match_parent"
-                                android:layout_height="wrap_content"
-                                android:layout_gravity="center_vertical"
-                                android:layout_marginLeft="12dp"
-                                android:fontFamily="@font/dosis_medium"
-                                android:text="@string/label_xpressVote"
-                                android:textAllCaps="true" />
-                        </LinearLayout>
-                        <LinearLayout
                             android:id="@+id/linQuickConverter"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
                                 android:src="@drawable/icon_quick" />
 
                             <TextView
@@ -270,8 +308,8 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
                                 android:src="@drawable/icon_tax" />
 
                             <TextView
@@ -289,8 +327,8 @@
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
                                 android:src="@drawable/icon_loan" />
 
                             <TextView
@@ -302,16 +340,16 @@
                                 android:text="@string/label_loanCalculator"
                                 android:textAllCaps="true" />
                         </LinearLayout>
-                        <LinearLayout
-                            android:id="@+id/lin52Challenge"
-                            android:layout_marginBottom="8dp"
+
+                        <!--<LinearLayout
+                            android:id="@+id/linBooks"
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content">
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/icon_52_weeks" />
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:src="@drawable/icon_latestbooks" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -319,19 +357,38 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/label_52Challenge"
+                                android:text="@string/label_Books"
+                                android:textAllCaps="true" />
+                        </LinearLayout>-->
+                        <LinearLayout
+                            android:id="@+id/linBooks"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content">
+
+                            <ImageView
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:padding="4dp"
+                                android:src="@drawable/icon_latestbooks" />
+
+                            <TextView
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginLeft="12dp"
+                                android:fontFamily="@font/"
+                                android:text="@string/label_Books"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                         <LinearLayout
-                            android:id="@+id/linClashMate"
-                            android:layout_marginBottom="8dp"
+                            android:id="@+id/linXpressVote"
                             android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
+                            android:layout_height="wrap_content" >
 
                             <ImageView
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:src="@drawable/icon_clashmate" />
+                                android:layout_width="52dp"
+                                android:layout_height="52dp"
+                                android:src="@drawable/icon_xpressvote" />
 
                             <TextView
                                 android:layout_width="match_parent"
@@ -339,7 +396,7 @@
                                 android:layout_gravity="center_vertical"
                                 android:layout_marginLeft="12dp"
                                 android:fontFamily="@font/dosis_medium"
-                                android:text="@string/label_clashmate"
+                                android:text="@string/label_xpressVote"
                                 android:textAllCaps="true" />
                         </LinearLayout>
                     </LinearLayout>
@@ -349,7 +406,7 @@
             <LinearLayout
                 android:id="@+id/linButtom"
                 android:layout_width="match_parent"
-                android:layout_height="105dp"
+                android:layout_height="90dp"
                 android:layout_alignParentBottom="true"
                 android:background="@color/backgroundAccentTheme1">
 

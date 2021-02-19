@@ -48,7 +48,7 @@
 	<string name="pop_up_get_some_love_tittle">Si prega di valutare la nostra app</string>
 	<string name="pop_up_rate_subject">Convertitore di valuta - Feedback - Android</string>
 	<string name="pop_up_share_content">Ti piace la nostra app?\nCondividi la nostra app su Facebook o Twitter !!</string>
-	<string name="pop_up_share_tittle">Condividi con il mondo\ne vieni premiato</string>
+	<string name="pop_up_share_tittle">Condividi con il mondo</string>
 	<string name="price_per_month">%s / Mese</string>
 	<string name="privacy_policy">politica sulla riservatezza</string>
 	<string name="range1D">24H</string>
@@ -106,4 +106,7 @@
 	<string name="label_xpressVote">"Xpress Vote" - Sondaggi</string>
 	<string name="share_on_facebook">Condividi su Facebook</string>
 	<string name="share_on_twitter">Condividi su Twitter</string>
+    <string name="label_Currency">Convertitore di valuta</string>
+	<string name="label_piggy_goals">Salvadanaio</string>
+	<string name="label_Books">Gli ultimi libri</string>
 </resources>

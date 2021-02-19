@@ -146,7 +146,7 @@ public class NotificationModel implements Serializable {
             int globalCount = sharedPreferences.getInt(context.getString(R.string.globalCount), 0);
             SharedPreferences.Editor ed = sharedPreferences.edit();
             if (incrementOrDecrement) {
-                if (globalCount < 1) {
+                if (globalCount < 2) {
                     globalCount++;
                     ed.putInt(context.getString(R.string.globalCount), globalCount);
                     ed.commit();

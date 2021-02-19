@@ -29,6 +29,8 @@ import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
 import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
+import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.romerock.apps.utilities.cryptocurrencyconverter.BuildConfig;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.SplashActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.api.ApiConfig;
@@ -528,7 +530,12 @@ public class Utilities {
                 countKeys++;
             } else {
                 countKeys = 0;
-                Popup.SubscribeMe(context);
+                if(BuildConfig.FLAVOR=="google") {
+                    Popup.SubscribeMe(context);
+                }
+                else{
+                    Utilities.addIntestitial(context, UserUdId.getFREE());
+                }
             }
             SharedPreferences.Editor ed = sharedPrefs.edit();
             ed.putInt(context.getString(R.string.preferences_count_keys), countKeys);
@@ -660,7 +667,7 @@ public class Utilities {
                 SingletonInAppBilling.Instance().setIS_FREE_OR_PREMIUM(isFree);
             }
             if (SingletonInAppBilling.Instance().getIS_FREE_OR_PREMIUM(context).compareTo("free") == 0) {
-                int MAX_CLICKS = 1;
+                int MAX_CLICKS = 2;
                 int clicks = 0;
 
                 if (range.getId() == R.id.range1Y) {

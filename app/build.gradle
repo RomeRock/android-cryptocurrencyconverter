@@ -4,7 +4,7 @@ buildscript {
         jcenter()
         mavenCentral()
         google() // Google's Maven repository
-        maven { url "https://jitpack.io" }
+        maven {url"https://jitpack.io"}
     }
 
     dependencies {
@@ -30,8 +30,8 @@ android {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 100800
-        versionName "1.8"
+        versionCode 100801
+        versionName "1.8.1"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled false
     }
@@ -44,30 +44,30 @@ android {
             shrinkResources false
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-
         }
     }
     sourceSets {
         samsung {
             res.srcDirs = ['/src/samsung/res']
+            java.srcDir('/src/samsung/java')
             resources {
                 exclude 'aidl/*'
             }
         }
         google {
             res.srcDirs = ['/src/google/res' ]
-
+            java.srcDir('/src/google/java')
         }
         amazon {
             res.srcDirs = ['/src/amazon/res' ]
-            java.srcDir('/src/samsung/java')
+            java.srcDir('/src/amazon/java')
             resources {
                 exclude 'aidl/*'
             }
         }
         huawei {
-            res.srcDirs = ['/src/samsung/res' ]
-            java.srcDir('/src/samsung/java')
+            res.srcDirs = ['/src/amazon/res' ]
+            java.srcDir('/src/amazon/java')
             resources {
                 exclude 'aidl/*'
             }

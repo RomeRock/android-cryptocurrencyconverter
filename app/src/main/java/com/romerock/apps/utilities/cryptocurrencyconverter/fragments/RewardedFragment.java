@@ -10,11 +10,13 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.reward.RewardItem;
 import com.google.android.gms.ads.reward.RewardedVideoAd;
 import com.google.android.gms.ads.reward.RewardedVideoAdListener;
+import com.romerock.apps.utilities.cryptocurrencyconverter.BuildConfig;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Popup;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
@@ -22,6 +24,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.DialogsHelper
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.FinishVideo;
 
+import butterknife.BindView;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
 import butterknife.Unbinder;
@@ -38,6 +41,10 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     public void setFinishVideo(FinishVideo finishVideo) {
         this.finishVideo = finishVideo;
     }
+
+    private boolean rewardedView=false;
+    @BindView(R.id.popUpDonate)
+    Button popUpDonate;
 
     public RewardedFragment() {
         // Required empty public constructor
@@ -62,6 +69,11 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
         getDialog().getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         unbinder = ButterKnife.bind(this, view);
         dialogsHelper=new DialogsHelper(getActivity());
+        if(BuildConfig.FLAVOR.compareTo("google")==0){
+            popUpDonate.setVisibility(View.VISIBLE);
+        }else{
+            popUpDonate.setVisibility(View.GONE);
+        }
         return view;
     }
 
@@ -137,27 +149,38 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
 
     @Override
     public void onRewardedVideoAdOpened() {
-        Log.d("", "");
+        Log.d("video", "onRewardedVideoAdOpened");
     }
 
     @Override
     public void onRewardedVideoStarted() {
-        Log.d("", "");
+        Log.d("video", "onRewardedVideoStarted");
     }
 
     @Override
     public void onRewardedVideoAdClosed() {
-        Log.d("", "");
+        if(rewardedView){
+            onSuccessRewarded();
+        }
+    }
+
+    private void onSuccessRewarded() {
+        if (rewardedVideoAd.isLoaded())
+            rewardedVideoAd.destroy(getActivity());
+        finishVideo.finish(true, true);
+
+        dismiss();
     }
 
     @Override
     public void onRewarded(RewardItem rewardItem) {
-        Log.d("", "");
+        Log.d("video", "onRewarded");
+        rewardedView=true;
     }
 
     @Override
     public void onRewardedVideoAdLeftApplication() {
-        Log.d("", "");
+        Log.d("video", "onRewardedVideoAdLeftApplication");
     }
 
     @Override
@@ -172,11 +195,8 @@ public class RewardedFragment extends DialogFragment implements RewardedVideoAdL
     @Override
     public void onRewardedVideoCompleted() {
         // aqui ya se debe abrir los stickers
-        if (rewardedVideoAd.isLoaded())
-            rewardedVideoAd.destroy(getActivity());
-        finishVideo.finish(true, true);
+        onSuccessRewarded();
 
-        dismiss();
     }
 
     @Override

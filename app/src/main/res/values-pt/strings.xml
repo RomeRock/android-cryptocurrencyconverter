@@ -48,7 +48,7 @@
 	<string name="pop_up_get_some_love_tittle">Por favor, classifique nosso aplicativo</string>
 	<string name="pop_up_rate_subject">Conversor de Moedas - Comentários - Android</string>
 	<string name="pop_up_share_content">Você gosta do nosso aplicativo?\nCompartilhe nosso aplicativo no Facebook ou no Twitter !!</string>
-	<string name="pop_up_share_tittle">Compartilhe com o mundo\ne ser recompensado</string>
+	<string name="pop_up_share_tittle">Compartilhe com o mundo</string>
 	<string name="price_per_month">%s / mês</string>
 	<string name="privacy_policy">Política de Privacidade</string>
 	<string name="range1D">24H</string>
@@ -106,4 +106,7 @@
 	<string name="label_xpressVote">"Xpress Vote" - Pesquisas</string>
 	<string name="share_on_facebook">Compartilhar no Facebook</string>
 	<string name="share_on_twitter">Compartilhar no Twitter</string>
+    <string name="label_Currency">Conversor de moeda</string>
+	<string name="label_piggy_goals">Cofrinho</string>
+	<string name="label_Books">Últimos Livros</string>
 </resources>

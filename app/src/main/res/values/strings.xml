@@ -9,13 +9,16 @@
     <string name="facebook_app_id" translatable="false">2292294817451565</string>
     <string name="banner_rewarded_AD_UNIT_ID" translatable="false">ca-app-pub-1943700858932247/1949938002</string>
     <string name="follow_us_instagram" translatable="false">https://www.instagram.com/romerock_apps/</string>
-    <string name="link_tipCalculator" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.tipcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_xpressVote" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.xpressvote&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_quickConverter" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.quickunitconverter&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_LoanCalulator" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.loancalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
-    <string name="link_TaxCalculator" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.salestaxdiscountcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_ClashMate" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.clashroyale.tournamentfinder&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
-    <string name="link_52Weeks" translatable="false">https://play.google.com/store/apps/details?id=com.romerock.apps.utilities.fiftytwoweekchallenge&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_tipCalculator" translatable="false">com.romerock.apps.utilities.tipcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_xpressVote" translatable="false">com.romerock.apps.utilities.xpressvote&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_quickConverter" translatable="false">com.romerock.apps.utilities.quickunitconverter&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_LoanCalulator" translatable="false">com.romerock.apps.utilities.loancalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_TaxCalculator" translatable="false">com.romerock.apps.utilities.salestaxdiscountcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_ClashMate" translatable="false">com.romerock.apps.utilities.clashroyale.tournamentfinder&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_52Weeks" translatable="false">com.romerock.apps.utilities.fiftytwoweekchallenge&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
+    <string name="link_currency" translatable="false">com.romerock.apps.utilities.currencyconverter&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_piggy" translatable="false">com.romerock.apps.utilities.moneysavingpiggy&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
+    <string name="link_books" translatable="false">com.romerock.apps.utilities.latestbooks&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
     <string name="follow_us_facebook" translatable="false">https://www.facebook.com/RomeRock-App-Studio-337180269970605</string>
     <string name="follow_us_facebook_profile" translatable="false">fb://page/337180269970605</string>
     <string name="link_twittter" translatable="false">https://www.twitter.com/RomeRock_Apps</string>
@@ -84,7 +87,7 @@
     <string name="pop_up_rate_subject">Currency Converter - Feedback - Android</string>
     <string name="share_on_facebook">Share on Facebook</string>
     <string name="share_on_twitter">Share on Twitter</string>
-    <string name="pop_up_share_tittle">Share with the World \n  and get rewarded</string>
+    <string name="pop_up_share_tittle">Share with the World</string>
     <string name="pop_up_share_content">Do you like Crypto Currency Conveter?\nShare our app on Facebook or Twitter !!</string>
     <string name="send">Send</string>
     <string name="pop_up_get_feedback_content_mail">Leave a comment</string>
@@ -140,7 +143,7 @@
     <string name="pay_as_much_you_want">* Pay as much as you want for  the premium version.\n* We are an Indi Company and we only urvive thanks to your support  c:"</string>
     <string name="VIEW_AD_AND_UNLOCK">VIEW AD AND UNLOCK THIS FEATURE</string>
     <string name="oh_oh">Oh oh!</string>
-    <string name="donate_us">Donate us</string>
+    <string name="donate_us" translatable="false">Donate us</string>
     <string name="this_feature_is_blocked">This feature is blocked :(, if you support our team with some love, we will enable this and other functions, and we will remove those annoying ads</string>
     <string name="German">German</string>
     <string name="English">English</string>
@@ -150,4 +153,7 @@
     <string name="Japanese">Japanese</string>
     <string name="Portuguese">Portuguese</string>
     <string name="Russian">Russian</string>
+    <string name="label_Currency">Currency Converter</string>
+    <string name="label_piggy_goals">Piggy Bank</string>
+    <string name="label_Books">Latest Books</string>
 </resources>
