@@ -498,7 +498,7 @@ public class MainActivity extends AppCompatActivity
             Intent i;
             switch (view.getId()) {
                 case R.id.linPrivacyPolicy:
-                    Utilities.goToLinks(MainActivity.this, BuildConfig.URL_STORE+ getString(R.string.privacy_policy_url));
+                    Utilities.goToLinks(MainActivity.this,  getString(R.string.privacy_policy_url));
                     break;
                 case R.id.lin52Challenge:
                     Utilities.goToLinks(MainActivity.this, BuildConfig.URL_STORE+getString(R.string.link_52Weeks));
