@@ -111,7 +111,8 @@
                             <TextView
                                 android:id="@+id/txtSharerewarded"
                                 style="@style/drawableTextviewDrawableBar"
-                                android:text="@string/share_rewarded" />
+                                android:textAllCaps="true"
+                                android:text="@string/pop_up_share_tittle" />
                         </LinearLayout>
 
                         <LinearLayout
