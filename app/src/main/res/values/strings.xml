@@ -21,6 +21,7 @@
     <string name="link_books" translatable="false">com.romerock.apps.utilities.latestbooks&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>
     <string name="follow_us_facebook" translatable="false">https://www.facebook.com/RomeRock-App-Studio-337180269970605</string>
     <string name="follow_us_facebook_profile" translatable="false">fb://page/337180269970605</string>
+    <string name="url_imgs" translatable="false">https://imateq.romerock.com/imateq/cryptocurrency/currencies/200SC200/%s.png</string>
     <string name="link_twittter" translatable="false">https://www.twitter.com/RomeRock_Apps</string>
     <string name="preferences_count_some_love" translatable="false">countSomeLove</string>
     <string name="preferences_name" translatable="false">currencyConverterRomeRock</string>

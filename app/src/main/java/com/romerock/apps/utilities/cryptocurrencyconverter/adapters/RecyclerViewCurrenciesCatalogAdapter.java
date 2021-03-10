@@ -12,6 +12,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.ItemClickLibraryInterface;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
@@ -71,11 +72,12 @@ public class RecyclerViewCurrenciesCatalogAdapter extends RecyclerView.Adapter<R
             idSearch=idSearch.replace("*","").replace("_","").replace("-","");
             int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
             viewHolder.imgFlag.setVisibility(View.VISIBLE);
-            if (id== 0) {
-                id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
 
-            }
-            viewHolder.imgFlag.setImageResource(id);
+            Glide.with(context)
+                    .load(String.format(context.getResources().getString(R.string.url_imgs),idSearch) )
+                    .placeholder(R.drawable.generic)
+                    .into( viewHolder.imgFlag);
+            //viewHolder.imgFlag.setImageResource(id);
         } else {
             viewHolder.imgFlag.setVisibility(View.INVISIBLE);
         }

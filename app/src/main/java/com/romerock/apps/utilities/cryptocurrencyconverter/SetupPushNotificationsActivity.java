@@ -23,6 +23,7 @@ import android.widget.RelativeLayout;
 import android.widget.Switch;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.iid.FirebaseInstanceId;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
@@ -233,7 +234,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
             });
         }
 
-        setValuesList();
+
         recyclerViewHoursAdded.setLayoutManager(new LinearLayoutManager(this));
         mAdapter = new RecyclerViewHoursAdapter(itemsHours, SetupPushNotificationsActivity.this, new ItemClickLibraryInterface() {
             @Override
@@ -318,6 +319,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
             }
         });
         Utilities.countTotalKeys(SetupPushNotificationsActivity.this);
+
     }
 
     private void enableSwitches() {
@@ -579,25 +581,26 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
 
     private void setValuesList() {
         // ------ From currency flag -----
-        int id;
+        String id;
         if (positionFrom.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom + positionFrom));
+            id = positionFrom+positionFrom;
         } else
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionFrom));
-        if (id == 0) {
-            id = getResources().getIdentifier("generic", "drawable", getPackageName());
-        }
-        imgFlagFrom.setImageResource(id);
+            id = positionFrom;
+        Glide.with(SetupPushNotificationsActivity.this)
+                .load(String.format( getResources().getString(R.string.url_imgs),id.toLowerCase()))
+                .placeholder(R.drawable.generic)
+                .into(imgFlagFrom);
+
         txtCurrentFrom.setText(positionFrom);
         // ------ To currency flag -----
         if (positionTo.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo + positionTo));
+            id = positionTo + positionTo;
         } else
-            id = CurrencyConvertApiModel.idForDrawable(SetupPushNotificationsActivity.this, Utilities.removeCharacters(positionTo));
-        if (id == 0) {
-            id = getResources().getIdentifier("generic", "drawable", getPackageName());
-        }
-        imgFlagTo.setImageResource(id);
+            id = positionTo;
+        Glide.with(SetupPushNotificationsActivity.this)
+                .load(String.format( getResources().getString(R.string.url_imgs),id.toLowerCase()))
+                .placeholder(R.drawable.generic)
+                .into(imgFlagTo);
         txtCurrentTo.setText(positionTo);
     }
 
@@ -754,6 +757,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         if (SingletonInAppBilling.Instance().getFirebaseDatabase() != null)
             SingletonInAppBilling.Instance().getFirebaseDatabase().goOnline();
         setThemeByActivity();
+        setValuesList();
     }
 
     @Override

@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.romerock.apps.utilities.cryptocurrencyconverter.DetailsActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
@@ -101,12 +102,17 @@ public class RecyclerViewCurrenciesDashboardAdapter extends RecyclerView.Adapter
         String idSearch = Utilities.removeCharacters(Items.get(position).getName().toLowerCase());
         if (idSearch.compareTo("try") == 0)
             idSearch = idSearch + idSearch;
-        int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
+       /* int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
         if (id == 0) {
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
-        }
-        viewHolder.imgFlagRow.setImageResource(id);
-        viewHolder.imgFlagRowLittle.setImageResource(id);
+        }*/
+
+        Glide .with(context)
+                .load(String.format(context.getResources().getString(R.string.url_imgs),idSearch) )
+                .placeholder(R.drawable.generic)
+                .into( viewHolder.imgFlagRow);
+
+       // viewHolder.imgFlagRow.setImageResource(id);
         viewHolder.imgDragNDrop.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {

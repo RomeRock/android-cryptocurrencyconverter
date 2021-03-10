@@ -9,11 +9,13 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.bumptech.glide.Glide;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.Query;
 import com.google.firebase.database.ValueEventListener;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
+import com.romerock.apps.utilities.cryptocurrencyconverter.SetupPushNotificationsActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.FirebaseHelper;
 import com.romerock.apps.utilities.cryptocurrencyconverter.interfaces.CurrenciesListInterface;
@@ -83,11 +85,14 @@ public class CurrencyConvertApiModel {
         String idSearch = items.get(position).getName().toString().toLowerCase();
         if (idSearch.compareTo("try") == 0)
             idSearch = idSearch + idSearch;
-        int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
-        if (id == 0) {
+       // int id = context.getResources().getIdentifier(idSearch, "drawable", context.getPackageName());
+       /* if (id == 0) {
             id = context.getResources().getIdentifier("generic", "drawable", context.getPackageName());
-        }
-        flagImg.setImageResource(id);
+        }*/
+        Glide.with(context)
+                .load(String.format( context.getResources().getString(R.string.url_imgs),idSearch))
+                .placeholder(R.drawable.generic)
+                .into(flagImg);
         flagText.setText(items.get(position).getName().toUpperCase());
         return items.get(position).getName().toUpperCase();
     }

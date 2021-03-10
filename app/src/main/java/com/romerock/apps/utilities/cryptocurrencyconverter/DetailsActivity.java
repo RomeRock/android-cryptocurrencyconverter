@@ -5,6 +5,8 @@ import android.content.SharedPreferences;
 import android.graphics.Typeface;
 import android.os.Bundle;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -261,7 +263,6 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
         if (itemsFromPreferences != null) {
             setCurrencies();
             setClickButton();
-
         } else {
             itemsFromPreferences = new ArrayList<>();
             for (int i = 0; i < splitCurrencies.length; i++) {
@@ -272,7 +273,6 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
                     }
                 }
             }
-
             boolean listHaveCurrency = false;
             for (int i = 0; i < itemsFromPreferences.size(); i++) {
                 if (itemsFromPreferences.get(i).getName().toString().compareTo(currencyFromSelected) == 0) {
@@ -394,27 +394,34 @@ public class DetailsActivity extends AppCompatActivity implements ThemeInterface
 
     private void setValuesList() {
         // ------ From currency flag -----
-        int id;
+        String id;
         if (currencyFromSelected.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyFromSelected + currencyFromSelected);
-        } else
+            id =  currencyFromSelected.toLowerCase() + currencyFromSelected.toLowerCase();
+        }else{
+            id=currencyFromSelected.toLowerCase();
+        }
+        /*else
             id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyFromSelected);
         if (id == 0) {
             id = getResources().getIdentifier("generic", "drawable", getPackageName());
         }
-
-        imgFlagFrom.setImageResource(id);
+*/
+        Glide.with(DetailsActivity.this)
+                .load(String.format( getResources().getString(R.string.url_imgs),id))
+                .placeholder(R.drawable.generic)
+                .into(imgFlagFrom);
         txtCurrentFrom.setText(currencyFromSelected);
         // ------ To currency flag -----
-        id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected);
         if (currencyToSelected.toLowerCase().compareTo("try") == 0) {
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected + currencyToSelected);
-        } else
-            id = CurrencyConvertApiModel.idForDrawable(DetailsActivity.this, currencyToSelected);
-        if (id == 0) {
-            id = getResources().getIdentifier("generic", "drawable", getPackageName());
+            id =  currencyToSelected.toLowerCase() + currencyToSelected.toLowerCase();
+        }else{
+            id=currencyToSelected.toLowerCase();
         }
-        imgFlagTo.setImageResource(id);
+        Glide.with(DetailsActivity.this)
+                .load(String.format( getResources().getString(R.string.url_imgs),id))
+                .placeholder(R.drawable.generic)
+                .into(imgFlagTo);
+
         txtCurrentTo.setText(currencyToSelected);
     }
 
