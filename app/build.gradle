@@ -30,8 +30,8 @@ android {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
         targetSdkVersion 29
-        versionCode 100803
-        versionName "1.8.3"
+        versionCode 100805
+        versionName "1.8.5"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled false
     }

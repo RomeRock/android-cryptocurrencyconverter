@@ -6,7 +6,8 @@
     android:background="#BF000000"
     android:orientation="vertical">
 
-    <pl.droidsonroids.gif.GifImageView
+    <ImageView
+        android:id="@+id/imgLoader"
         android:layout_width="100dp"
         android:layout_height="wrap_content"
         android:src="@drawable/preloader" />

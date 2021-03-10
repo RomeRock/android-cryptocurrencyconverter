@@ -8,10 +8,13 @@ import android.content.SharedPreferences;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
+
+import com.bumptech.glide.Glide;
 import com.google.android.material.snackbar.Snackbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
@@ -49,9 +52,17 @@ public class DialogsHelper extends Activity implements Serializable {
     public void showLoading() {
         if(!((Activity) context).isFinishing())
         {
+
+
             settingsDialog = new Dialog(context,android.R.style.Theme_Black_NoTitleBar_Fullscreen);
             settingsDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-            settingsDialog.setContentView(activity.getLayoutInflater().inflate(R.layout.loading, null));
+            View inflatedView = LayoutInflater.from(context).inflate(R.layout.loading, null);
+            ImageView imgLoading = inflatedView.findViewById(R.id.imgLoader);
+
+            Glide.with(context).load(context.getResources()
+                    .getIdentifier("preloader", "drawable", context.getPackageName()))
+                    .into(imgLoading);
+            settingsDialog.setContentView(inflatedView);
             settingsDialog.setCancelable(true);
             settingsDialog.show();
         }

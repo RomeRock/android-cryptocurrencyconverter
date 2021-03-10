@@ -122,8 +122,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/imgFlagFrom"
                             android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/eur" />
+                            android:layout_height="18dp" />
 
                         <TextView
                             android:id="@+id/txtCurrentFrom"
@@ -167,8 +166,7 @@
                         <de.hdodenhof.circleimageview.CircleImageView
                             android:id="@+id/imgFlagTo"
                             android:layout_width="18dp"
-                            android:layout_height="18dp"
-                            android:src="@drawable/eur" />
+                            android:layout_height="18dp"  />
 
                         <TextView
                             android:id="@+id/txtCurrentTo"

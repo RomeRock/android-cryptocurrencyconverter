@@ -27,8 +27,7 @@
                 android:layout_height="@dimen/flagsImages"
                 android:layout_alignParentTop="true"
                 android:layout_centerInParent="true"
-                android:layout_marginTop="8dp"
-                android:src="@drawable/eur" />
+                android:layout_marginTop="8dp"  />
 
             <TextView
                 android:id="@+id/txtFlagRow"
@@ -117,8 +116,7 @@
                 android:layout_centerInParent="true"
                 android:layout_gravity="center_vertical"
                 android:layout_marginEnd="4dp"
-                android:layout_marginRight="4dp"
-                android:src="@drawable/eur" />
+                android:layout_marginRight="4dp" />
 
             <TextView
                 android:id="@+id/txtFlagRowLittle"
