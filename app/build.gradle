@@ -25,13 +25,13 @@ repositories {
 }
 
 android {
-    compileSdkVersion 29
+    compileSdkVersion 33
     defaultConfig {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
-        targetSdkVersion 29
-        versionCode 100805
-        versionName "1.8.5"
+        targetSdkVersion 33
+        versionCode 1008011
+        versionName "1.8.11"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled false
     }
@@ -134,6 +134,7 @@ dependencies {
     implementation 'com.wdullaer:materialdatetimepicker:3.5.1'
     implementation 'pl.droidsonroids.gif:android-gif-drawable:1.2.12'
 
+    compileOnly 'com.google.android.wearable:wearable:2.3.0'
     implementation 'com.google.android.support:wearable:2.3.0'
     implementation 'com.google.gms:google-services:3.3.0'
     implementation 'com.google.android.gms:play-services-wearable:15.0.1'
