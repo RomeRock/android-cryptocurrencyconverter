@@ -112,7 +112,7 @@
 
         <meta-data
             android:name="com.google.android.play.billingclient.version"
-            android:value="6.0.0" />
+            android:value="6.2.0" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -204,5 +204,7 @@
             android:configChanges="orientation|screenSize"/>
 
     </application>
+
+    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
 
 </manifest>

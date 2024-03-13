@@ -1,16 +1,16 @@
 apply plugin: 'com.android.application'
 buildscript {
     repositories {
-        jcenter()
         mavenCentral()
-        google() // Google's Maven repository
         maven {url"https://jitpack.io"}
+        jcenter()
+        google() // Google's Maven repository
     }
 
     dependencies {
         /* classpath 'io.fabric.tools:gradle:1.29.0'*/
         classpath 'com.google.gms:google-services:4.4.0'
-        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.6.0'
+        classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.9'
         classpath 'com.android.tools.build:gradle:8.3.0'
     }
 }
@@ -26,12 +26,13 @@ repositories {
 
 android {
     compileSdkVersion 34
+    buildToolsVersion "34"
     defaultConfig {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 21
         targetSdkVersion 34
-        versionCode 1008016
-        versionName "1.8.16"
+        versionCode 1009009
+        versionName "1.9.09"
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled false
     }
@@ -141,7 +142,7 @@ dependencies {
     compileOnly 'com.google.android.wearable:wearable:2.3.0'
     implementation 'com.google.android.support:wearable:2.3.0'
     implementation 'com.google.gms:google-services:3.3.0'
-    implementation 'com.google.android.gms:play-services-wearable:15.0.1'
+    implementation 'com.google.android.gms:play-services-wearable:18.1.0'
     implementation 'androidx.legacy:legacy-support-v13:1.0.0'
     implementation 'com.applovin:applovin-sdk:8.0.2'
     implementation 'com.google.ads.mediation:applovin:8.0.2.0'
@@ -160,7 +161,11 @@ dependencies {
     implementation 'com.google.firebase:firebase-crashlytics:18.4.0'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'androidx.work:work-runtime:2.7.1'
-
+    implementation 'com.google.android.gms:play-services-ads:17.2.0'
+    implementation "com.android.billingclient:billing:6.2.0"
+    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
+        transitive = true;
+    }
 }
 
 tasks.withType(JavaCompile).configureEach{
