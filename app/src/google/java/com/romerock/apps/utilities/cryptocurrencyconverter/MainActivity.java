@@ -43,7 +43,13 @@ import com.facebook.share.Sharer;
 import com.facebook.share.widget.ShareDialog;
 import com.google.ads.mediation.inmobi.InMobiConsent;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
+//import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.android.gms.common.api.GoogleApiClient;
 import com.google.android.gms.wearable.Wearable;
 import com.google.firebase.FirebaseApp;
@@ -92,6 +98,7 @@ import butterknife.ButterKnife;
 import butterknife.OnClick;
 
 import static com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES.cipher;
+import static com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES.context;
 import static com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities.getThemePreferences;
 
 public class MainActivity extends AppCompatActivity
@@ -187,7 +194,7 @@ public class MainActivity extends AppCompatActivity
     private Wear wear;
     private GoogleApiClient mGoogleApiClient;
     private String isFree = "";
-    private RewardedVideoAd rewardedVideoAd;
+    private RewardedAd rewardedVideoAd;
 
 
     String UDID = "", isFreeOrPremium = "free";
@@ -209,7 +216,9 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         Utilities.ChangeLanguage(this);
         FirebaseApp.initializeApp(MainActivity.this);
-        rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
+        //rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
+        //MobileAds.initialize(context);
+        MobileAds.initialize(getApplicationContext());
         SingletonInAppBilling.Instance().setRewardedVideoAd(rewardedVideoAd);
         setTheme(getThemePreferences(getApplication()));
         sharedPrefs = getSharedPreferences(getString(R.string.preferences_name), MODE_PRIVATE);

@@ -10,6 +10,8 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
 import android.provider.Settings;
+
+import androidx.annotation.NonNull;
 import androidx.coordinatorlayout.widget.CoordinatorLayout;
 import android.util.Base64;
 import android.util.DisplayMetrics;
@@ -27,9 +29,10 @@ import com.google.android.gms.ads.AdListener;
 import com.google.android.gms.ads.AdRequest;
 import com.google.android.gms.ads.AdSize;
 import com.google.android.gms.ads.AdView;
-import com.google.android.gms.ads.InterstitialAd;
 import com.google.android.gms.ads.MobileAds;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.interstitial.InterstitialAd;
+import com.google.android.gms.ads.interstitial.InterstitialAdLoadCallback;
 import com.romerock.apps.utilities.cryptocurrencyconverter.BuildConfig;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.SplashActivity;
@@ -58,6 +61,7 @@ import retrofit2.Response;
 
 import static android.content.Context.INPUT_METHOD_SERVICE;
 import static android.content.Context.MODE_PRIVATE;
+import static com.orangegangsters.github.swipyrefreshlayout.library.SwipyRefreshLayout.TAG;
 
 /**
  * Created by Ebricko on 13/03/2018.
@@ -421,6 +425,7 @@ public class Utilities {
         return "";
     }
 
+    static InterstitialAd mInterstitialAd;
     public static void addIntestitial(Context context, String isFreeOrPremium) {
         if (todayMayorRegisterDay(context)) {
             if (isFreeOrPremium.isEmpty()) {
@@ -430,12 +435,31 @@ public class Utilities {
                 String deviceId, android_id;
                 android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                 deviceId = TestDevice(android_id).toUpperCase();
-                final InterstitialAd mInterstitialAd;
-                mInterstitialAd = new InterstitialAd(context);
-                mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
                 AdRequest adRequest = new AdRequest.Builder()
-                        //.addTestDevice(deviceId)  // only for test
+                        //              .addTestDevice(deviceId)  // only for test
                         .build();
+                //mInterstitialAd = new InterstitialAd(context);
+                InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad_unit_id), adRequest,
+                        new InterstitialAdLoadCallback() {
+                            @Override
+                            public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                                // The mInterstitialAd reference will be null until
+                                // an ad is loaded.
+                                mInterstitialAd = interstitialAd;
+                                Log.i(TAG, "onAdLoaded");
+                                if (mInterstitialAd != null) {
+                                    mInterstitialAd.show(new Activity());
+                                }
+                            }
+
+                            @Override
+                            public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                                // Handle the error
+                                Log.d(TAG, loadAdError.toString());
+                                mInterstitialAd = null;
+                            }
+                        });
+                /*mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
                 mInterstitialAd.loadAd(adRequest);
                 mInterstitialAd.setAdListener(new AdListener() {
                     public void onAdLoaded() {
@@ -443,7 +467,7 @@ public class Utilities {
                             mInterstitialAd.show();
                         }
                     }
-                });
+                });*/
             }
         }
     }
@@ -470,9 +494,32 @@ public class Utilities {
                     String deviceId, android_id;
                     android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                     deviceId = TestDevice(android_id).toUpperCase();
-                    final InterstitialAd mInterstitialAd;
+                    AdRequest adRequest = new AdRequest.Builder()
+                            //              .addTestDevice(deviceId)  // only for test
+                            .build();
+                    InterstitialAd.load(context, context.getResources().getString(R.string.interstitial_ad_unit_id), adRequest,
+                            new InterstitialAdLoadCallback() {
+                                @Override
+                                public void onAdLoaded(@NonNull InterstitialAd interstitialAd) {
+                                    // The mInterstitialAd reference will be null until
+                                    // an ad is loaded.
+                                    mInterstitialAd = interstitialAd;
+                                    Log.i(TAG, "onAdLoaded");
+                                    if (mInterstitialAd != null) {
+                                        mInterstitialAd.show(new Activity());
+                                    }
+                                }
+
+                                @Override
+                                public void onAdFailedToLoad(@NonNull LoadAdError loadAdError) {
+                                    // Handle the error
+                                    Log.d(TAG, loadAdError.toString());
+                                    mInterstitialAd = null;
+                                }
+                            });
+                    /*final InterstitialAd mInterstitialAd;
                     mInterstitialAd = new InterstitialAd(context);
-                    mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
+                    /*mInterstitialAd.setAdUnitId(context.getResources().getString(R.string.interstitial_ad_unit_id));
                     AdRequest adRequest = new AdRequest.Builder()
                             //                           .addTestDevice(deviceId)  // only for test
                             .build();
@@ -483,9 +530,7 @@ public class Utilities {
                                 mInterstitialAd.show();
                             }
                         }
-                    });
-
-
+                    });*/
                 }
             }
         }
@@ -551,7 +596,7 @@ public class Utilities {
         }
         try {
             if (isFreeOrPremium.compareTo(UserUdId.getFREE()) == 0) {
-                MobileAds.initialize(context, banner_ad_unit);
+                MobileAds.initialize(context);
                 android_id = Settings.Secure.getString(context.getContentResolver(), Settings.Secure.ANDROID_ID);
                 deviceId = TestDevice(android_id).toUpperCase();
                 adRequest = new AdRequest.Builder()
@@ -639,7 +684,7 @@ public class Utilities {
                 content.addView(mAdView);
                 final AdRequest adRequest = new AdRequest.Builder().build();
                 mAdView.setAdListener(new AdListener() {
-                    @Override
+
                     public void onAdFailedToLoad(int errorCode) {
                         mAdView.loadAd(adRequest);
                     }

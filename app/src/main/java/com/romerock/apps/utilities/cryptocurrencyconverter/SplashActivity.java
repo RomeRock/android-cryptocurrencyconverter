@@ -15,7 +15,8 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.LocaleHelper;
 import com.romerock.apps.utilities.cryptocurrencyconverter.helpers.SingletonInAppBilling;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.PushNotificationModel;
-import com.twitter.sdk.android.Twitter;
+//import com.twitter.sdk.android.Twitter;
+import com.twitter.sdk.android.core.Twitter;
 import com.twitter.sdk.android.core.TwitterAuthConfig;
 
 import java.text.SimpleDateFormat;
@@ -44,7 +45,8 @@ public class SplashActivity extends Activity {
         setContentView(R.layout.activity_splash);
         AppLovinSdk.initializeSdk(SplashActivity.this);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(CipherAES.getApiKeyTwitter(), CipherAES.getApiSecretKeyTwitter());
-        Fabric.with(this, new Twitter(authConfig));
+        //Fabric.with(this, new Twitter(authConfig));
+        Fabric.with(this);
         //Stetho.initializeWithDefaults(this);  //   TODO  ------- BORRAR ES SOLO PARA DEBUG
         sPlashScreen = this;
         PushNotificationModel.CleanBadges(this);

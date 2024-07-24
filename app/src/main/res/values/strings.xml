@@ -8,6 +8,7 @@
     <string name="follow_us_twitter_profile" translatable="false">twitter://user?screen_name=RomeRock_Apps</string>
     <string name="facebook_app_id" translatable="false">2292294817451565</string>
     <string name="banner_rewarded_AD_UNIT_ID" translatable="false">ca-app-pub-1943700858932247/1949938002</string>
+    <string name="admob_app_id" translatable="false">ca-app-pub-1943700858932247/1949938002</string>
     <string name="follow_us_instagram" translatable="false">https://www.instagram.com/romerock_apps/</string>
     <string name="link_tipCalculator" translatable="false">com.romerock.apps.utilities.tipcalculator&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app</string>
     <string name="link_xpressVote" translatable="false">com.romerock.apps.utilities.xpressvote&#38;utm_source=cryptocurrencyconverter&#38;utm_medium=share&#38;utm_campaign=app </string>

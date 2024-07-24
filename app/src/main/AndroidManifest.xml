@@ -112,7 +112,7 @@
 
         <meta-data
             android:name="com.google.android.play.billingclient.version"
-            android:value="6.2.0" />
+            android:value="7.0.0" />
 
         <meta-data
             android:name="preloaded_fonts"
@@ -197,14 +197,23 @@
         <meta-data android:name="applovin.sdk.key"
             android:value="XGhOpEJQNu9-C-PTC99bx6dW63l1LbyuteGftZ4ERDCeCc7OmG_gMdBTgwU1WRvN4A2yk6AAKNpX_xwlBwQTXb" />
 
-        <activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
+        <!--<activity android:name="com.applovin.adview.AppLovinInterstitialActivity"
             android:configChanges="orientation|screenSize"/>
 
         <activity android:name="com.applovin.adview.AppLovinConfirmationActivity"
-            android:configChanges="orientation|screenSize"/>
+            android:configChanges="orientation|screenSize"/>-->
+
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-1943700858932247~8820685884"/>
+
+        <property
+            android:name="android.adservices.AD_SERVICES_CONFIG"
+            android:resource="@xml/gma_ad_services_config"
+            tools:replace="android:resource"/>
 
     </application>
 
-    <uses-sdk android:minSdkVersion="21" android:targetSdkVersion="34" />
+    <uses-sdk android:minSdkVersion="23" android:targetSdkVersion="34" />
 
 </manifest>

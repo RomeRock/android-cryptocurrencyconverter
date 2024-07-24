@@ -1,5 +1,7 @@
 package com.romerock.apps.utilities.cryptocurrencyconverter.services;
 
+import static com.applovin.sdk.AppLovinSdkUtils.runOnUiThread;
+
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.util.Log;
@@ -13,7 +15,7 @@ import com.romerock.apps.utilities.cryptocurrencyconverter.model.PushNotificatio
 
 import me.leolin.shortcutbadger.ShortcutBadger;
 
-import static androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
+//import static androidx.test.internal.runner.junit4.statement.UiThreadStatement.runOnUiThread;
 
 
 public class LocalFirebaseMessagingService extends FirebaseMessagingService {

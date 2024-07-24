@@ -10,7 +10,13 @@ import android.os.RemoteException;
 import android.util.Log;
 
 import com.android.vending.billing.IInAppBillingService;
-import com.google.android.gms.ads.reward.RewardedVideoAd;
+//import com.google.android.gms.ads.reward.RewardedVideoAd;
+import com.google.android.gms.ads.FullScreenContentCallback;
+import com.google.android.gms.ads.LoadAdError;
+import com.google.android.gms.ads.OnUserEarnedRewardListener;
+import com.google.android.gms.ads.rewarded.RewardItem;
+import com.google.android.gms.ads.rewarded.RewardedAd;
+import com.google.android.gms.ads.rewarded.RewardedAdLoadCallback;
 import com.google.firebase.database.FirebaseDatabase;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.CipherAES;
 import com.romerock.apps.utilities.cryptocurrencyconverter.model.UserUdId;
@@ -49,13 +55,13 @@ public class SingletonInAppBilling {
     private FirebaseDatabase firebaseDatabase;
     private DialogsHelper dialogsHelper;
     private UserUdId userUdId;
-    private RewardedVideoAd rewardedVideoAd;
+    private RewardedAd rewardedVideoAd;
 
-    public RewardedVideoAd getRewardedVideoAd() {
+    public RewardedAd getRewardedVideoAd() {
         return rewardedVideoAd;
     }
 
-    public void setRewardedVideoAd(RewardedVideoAd rewardedVideoAd) {
+    public void setRewardedVideoAd(RewardedAd rewardedVideoAd) {
         this.rewardedVideoAd = rewardedVideoAd;
     }
 
