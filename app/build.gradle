@@ -1,10 +1,9 @@
 //apply plugin: 'com.android.application'
 buildscript {
     repositories {
+        google()
+        mavenLocal()
         mavenCentral()
-        maven {url"https://jitpack.io"}
-        jcenter()
-        google() // Google's Maven repository
     }
 
     dependencies {
@@ -14,19 +13,26 @@ buildscript {
         classpath 'com.android.tools.build:gradle:8.3.2'
     }
 }
-/*apply plugin: 'com.android.application'
-
+apply plugin: 'com.android.application'
 apply plugin: 'com.google.gms.google-services'
 apply plugin: 'com.google.firebase.crashlytics'
-apply plugin: 'com.android.application'*/
-plugins {
+/*plugins {
     id 'com.android.application'
     // Make sure that you have the Google services Gradle plugin
     id 'com.google.gms.google-services'
-}
+    id 'com.google.firebase.crashlytics'
+}*/
 
-repositories {
+/*repositories {
     maven { url 'https://maven.fabric.io/public' }
+}*/
+
+allprojects {
+    repositories {
+        mavenCentral()
+        google() // Google's Maven repository
+        maven { url "https://jitpack.io" }
+    }
 }
 
 android {
@@ -35,8 +41,9 @@ android {
         applicationId "com.romerock.apps.utilities.cryptocurrencyconverter"
         minSdkVersion 23
         targetSdkVersion 34
-        versionCode 1009010
-        versionName "1.9.10"
+        versionCode 1009011
+        versionName "1.9.11"
+        compileSdkVersion 34
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
         multiDexEnabled false
     }
@@ -46,7 +53,7 @@ android {
     }
     buildTypes {
         release {
-            shrinkResources false
+            shrinkResources true
             minifyEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
@@ -98,9 +105,9 @@ android {
             buildConfigField 'String', 'URL_STORE', "\"https://play.google.com/store/apps/details?id=\""
         }
     }
-    lintOptions {
-        checkReleaseBuilds false
+    lint {
         abortOnError false
+        checkReleaseBuilds true
     }
     //for can change diferent languages programatically
     bundle {
@@ -162,7 +169,7 @@ dependencies {
     annotationProcessor 'com.github.bumptech.glide:compiler:4.12.0'
     // Declare the dependencies for the Crashlytics and Analytics libraries
     // When using the BoM, you don't specify versions in Firebase library dependencies
-    implementation 'com.google.firebase:firebase-crashlytics'
+    implementation 'com.google.firebase:firebase-crashlytics:19.0.3'
     implementation 'com.google.firebase:firebase-analytics'
     implementation 'com.google.firebase:firebase-iid:21.1.0'
     implementation 'androidx.work:work-runtime-ktx:2.9.0'
@@ -170,9 +177,9 @@ dependencies {
     //implementation 'com.google.android.gms:play-services-ads-identifier:18.1.0'
     //implementation 'com.google.android.gms:play-services-ads-lite:17.5.0'
     implementation "com.android.billingclient:billing:7.0.0"
-    implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
+    /*implementation('com.crashlytics.sdk.android:crashlytics:2.10.1@aar') {
         transitive = true;
-    }
+    }*/
 }
 
 

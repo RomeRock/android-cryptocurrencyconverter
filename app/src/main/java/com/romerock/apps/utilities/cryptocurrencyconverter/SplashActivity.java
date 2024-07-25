@@ -24,7 +24,7 @@ import java.util.Arrays;
 import java.util.Calendar;
 import java.util.Locale;
 
-import io.fabric.sdk.android.Fabric;
+//import io.fabric.sdk.android.Fabric;
 
 
 public class SplashActivity extends Activity {
@@ -46,7 +46,7 @@ public class SplashActivity extends Activity {
         AppLovinSdk.initializeSdk(SplashActivity.this);
         TwitterAuthConfig authConfig = new TwitterAuthConfig(CipherAES.getApiKeyTwitter(), CipherAES.getApiSecretKeyTwitter());
         //Fabric.with(this, new Twitter(authConfig));
-        Fabric.with(this);
+        //Fabric.with(this);
         //Stetho.initializeWithDefaults(this);  //   TODO  ------- BORRAR ES SOLO PARA DEBUG
         sPlashScreen = this;
         PushNotificationModel.CleanBadges(this);

@@ -15,14 +15,6 @@
       },
       "oauth_client": [
         {
-          "client_id": "762665074287-i2dv96b165us04e7g2ojc789ravgm8ap.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.romerock.apps.utilities.cryptocurrencyconverter",
-            "certificate_hash": "4f7ab5dcc8cc5e8512335447fe2f630f02438a86"
-          }
-        },
-        {
           "client_id": "762665074287-m9co5bfo3b7vksr77hvqfv5o9fo2p6hn.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
@@ -41,7 +33,11 @@
         }
       ],
       "services": {
+        "analytics_service": {
+          "status": 1
+        },
         "appinvite_service": {
+          "status": 2,
           "other_platform_oauth_client": [
             {
               "client_id": "762665074287-s4q159460tnevfp9q5p6lgijfvduf153.apps.googleusercontent.com",
@@ -55,9 +51,13 @@
               }
             }
           ]
+        },
+        "ads_service": {
+          "status": 2
         }
       },
       "admob_app_id": "ca-app-pub-1943700858932247~8820685884"
+
     }
   ],
   "configuration_version": "1"
