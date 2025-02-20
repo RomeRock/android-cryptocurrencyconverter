@@ -217,7 +217,7 @@ public class MainActivity extends AppCompatActivity
         Utilities.ChangeLanguage(this);
         FirebaseApp.initializeApp(MainActivity.this);
         //rewardedVideoAd = MobileAds.getRewardedVideoAdInstance(MainActivity.this);
-        //MobileAds.initialize(context);
+        MobileAds.initialize(MainActivity.this);
         MobileAds.initialize(getApplicationContext());
         SingletonInAppBilling.Instance().setRewardedVideoAd(rewardedVideoAd);
         setTheme(getThemePreferences(getApplication()));

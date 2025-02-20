@@ -453,7 +453,7 @@ public class SetupPushNotificationsActivity extends AppCompatActivity implements
         } else if (themeSelected.contains("Daylight")) {
             timePickerDialog.setThemeDark(false);
         }
-        timePickerDialog.show(getFragmentManager(), "tag");
+        //timePickerDialog.show(getFragmentManager(), "tag");
     }
 
     private void changeCurrent() {

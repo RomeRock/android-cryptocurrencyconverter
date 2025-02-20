@@ -19,7 +19,7 @@ import com.facebook.share.widget.ShareDialog;
 import com.romerock.apps.utilities.cryptocurrencyconverter.MainActivity;
 import com.romerock.apps.utilities.cryptocurrencyconverter.R;
 import com.romerock.apps.utilities.cryptocurrencyconverter.Utilities.Utilities;
-import com.twitter.sdk.android.tweetcomposer.TweetComposer;
+//import com.twitter.sdk.android.tweetcomposer.TweetComposer;
 
 import java.net.MalformedURLException;
 import java.net.URL;
@@ -40,8 +40,6 @@ public class ShareDialogFragment extends DialogFragment {
     private static int spinner;
     @BindView(R.id.popUpFacebookBoton)
     Button popUpFacebookBoton;
-    @BindView(R.id.popUpTwitterBoton)
-    Button popUpTwitterBoton;
     @BindView(R.id.popUpNoThanks)
     TextView popUpNoThanks;
     @BindView(R.id.txtTittleImg)
@@ -112,7 +110,7 @@ public class ShareDialogFragment extends DialogFragment {
         unbinder.unbind();
     }
 
-    @OnClick({R.id.popUpFacebookBoton, R.id.popUpTwitterBoton, R.id.popUpNoThanks})
+    @OnClick({R.id.popUpFacebookBoton, R.id.popUpNoThanks})
     public void onClick(View view) {
 
         switch (view.getId()) {
@@ -124,22 +122,6 @@ public class ShareDialogFragment extends DialogFragment {
                             .build();
                     shareDialog.show(linkContent);
                 }
-                break;
-            case R.id.popUpTwitterBoton:
-                dismiss();
-                try {
-                    URL url;
-                    url = new URL(getString(R.string.share_link));
-                    Intent intent = null;
-                    intent = new TweetComposer.Builder(getActivity())
-                            .text(getActivity().getString(R.string.shareTwitter))
-                            .url(url)
-                            .createIntent();
-                    startActivityForResult(intent, TWEET_COMPOSER_REQUEST_CODE);
-                } catch (MalformedURLException e) {
-                    e.printStackTrace();
-                }
-
                 break;
             case R.id.popUpNoThanks:
                 dismiss();

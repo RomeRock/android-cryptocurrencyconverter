@@ -84,6 +84,7 @@ public class RewardedFragment extends DialogFragment {
         }else{
             popUpDonate.setVisibility(View.GONE);
         }
+        adRequest = new AdRequest.Builder().build();
         return view;
     }
 
@@ -163,6 +164,18 @@ public class RewardedFragment extends DialogFragment {
                             showRewardedVideo();
                         }
                     });
+        } else {
+            rewardedVideoAd.show(getActivity(), new OnUserEarnedRewardListener() {
+                @Override
+                public void onUserEarnedReward(@NonNull RewardItem rewardItem) {
+                    // Handle the reward.
+                    Log.d(TAG, "The user earned the reward.");
+                    int rewardAmount = rewardItem.getAmount();
+                    String rewardType = rewardItem.getType();
+                    rewardedView=true;
+                    dismiss();
+                }
+            });
         }
 
         /*if (!rewardedVideoAd.isLoaded()) {
@@ -184,7 +197,6 @@ public class RewardedFragment extends DialogFragment {
                     int rewardAmount = rewardItem.getAmount();
                     String rewardType = rewardItem.getType();
                     rewardedView=true;
-                    onSuccessRewarded();
                     dismiss();
                 }
             });
